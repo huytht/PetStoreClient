@@ -17,7 +17,10 @@
     width: 12.85%;
     cursor: pointer;
 }
-
+.box-img-detail{
+    max-width: 50%;
+    margin-top: 20px;
+}
 .pdetails .single-detail{
     margin-left: -20%;
     line-height: 65px;

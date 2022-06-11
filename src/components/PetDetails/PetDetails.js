@@ -21,6 +21,7 @@ const PetDetails = () => {
         ) : (
           <>
             <section className='pdetails container mtop heading f_flex'>
+              <div className='box-img-detail'>
                 <div className='single-img'  >
                   <img className='big-img' src={`${process.env.REACT_APP_API_ENDPOINT}${product?.imagePath[0]} `} alt=''/>
                     <div className='small-img-group f_flex '>
@@ -38,20 +39,21 @@ const PetDetails = () => {
                       </div>
                     </div>
                 </div>
+              </div>
                 <div className='single-detail'>
-                  <h1>{product.name}</h1>
-                  <h2>{product.price}</h2>
-                  <h4>Tuổi: <span>{product.age}</span> tháng tuổi</h4>
-                  <h4>Giới tính: <span>{product.gender === 0 ? 'Đực' : 'Cái'}</span> </h4>
-                  <h4>Xuất xứ: <span>{product.origins.map(origin => origin.name).join(', ')}</span> </h4>
-                  <h4>Chủng loại: <span>{product.breed.name }</span> </h4>
+                  <h1>{product?.name==null ? '-':product.name}</h1>
+                  <h2>{product?.price}</h2>
+                  <h4>Tuổi: <span>{product?.age===null ? '-': product.age}</span> tháng tuổi</h4>
+                  <h4>Giới tính: <span>{product?.gender === null ? '-':product?.gender === 0 ? 'Đực' : 'Cái'}</span> </h4>
+                  <h4>Xuất xứ: <span>{product.origins.map(origin => origin.name).lenght===[] ? '-' :product?.origins.map(origin => origin.name).join(', ')}</span> </h4>
+                  <h4>Chủng loại: <span>{product.breed === null ? '-':product.breed.name }</span>  </h4>
                   <div className='amount'>
                     <h3>Số lượng: </h3>
                     <div className='amount-box f_flex'>
                       <button className='de'>-</button><input className='intput'type="text" value="1"/><button className='in'>+</button>
                     </div>
                     <div className='amount-index'> 
-                      Số lượng còn {product.amount}
+                      Số lượng còn {product?.amount}
                     </div>
                   </div>
                   <br/>

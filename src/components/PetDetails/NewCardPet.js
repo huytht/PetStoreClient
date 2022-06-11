@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import {useDispatch, useSelector} from "react-redux"
 import { listProduct } from "../redux/Actions/ProductActions"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import Loading from "../LoadingError/Loading"
 
 const SampleNextArrow = (props) => {
@@ -45,7 +45,7 @@ const SampleNextArrow = (props) => {
     const { loading, product } = productDetails;
     useEffect(()=>{
       if (loading === false)
-        dispatch(listProduct("related",product.breed.id,2,0,8))
+        dispatch(listProduct("related",product.breed === null ? 1001:product.breed.id,0,0,8))
     },[id, dispatch, loading])
     return (
       <> 
@@ -60,10 +60,10 @@ const SampleNextArrow = (props) => {
                     <div className='product mtop'>
                       <div className='img'>
                         <span className='discount'>New</span>
-                        <img src={`${process.env.REACT_APP_API_ENDPOINT}${product?.imagePath[0]} `} alt='' /> 
+                        <img src={`${process.env.REACT_APP_API_ENDPOINT}${productItems?.imagePath[0]} `} alt='' /> 
                       </div>
                       <div className='product-details'>
-                        <h3>{productItems.name}</h3>
+                        <Link to = {`/product/${productItems.id}`}><h3>{productItems.name}</h3></Link>
                         <div className='rate'>
                           <i className='fa fa-star'></i>
                           <i className='fa fa-star'></i>
@@ -72,7 +72,7 @@ const SampleNextArrow = (props) => {
                           <i className='fa fa-star'></i>
                         </div>
                         <div className='price'>
-                          <h4>${productItems.price}.00 </h4>
+                          <h4>{productItems.price} VNĐ </h4>
                           {/* step : 3  
                           if hami le button ma click garryo bahne 
                           */}

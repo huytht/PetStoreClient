@@ -248,3 +248,13 @@ button {
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 10px;
 }
+
+/*----- login form -------*/
+.nextui-c-iWjDFM-liCIiP-cv {
+  color: #ff014f !important;
+}
+
+.nextui-c-iWjDFM-dlzPzf-cv {
+  color:  #ff014f !important;
+}
+/*----- login form -------*/

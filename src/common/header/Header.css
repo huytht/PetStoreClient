@@ -1,19 +1,21 @@
 /*------search-----------*/
 .search {
     padding: 20px 0;
+    max-width: 100%;
   }
   .search .logo img {
     width: auto;
     height: auto;
   }
   .search .width {
-    width: 20%;
+    width: 45%;
   }
   .search-box {
     width: 80%;
     border: 2px solid rgba(0, 0, 0, 0.1);
     /*padding: 10px;*/
     border-radius: 50px;
+    
   }
   .search-box i {
     width: 5%;
@@ -165,3 +167,12 @@
     }
   }
   
+.login-logout{
+      display: flex;
+}
+.login-logout .btnlogin{
+     margin-right: -48px;
+}
+.login-logout .btnregisted{
+ margin-left: 50px;
+}

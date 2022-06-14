@@ -1,21 +1,16 @@
 import axios from "axios"
-import { USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT } from "../Constants/UserConstants"
-
+import { USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT,REFRESH_TOKEN } from "../Constants/UserConstants"
+import TokenService from "../../services/token.service"
+import { axiosClient } from "../../services/api"
 //login
 export const login = (username,password) => async(dispatch) =>{
     try {
         dispatch({type:USER_LOGIN_REQUEST})
 
-        const config ={
-            headers:{
-                "Content-Type":"application/json",
-            },
-        }
+        const res = await axiosClient.post(`/user/login`,{username,password})
 
-        const res = await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/user/login`,{username,password},config)
-
-        dispatch({type: USER_LOGIN_SUCCESS, payload: res.data.data})
-        localStorage.setItem("userInfo",JSON.stringify(res.data.data))
+        dispatch({type: USER_LOGIN_SUCCESS, payload:res.data.data})
+        localStorage.setItem("user",JSON.stringify(res.data.data))
         
     } catch (error) {
         dispatch({
@@ -26,9 +21,15 @@ export const login = (username,password) => async(dispatch) =>{
 }
 
 //logout
-
 export const logout = () => (dispatch) => {
-    localStorage.removeItem("userInfo")
+    localStorage.removeItem("user")
     dispatch({type: USER_LOGOUT})
     document.location.href ="/"
+}
+//refresh token
+export const refreshToken = (accessToken) => (dispatch) => {
+    dispatch({
+      type: REFRESH_TOKEN,
+      payload: accessToken,
+    })
 }

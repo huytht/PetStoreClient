@@ -4,6 +4,7 @@ import App from "./App";
 import store from "./components/redux/store"
 import {Provider} from "react-redux";
 import "./index.css"
+import setup from "./components/redux/Actions/Interceptor";
 
 ReactDOM.render(
     <Provider store={store}>
@@ -12,3 +13,4 @@ ReactDOM.render(
 
     document.getElementById("root")
 );
+setup(store);

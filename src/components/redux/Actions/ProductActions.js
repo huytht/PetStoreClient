@@ -1,4 +1,5 @@
 import axios from "axios";
+import { axiosClient } from "../../services/api";
 import { 
     PRODUCT_LIST_NEW_FAIL, 
     PRODUCT_LIST_NEW_REQUEST, 
@@ -28,7 +29,7 @@ export const listProduct = (type, breedId, categoryId, pageNumber, pageSize) => 
                         ? PRODUCT_LIST_HOT_REQUEST 
                         : PRODUCT_LIST_REQUEST})
 
-        const res = await axios.get(`${process.env.REACT_APP_API_ENDPOINT}/product?type=${type}&breed-id=${breedId}&category-id=${categoryId}&page-number=${pageNumber}&page-size=${pageSize}`)
+        const res = await axiosClient.get(`/product?type=${type}&breed-id=${breedId}&category-id=${categoryId}&page-number=${pageNumber}&page-size=${pageSize}`)
         // console.log(res.data.data.content)
         dispatch({type:  breedId !== 0 
                         ? PRODUCT_LIST_RELATED_SUCCESS
@@ -56,7 +57,7 @@ export const listProductDetails = (id) => async(dispatch) =>{
     try {
         dispatch({type: PRODUCT_DETAILS_REQUEST})
 
-        const res = await axios.get(`${process.env.REACT_APP_API_ENDPOINT}/product/detail?id=${id}`)
+        const res = await axiosClient.get(`/product/detail?id=${id}`)
 
         dispatch({type: PRODUCT_DETAILS_SUCCESS, payload: res.data.data})
     } catch (error) {

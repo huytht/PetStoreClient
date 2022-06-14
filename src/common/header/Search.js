@@ -31,14 +31,13 @@ const [username, setUsername] = useState("");
 const [password, setPassword] = useState("");
 const dispatch = useDispatch();
 const userLogin =useSelector((state) => state.userLogin);
-const {error,loading,userInfo} = userLogin;
+const {error,loading,user} = userLogin;
 
 useEffect(()=>{
-  if(userInfo){
+  if(user){
     setVisible(false)
-    //console.log(userInfo)
   }
-},[userInfo])
+},[user])
 const loginHandler = (e) => {;
   e.preventDefault();
   dispatch(login(username,password))
@@ -62,7 +61,7 @@ const logoutHander = () =>{
         </div>
 
         <div className='icon f_flex width'>
-          {userInfo  ?
+          {user  ?
             ( <Grid.Container justify="flex-end" gap={2}>
             <Grid>
               <Dropdown placement="bottom-left">
@@ -72,7 +71,7 @@ const logoutHander = () =>{
                     size="lg"
                     as="button"
                     color="secondary"
-                    src={userInfo.avatarImg === undefined ? userInfo.data.data.avatarImg: userInfo.avatarImg }
+                    src={user.avatarImg === undefined ? user.data.data.avatarImg: user.avatarImg }
                   />
                 </Dropdown.Trigger>
                 <Dropdown.Menu color="secondary" aria-label="Avatar Actions">
@@ -81,7 +80,7 @@ const logoutHander = () =>{
                       Signed in as
                     </Text>
                     <Text b color="inherit" css={{ d: "flex" }}>
-                      {userInfo.username === undefined ? userInfo.data.data.username: userInfo.username}
+                      {user.username === undefined ? user.data.data.username: user.username}
                     </Text>
                   </Dropdown.Item>  
                   <Dropdown.Item key="settings" withDivider>

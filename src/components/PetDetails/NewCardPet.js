@@ -45,11 +45,15 @@ const SampleNextArrow = (props) => {
     const { loading, product } = productDetails;
     useEffect(()=>{
       if (loading === false)
-        dispatch(listProduct("related",product.breed === null ? 1001:product.breed.id,0,0,8))
-    },[id, dispatch, loading])
+        if (product.breed === null) 
+          dispatch(listProduct("related", 0, product.category.id,0,8))
+        else
+          dispatch(listProduct("related", product.breed.id,0,0,8))
+          
+    },[id, dispatch, loading, product])
     return (
       <> 
-       { loading === undefined || loading === true ? (
+       { (loading === undefined || loading === true) && product !== null ? (
             <div className="mb-5 "><Loading/></div>
         ) : (
           <>
@@ -60,7 +64,7 @@ const SampleNextArrow = (props) => {
                     <div className='product mtop'>
                       <div className='img'>
                         <span className='discount'>New</span>
-                        <img src={`${process.env.REACT_APP_API_ENDPOINT}${productItems?.imagePath[0]} `} alt='' /> 
+                        <img src={`${process.env.REACT_APP_API_ENDPOINT}${productItems.imagePath[0]} `} alt='' /> 
                       </div>
                       <div className='product-details'>
                         <Link to = {`/product/${productItems.id}`}><h3>{productItems.name}</h3></Link>

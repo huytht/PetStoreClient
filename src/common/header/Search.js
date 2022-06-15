@@ -31,7 +31,7 @@ const [username, setUsername] = useState("");
 const [password, setPassword] = useState("");
 const dispatch = useDispatch();
 const userLogin =useSelector((state) => state.userLogin);
-const {error,loading,user} = userLogin;
+const {user} = userLogin;
 
 useEffect(()=>{
   if(user){

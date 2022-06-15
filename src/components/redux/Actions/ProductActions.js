@@ -1,4 +1,3 @@
-import axios from "axios";
 import { axiosClient } from "../../services/api";
 import { 
     PRODUCT_LIST_NEW_FAIL, 
@@ -18,10 +17,15 @@ import {
     PRODUCT_LIST_RELATED_REQUEST
 } from "../Constants/ProductConstants"
 
+const array = [
+    0,
+    1,
+    2
+]
 
 export const listProduct = (type, breedId, categoryId, pageNumber, pageSize) => async(dispatch) =>{
     try {
-        dispatch({type: breedId !== 0 
+        dispatch({type: (breedId !== 0 || (breedId === 0 && !array.includes(categoryId)))
                         ? PRODUCT_LIST_RELATED_REQUEST
                         : categoryId === 1 
                         ? PRODUCT_LIST_NEW_REQUEST 
@@ -29,9 +33,9 @@ export const listProduct = (type, breedId, categoryId, pageNumber, pageSize) => 
                         ? PRODUCT_LIST_HOT_REQUEST 
                         : PRODUCT_LIST_REQUEST})
 
-        const res = await axiosClient.get(`/product?type=${type}&breed-id=${breedId}&category-id=${categoryId}&page-number=${pageNumber}&page-size=${pageSize}`)
+        const res = await axiosClient.get(`/product/list?type=${type}&breed-id=${breedId}&category-id=${categoryId}&page-number=${pageNumber}&page-size=${pageSize}`)
         // console.log(res.data.data.content)
-        dispatch({type:  breedId !== 0 
+        dispatch({type:  (breedId !== 0 || (breedId === 0 && !array.includes(categoryId)))
                         ? PRODUCT_LIST_RELATED_SUCCESS
                         : categoryId === 1 
                         ? PRODUCT_LIST_NEW_SUCCESS 
@@ -40,7 +44,7 @@ export const listProduct = (type, breedId, categoryId, pageNumber, pageSize) => 
                         : PRODUCT_LIST_SUCCESS, payload: res.data.data.content })
     } catch (error) {
         dispatch({
-            type:  breedId !== 0 
+            type:  (breedId !== 0 || (breedId === 0 && !array.includes(categoryId)))
                     ? PRODUCT_LIST_RELATED_FAIL
                     : categoryId === 1 
                     ? PRODUCT_LIST_NEW_FAIL 

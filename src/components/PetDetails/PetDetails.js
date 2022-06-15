@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import {useEffect} from 'react'
 import "./PetDetails.css"
 import {  listProductDetails } from '../redux/Actions/ProductActions'
 import {useDispatch, useSelector} from "react-redux"
@@ -16,27 +16,20 @@ const PetDetails = () => {
   }, [id, dispatch])
   return (
     <div className='box-details'>
-      { loading === undefined || loading === true ? (
+      { (loading === undefined || loading === true) ? (
             <div className="mb-5 "><Loading/></div>
         ) : (
           <>
             <section className='pdetails container mtop heading f_flex'>
               <div className='box-img-detail'>
                 <div className='single-img'  >
-                  <img className='big-img' src={`${process.env.REACT_APP_API_ENDPOINT}${product?.imagePath[0]} `} alt=''/>
+                  <img className='big-img' src={`${process.env.REACT_APP_API_ENDPOINT}${product.imagePath[0]} `} alt=''/>
                     <div className='small-img-group f_flex '>
-                      <div className='small-img-col '>
-                        <img className='small-img' src={`${process.env.REACT_APP_API_ENDPOINT}${product?.imagePath[0]} `}   alt=''/>
-                      </div>
-                      <div className='small-img-col'>
-                        <img className='small-img' src={ `${process.env.REACT_APP_API_ENDPOINT}${product?.imagePath[1]} `} alt=''/>
-                      </div>
-                      <div className='small-img-col'>
-                        <img className='small-img' src={ `${process.env.REACT_APP_API_ENDPOINT}${product?.imagePath[2]} `} alt=''/>
-                      </div>
-                      <div className='small-img-col'>
-                        <img className='small-img' src={ `${process.env.REACT_APP_API_ENDPOINT}${product?.imagePath[3]} `}alt=''/>
-                      </div>
+                      {product.imagePath.map((image) => (
+                        <div className='small-img-col '>
+                          <img className='small-img' src={`${process.env.REACT_APP_API_ENDPOINT}${image} `}   alt=''/>
+                        </div>
+                      ))}
                     </div>
                 </div>
               </div>

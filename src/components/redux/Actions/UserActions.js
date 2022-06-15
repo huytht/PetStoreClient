@@ -1,6 +1,4 @@
-import axios from "axios"
 import { USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT,REFRESH_TOKEN } from "../Constants/UserConstants"
-import TokenService from "../../services/token.service"
 import { axiosClient } from "../../services/api"
 //login
 export const login = (username,password) => async(dispatch) =>{
@@ -9,7 +7,7 @@ export const login = (username,password) => async(dispatch) =>{
 
         const res = await axiosClient.post(`/user/login`,{username,password})
 
-        dispatch({type: USER_LOGIN_SUCCESS, payload:res.data.data})
+        dispatch({type: USER_LOGIN_SUCCESS, payload: res.data.data})
         localStorage.setItem("user",JSON.stringify(res.data.data))
         
     } catch (error) {
@@ -22,9 +20,11 @@ export const login = (username,password) => async(dispatch) =>{
 
 //logout
 export const logout = () => (dispatch) => {
-    localStorage.removeItem("user")
+   
+    window.location.href = "/"; 
     dispatch({type: USER_LOGOUT})
-    document.location.href ="/"
+    localStorage.clear();    
+    
 }
 //refresh token
 export const refreshToken = (accessToken) => (dispatch) => {

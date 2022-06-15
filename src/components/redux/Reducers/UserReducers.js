@@ -27,7 +27,7 @@ const initialState = user
   ? { isLoggedIn: true, user }
   : { isLoggedIn: false, user: null };
   
-export const refreshToken = (state= initialState,action) => {
+export const refreshTokenReducer = (state= initialState,action) => {
     const { type, payload } = action;
     switch (type) {
         case REFRESH_TOKEN:

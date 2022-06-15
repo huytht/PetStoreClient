@@ -1,27 +1,30 @@
-import { refreshToken } from "../Reducers/UserReducers";
 import TokenService from "../../services/token.service";
-import axios from "axios";
 import { axiosClient } from "../../services/api";
+import { logout, refreshToken } from './UserActions';
 
 const validRequestForNotAddingToken = [
-  '/product',
+  '/product/list',
   '/user/login',
   '/user/refresh-token'
 ]
 
 const setup = (store) => {
   
-  axiosClient.interceptors.request.use( async (config) => {
-    // const positionIndicator = 'api/';
-    // const position = request.url.indexOf(positionIndicator);
-    validRequestForNotAddingToken.forEach(item => {
-      if (config.url.indexOf(item) >= 0) {
-        return config;
-      }
-    })
-      const token = await TokenService.getLocalAccessToken();
-      if (token) {
-        config.headers["Authorization"] = 'Bearer ' + token;  // for Spring Boot back-end
+  axiosClient.interceptors.request.use( 
+    async (config) => {
+      // console.log(config)
+      let check, isPublic = false;
+
+      validRequestForNotAddingToken.forEach(item => {
+        check = config.url.substring(0).search(item);
+        if (check === 0)
+          isPublic = true;
+      });
+      if (!isPublic) {
+        const token = await TokenService.getLocalAccessToken();
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+        }
       }
       return config;
     },
@@ -35,26 +38,28 @@ const setup = (store) => {
       return res;
     },
     async (err) => {
+      console.log(err);
       const originalConfig = err.config;
       if (originalConfig.url !== '/user/login' && err.response) {
         // Access Token was expired
-        if (err.response.status !== 401 && !originalConfig._retry) {
+        if (err.response.status === 403 && !originalConfig._retry) {
           originalConfig._retry = true;
           try {
             const rs = await axiosClient.post('/user/refresh-token', {
               refreshToken: TokenService.getLocalRefreshToken(),
             });
-            const { accessToken } = rs.data.data;
-            console.log(accessToken)
+            const { accessToken } = rs.data;
             dispatch(refreshToken(accessToken));
             TokenService.updateLocalAccessToken(accessToken);
+            localStorage.setItem("refreshToken", JSON.stringify(accessToken));
             return axiosClient(originalConfig);
           } catch (_error) {
-            console.log(_error)
             return Promise.reject(_error);
           }
+        } else if (err.response.status === 500){
+            dispatch(logout());
+          }
         }
-      }
       return Promise.reject(err);
     }
   );

@@ -3,7 +3,7 @@ import { axiosClient } from "../../services/api";
 import { logout, refreshToken } from './UserActions';
 
 const validRequestForNotAddingToken = [
-  '/product/list',
+  '/product',
   '/user/login',
   '/user/refresh-token'
 ]

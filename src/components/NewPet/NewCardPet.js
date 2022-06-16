@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import { listProduct } from "../redux/Actions/ProductActions"
 import { useDispatch,useSelector } from "react-redux"
+import { Link } from "react-router-dom"
 
 const SampleNextArrow = (props) => {
     const { onClick } = props
@@ -50,10 +51,14 @@ const SampleNextArrow = (props) => {
                 <div className='product mtop'>
                   <div className='img'>
                     <span className='discount'>New</span>
-                    <img src= { `${process.env.REACT_APP_API_ENDPOINT}${productItems.imagePath[0]} `} alt='' /> 
+                    <div className="box-img-product">
+                      <img className="img-product"  src= { `${process.env.REACT_APP_API_ENDPOINT}${productItems.imagePath[0]} `} alt='' /> 
+                    </div>
                   </div>
                   <div className='product-details'>
+                  <Link  to = {`/product/${productItems.id}`}>
                     <h3>{productItems.name}</h3>
+                    </Link>
                     <div className='rate'>
                       <i className='fa fa-star'></i>
                       <i className='fa fa-star'></i>

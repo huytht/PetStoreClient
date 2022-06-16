@@ -17,9 +17,14 @@
     width: 12.85%;
     cursor: pointer;
 }
+
 .box-img-detail{
     max-width: 50%;
     margin-top: 20px;
+}
+.img-related{
+    width: 100%;
+    height: 250px;
 }
 .pdetails .single-detail{
     margin-left: -20%;

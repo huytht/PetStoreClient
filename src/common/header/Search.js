@@ -59,7 +59,6 @@ const logoutHander = () =>{
           <input type='text' placeholder='Search...' />
           <span>All Name</span>
         </div>
-
         <div className='icon f_flex width'>
           {user  ?
             ( <Grid.Container justify="flex-end" gap={2}>
@@ -77,7 +76,7 @@ const logoutHander = () =>{
                 <Dropdown.Menu color="secondary" aria-label="Avatar Actions">
                   <Dropdown.Item key="profile" css={{ height: "$18" }}>
                     <Text b color="inherit" css={{ d: "flex" }}>
-                      Signed in as
+                      Đăng nhập bởi
                     </Text>
                     <Text b color="inherit" css={{ d: "flex" }}>
                       {user.username === undefined ? user.data.data.username: user.username}
@@ -85,7 +84,7 @@ const logoutHander = () =>{
                   </Dropdown.Item>  
                   <Dropdown.Item key="settings" withDivider>
                     <Link to = '/profile'>
-                      My Settings
+                      Thông tin cá nhân
                     </Link>
                   </Dropdown.Item>
 
@@ -143,6 +142,7 @@ const logoutHander = () =>{
             fullWidth
             color="primary"
             size="lg"
+            type="password"
             placeholder="Password"  
             value={password}
             onChange ={(e) => setPassword(e.target.value)}

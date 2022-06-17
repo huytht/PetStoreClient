@@ -5,10 +5,15 @@ import HomePage from "./pages/HomePage";
 import Footer from "./common/footer/Footer";
 import PetDetailPage from "./pages/PetDetailPage";
 import UserDetailPage from "./pages/UserDetailPage";
+import { Toaster } from 'react-hot-toast';
 
 const App = () =>{
   return (
     <>
+    <Toaster
+      position="bottom-center"
+      reverseOrder={false}
+    />
       <Router>
         <Header/>
         <Routes>

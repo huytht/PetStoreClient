@@ -13,6 +13,9 @@ const App = () =>{
     <Toaster
       position="bottom-center"
       reverseOrder={false}
+      containerStyle={{ 
+        zIndex: "10000",
+      }}
     />
       <Router>
         <Header/>

@@ -1,4 +1,4 @@
-import { USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT,REFRESH_TOKEN, USER_REGISTER_REQUEST, USER_REGISTER_FAIL, USER_REGISTER_SUCCESS } from "../Constants/UserConstants"
+import { USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT,REFRESH_TOKEN, USER_REGISTER_REQUEST, USER_REGISTER_FAIL, USER_REGISTER_SUCCESS,USER_DETAIL_FAIL,USER_DETAIL_REQUEST,USER_DETAIL_SUCCESS } from "../Constants/UserConstants"
 import { axiosClient } from "../../services/api"
 import toast from 'react-hot-toast';
 //login
@@ -22,7 +22,22 @@ export const login = (username,password) => async(dispatch) =>{
         
     }
 }
+//user details
+export const getUserDetails = (id) => async(dispatch) =>{
+    try {
+        dispatch({type:USER_DETAIL_REQUEST})
 
+        const res = await axiosClient.get(`/user/profiles?id=${id}`)
+        dispatch({type: USER_DETAIL_SUCCESS, payload: res.data.data})
+        console.log(res)
+       
+    } catch (error) {
+        dispatch({
+            type:USER_DETAIL_FAIL,
+            payload: error.response && error.response.message ? error.response.data.message : error.message
+        })
+    }
+}
 //register
 export const register = (email, username, password) => async(dispatch) =>{
     try {

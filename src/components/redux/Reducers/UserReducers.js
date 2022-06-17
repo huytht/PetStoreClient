@@ -6,6 +6,10 @@ import {
     USER_LOGIN_REQUEST,
     USER_LOGIN_SUCCESS, 
     USER_LOGOUT,
+    USER_DETAIL_FAIL,
+    USER_DETAIL_REQUEST,
+    USER_DETAIL_SUCCESS,
+    USER_DETAIL_RESET,
     REFRESH_TOKEN,
 } from "../Constants/UserConstants"
 
@@ -20,6 +24,21 @@ export const userLoginReducer = (state = {},action) =>{
             return {loading: false, error: action.payload}
         case USER_LOGOUT:
             return{}
+        default:
+            return state;
+    }
+}
+//user details
+export const userDetailsReducer = (state = {userInfo:{}},action) =>{
+    switch (action.type) {
+        case USER_DETAIL_REQUEST:
+            return {...state, loading: true}
+        case USER_DETAIL_SUCCESS:
+            return {loading: false, userInfo: action.payload}
+        case USER_DETAIL_FAIL:
+            return {loading: false, error: action.payload}
+        case USER_DETAIL_RESET:
+            return{ userInfo:{}}
         default:
             return state;
     }

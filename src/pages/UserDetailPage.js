@@ -1,8 +1,9 @@
-import React,{useState} from 'react'
+import React,{useEffect,useState} from 'react'
 import "./../components/User/style.css"
 import UserChangePassword from '../components/User/UserChangePassword'
 import UserDetail from '../components/User/UserDetail'
-
+import { useDispatch,useSelector } from 'react-redux'
+import { getUserDetails } from '../components/redux/Actions/UserActions'
 
 const UserDetailPage = () => {
   const [toggleState, setToggleState] = useState(1);
@@ -10,6 +11,15 @@ const UserDetailPage = () => {
   const toggleTab = (index) => {
     setToggleState(index);
   };
+  const dispatch =useDispatch()
+  const userLogin =useSelector((state) => state.userLogin);
+  const {user} = userLogin;
+  useEffect(() => {
+    if(user){
+      dispatch(getUserDetails(user.userId))
+      console.log(user.userId)
+    } 
+  },[dispatch])
 
   return (
     <div className="user-detail-page container mtop">

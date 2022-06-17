@@ -19,7 +19,7 @@ import { useDispatch,useSelector } from "react-redux"
                 <div className='product mtop'>
                   <div className='img'>
                     <span className='discount'>New</span>
-                    <img className="img-product"src= { `${process.env.REACT_APP_API_ENDPOINT}${productItems.imagePath[0]} `} alt='' /> 
+                    <img className="img-product"src= { `${process.env.REACT_APP_API_ENDPOINT}${productItems.imagePath} `} alt='' /> 
                     
                   </div>
                   <div className='product-details'>

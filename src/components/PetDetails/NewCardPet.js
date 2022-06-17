@@ -64,7 +64,7 @@ const SampleNextArrow = (props) => {
                     <div className='product mtop'>
                       <div className='img'>
                         <span className='discount'>New</span>
-                        <img className="img-related" src={`${process.env.REACT_APP_API_ENDPOINT}${productItems.imagePath[0]} `} alt='' /> 
+                        <img className="img-related" src={`${process.env.REACT_APP_API_ENDPOINT}${productItems.imagePath} `} alt='' /> 
                       </div>
                       <div className='product-details'>
                         <Link to = {`/product/${productItems.id}`}><h3>{productItems.name}</h3></Link>

@@ -52,7 +52,7 @@ const SampleNextArrow = (props) => {
                   <div className='img'>
                     <span className='discount'>New</span>
                     <div className="box-img-product">
-                      <img className="img-product"  src= { `${process.env.REACT_APP_API_ENDPOINT}${productItems.imagePath[0]} `} alt='' /> 
+                      <img className="img-product"  src= { `${process.env.REACT_APP_API_ENDPOINT}${productItems.imagePath} `} alt='' /> 
                     </div>
                   </div>
                   <div className='product-details'>

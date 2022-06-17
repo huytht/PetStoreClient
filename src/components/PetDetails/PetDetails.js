@@ -36,10 +36,10 @@ const PetDetails = () => {
                 <div className='single-detail'>
                   <h1>{product?.name==null ? '-':product.name}</h1>
                   <h2>{product?.price}</h2>
-                  <h4>Tuổi: <span>{product?.age===null ? '-': product.age}</span> tháng tuổi</h4>
-                  <h4>Giới tính: <span>{product?.gender === null ? '-':product?.gender === 0 ? 'Đực' : 'Cái'}</span> </h4>
-                  <h4>Xuất xứ: <span>{product.origins.map(origin => origin.name).lenght===[] ? '-' :product?.origins.map(origin => origin.name).join(', ')}</span> </h4>
-                  <h4>Chủng loại: <span>{product.breed === null ? '-':product.breed.name }</span>  </h4>
+                  {product?.age !== null && <h4>Tuổi: <span>  {product.age}</span> tháng tuổi</h4> }
+                  {product?.gender !== null && <h4>Giới tính: <span> {product?.gender === 0 ? 'Đực' : 'Cái'}</span> </h4> }
+                  {product.origins.length > 0 && <h4>Xuất xứ: <span>{product?.origins.map(origin => origin.name).join(', ')}</span> </h4>}
+                  {product.breed !== null && <h4>Chủng loại: <span>{product.breed.name}</span>  </h4>}
                   <div className='amount'>
                     <h3>Số lượng: </h3>
                     <div className='amount-box f_flex'>

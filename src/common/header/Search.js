@@ -5,7 +5,6 @@ import { Modal, Input, Row, Checkbox, Button, Text } from "@nextui-org/react";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout, register } from "../../components/redux/Actions/UserActions";
 import { Dropdown, Avatar, Grid } from "@nextui-org/react";
-import { toast } from 'react-hot-toast';
 
 const Search = () => {
   // fixed Header
@@ -15,7 +14,6 @@ const Search = () => {
   });
 
   const [visible, setVisible] = React.useState(false);
-  const status  = window.location.search;
   const handler = () => setVisible(true);
   const closeHandler = () => {
     setVisible(false);
@@ -87,6 +85,7 @@ const Search = () => {
 
   useEffect(() => {
     if (user) {
+      
       setVisible(false);
     }
   }, [user]);
@@ -97,14 +96,6 @@ const Search = () => {
     }
   }, [userReg]);
 
-  useEffect(() => {
-    if (status) {
-        if (status === "success")
-            toast.success("Xác thực thành công")
-        else
-            toast.error("Xác thực thất bại")
-    }
-  }, [status])
   const loginHandler = (e) => {
     e.preventDefault();
     dispatch(login(username, password));

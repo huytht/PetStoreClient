@@ -11,6 +11,9 @@ import {
     USER_DETAIL_SUCCESS,
     USER_DETAIL_RESET,
     REFRESH_TOKEN,
+    USER_CHANGE_PASSWORD_REQUEST,
+    USER_CHANGE_PASSWORD_SUCCESS,
+    USER_CHANGE_PASSWORD_FAIL,
 } from "../Constants/UserConstants"
 
 //login
@@ -76,4 +79,19 @@ export const refreshTokenReducer = (state= initialState,action) => {
             return state;
     }
 }
+
+//register
+export const changePasswordReducer = (state = {},action) =>{
+    switch (action.type) {
+        case USER_CHANGE_PASSWORD_REQUEST:
+            return {loading: true}
+        case USER_CHANGE_PASSWORD_SUCCESS:
+            return {loading: false, response: action.payload}
+        case USER_CHANGE_PASSWORD_FAIL:
+            return {loading: false, error: action.payload}
+        default:
+            return state;
+    }
+}
+
 

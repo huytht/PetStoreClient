@@ -264,3 +264,6 @@ button {
   display: contents !important;
 }
 /*----- register form -------*/
+.slick-slider {
+  z-index: 1;
+}

@@ -126,7 +126,7 @@ const UserDetail = () => {
         <div onClick={onChangeProfileImage} class="content_img">
           <Avatar
             src={userInfo.avatarImg}
-            css={{ size: "$40" }}
+            style={{ width: "150px", height: "150px" }}
             className="avatar"
             zoomed
           />

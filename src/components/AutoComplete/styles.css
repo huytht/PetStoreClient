@@ -39,17 +39,8 @@ input {
 .suggestions li:not(:last-of-type) {
   border-bottom: 1px solid #999;
 } */
-html {
-  box-sizing: border-box;
-  background: cornflowerblue;
-  font-family: 'helvetica neue';
-  font-size: 20px;
-  font-weight: 200;
-}
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-input {
+
+.search-form input {
   width: 100%;
   padding:20px;
 }
@@ -60,7 +51,7 @@ input {
   width: 60%;
 }
 
-input.search {
+.search-form input.search {
   margin: 0;
   outline: 0;
   border: 10px solid #F7F7F7;

@@ -126,14 +126,14 @@ const UserDetail = () => {
         <div onClick={onChangeProfileImage} class="content_img">
           <Avatar
             src={userInfo.avatarImg}
-            style={{ width: "150px", height: "150px" }}
+            css= {{size:"$40",zIndex:"$1"}}
             className="avatar"
             zoomed
           />
           <div>Bấm để đổi ảnh</div>
           <br />
         </div>
-        <h4>{userInfo.username}</h4>
+        <h3>{userInfo.username}</h3>
         <form enctype="multipart/form-data" style={{ opacity: 0 }}>
           <input
             type="file"

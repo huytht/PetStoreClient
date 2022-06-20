@@ -104,12 +104,14 @@ const UserChangePassword = () => {
   return (
     <div className="wrapper">
       <div className="left">
-        <Avatar
-          src={userInfo.avatarImg}
-          css={{ size: "$40" }}
-        />
-        <br />
-        <h4>{userInfo.username}</h4>
+        <div class="content_img">
+          <Avatar
+            src={userInfo.avatarImg}
+            css={{ size: "$40" }}
+          />
+          <br/>
+        </div>
+        <h3>{userInfo.username}</h3>
       </div>
       <div className="right">
         <div className="info">

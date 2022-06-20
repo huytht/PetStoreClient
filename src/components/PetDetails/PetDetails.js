@@ -41,17 +41,35 @@ const PetDetails = () => {
                   {product.origins.length > 0 && <h4>Xuất xứ: <span>{product?.origins.map(origin => origin.name).join(', ')}</span> </h4>}
                   {product.breed !== null && <h4>Chủng loại: <span>{product.breed.name}</span>  </h4>}
                   <div className='amount'>
-                    <h3>Số lượng: </h3>
-                    <div className='amount-box f_flex'>
-                      <button className='de'>-</button><input className='intput'type="text" value="1"/><button className='in'>+</button>
-                    </div>
-                    <div className='amount-index'> 
-                      Số lượng còn {product?.amount}
-                    </div>
+                    {product.amount > 0 ? (
+                      <>
+                        <h3>Số lượng: </h3>
+                          <div className='amount-box f_flex'>
+                            <button className='de'>-</button><input className='intput'type="text" value="1"/><button className='in'>+</button>
+                          </div>
+                          <div className='amount-index'> 
+                            Số lượng còn {product?.amount}
+                          </div>
+                      </>
+                      ):(
+                        <>   
+                          <h3>Số lượng: </h3>
+                          <div className='amount-index'> 
+                            Số lượng còn {product?.amount}
+                          </div>
+                        </>
+                    )}
+                    
                   </div>
                   <br/>
-                  <button className='btn-add-to-cart'>Mua hàng</button>
-                 
+                  {product.amount > 0 ? 
+                  (<>
+                    <button type="button" className='btn-add-to-cart' >Mua hàng</button>
+                  </>):
+                  (<>
+                    <button type="button" className='btn-add-to-cart' disabled>Hết sản phẩm</button>
+                  </>)}
+
                 </div>
             </section>
           </>

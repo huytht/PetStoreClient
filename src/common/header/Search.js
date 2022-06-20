@@ -3,9 +3,13 @@ import logo from "./assets/logo.svg";
 import { Link } from "react-router-dom";
 import { Modal, Input, Row, Checkbox, Button, Text } from "@nextui-org/react";
 import { useDispatch, useSelector } from "react-redux";
-import { login, logout, register } from "../../components/redux/Actions/UserActions";
+import {
+  login,
+  logout,
+  register,
+} from "../../components/redux/Actions/UserActions";
 import { Dropdown, Avatar, Grid } from "@nextui-org/react";
-import { toast } from 'react-hot-toast';
+import Autocomplete from "../../components/AutoComplete/Autocomplete";
 
 const Search = () => {
   // fixed Header
@@ -15,7 +19,6 @@ const Search = () => {
   });
 
   const [visible, setVisible] = React.useState(false);
-  const status  = window.location.search;
   const handler = () => setVisible(true);
   const closeHandler = () => {
     setVisible(false);
@@ -34,11 +37,14 @@ const Search = () => {
   const [usernameToched, setUsernameToched] = useState(false);
   const [passwordToched, setPasswordToched] = useState(false);
   const [emailToched, setEmailToched] = useState(false);
+  // const [searchValue, setSearchValue] = useState("");
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const userRegister = useSelector((state) => state.userRegister);
+  const productListSuggest = useSelector((state) => state.productListSuggest);
   const { user } = userLogin;
   const { userReg } = userRegister;
+  const { products } = productListSuggest;
 
   const validateEmail = (value) => {
     return value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
@@ -97,14 +103,6 @@ const Search = () => {
     }
   }, [userReg]);
 
-  useEffect(() => {
-    if (status) {
-        if (status === "success")
-            toast.success("Xác thực thành công")
-        else
-            toast.error("Xác thực thất bại")
-    }
-  }, [status])
   const loginHandler = (e) => {
     e.preventDefault();
     dispatch(login(username, password));
@@ -116,6 +114,7 @@ const Search = () => {
   const logoutHander = () => {
     dispatch(logout());
   };
+
   return (
     <>
       <section className="search">
@@ -125,10 +124,10 @@ const Search = () => {
           </div>
 
           <div className="search-box f_flex">
+            <Autocomplete suggestions={products?.length > 0 ? products : []} />
             <i className="fa fa-search"></i>
-            <input type="text" placeholder="Search..." />
-            <span>All Name</span>
           </div>
+
           <div className="icon f_flex width">
             {user ? (
               <Grid.Container justify="flex-end" gap={2}>

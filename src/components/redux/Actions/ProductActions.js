@@ -14,7 +14,10 @@ import {
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_LIST_RELATED_SUCCESS,
     PRODUCT_LIST_RELATED_FAIL,
-    PRODUCT_LIST_RELATED_REQUEST
+    PRODUCT_LIST_RELATED_REQUEST,
+    PRODUCT_LIST_SUGGESTION_REQUEST,
+    PRODUCT_LIST_SUGGESTION_SUCCESS,
+    PRODUCT_LIST_SUGGESTION_FAIL
 } from "../Constants/ProductConstants"
 
 const array = [
@@ -67,6 +70,23 @@ export const listProductDetails = (id) => async(dispatch) =>{
     } catch (error) {
         dispatch({
             type:PRODUCT_DETAILS_FAIL,
+            payload: error.response && error.response.message ? error.response.data.message : error.message
+        })
+    }
+}
+
+// search product
+export const listProductSuggest = (text) => async(dispatch) =>{
+    try {
+        dispatch({ type: PRODUCT_LIST_SUGGESTION_REQUEST })
+
+        const res = await axiosClient.get(`/product/search-text?text=${text}`)
+
+        dispatch({ type: PRODUCT_LIST_SUGGESTION_SUCCESS, payload: res.data.data.content})
+
+    } catch (error) {
+        dispatch({
+            type: PRODUCT_LIST_SUGGESTION_FAIL,
             payload: error.response && error.response.message ? error.response.data.message : error.message
         })
     }

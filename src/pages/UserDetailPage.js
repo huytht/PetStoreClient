@@ -19,7 +19,7 @@ const UserDetailPage = () => {
       dispatch(getUserDetails(user.userId))
       console.log(user.userId)
     } 
-  },[dispatch])
+  },[dispatch, user])
 
   return (
     <div className="user-detail-page container mtop">

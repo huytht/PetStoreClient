@@ -13,7 +13,10 @@ import {
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_LIST_RELATED_FAIL,
     PRODUCT_LIST_RELATED_REQUEST,
-    PRODUCT_LIST_RELATED_SUCCESS
+    PRODUCT_LIST_RELATED_SUCCESS,
+    PRODUCT_LIST_SUGGESTION_REQUEST,
+    PRODUCT_LIST_SUGGESTION_SUCCESS,
+    PRODUCT_LIST_SUGGESTION_FAIL
 } from "../Constants/ProductConstants"
 
 //productlist
@@ -79,6 +82,20 @@ export const productDetailsReducer = (state = {product:{}},action) =>{
             return {loading: false, product: action.payload}
         case PRODUCT_DETAILS_FAIL:
             return {loading: false, product: action.payload}
+        default:
+            return state;
+    }
+}
+
+//details product
+export const productListSuggestReducer = (state = {},action) =>{
+    switch (action.type) {
+        case PRODUCT_LIST_SUGGESTION_REQUEST:
+            return {...state, loading: true}
+        case PRODUCT_LIST_SUGGESTION_SUCCESS:
+            return {loading: false, products: action.payload}
+        case PRODUCT_LIST_SUGGESTION_FAIL:
+            return {loading: false, error: action.payload}
         default:
             return state;
     }

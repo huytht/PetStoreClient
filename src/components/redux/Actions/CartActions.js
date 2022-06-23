@@ -4,17 +4,17 @@ import { CART_ADD_ITEM, CART_REMOVE_ITEM,DECREASE_QUANTITY,GET_NUMBER_CART, INCR
 
 export const addToCart = (id, qty) => async(dispatch, getState) => {
     const res = await axiosClient.get(`/product/detail?id=${id}`)
-    dispatch({
-        type: CART_ADD_ITEM,
-        payload: {
-            id: res.data.data.id,
-            name: res.data.data.name,
-            price: res.data.data.price,
-            imagePath:res.data.data.imagePath[0] ,
-            amount: res.data.data.amount,
-            qty,
-        },
-    });
+        dispatch({
+            type: CART_ADD_ITEM,
+            payload: {
+                id: res.data.data.id,
+                name: res.data.data.name,
+                price: res.data.data.price,
+                imagePath:res.data.data.imagePath[0] ,
+                amount: res.data.data.amount,
+                qty,
+            },
+        });   
     localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
 };
 

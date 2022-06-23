@@ -13,11 +13,13 @@ import { addToCart } from "../redux/Actions/CartActions"
       dispatch(listProduct("hot",0,2,0,8))
     },[dispatch])
     const { cartItems } = useSelector((state) => state.cart);
-    const handleAddToCart = (id) => {
-          if(cartItems.amount-cartItems.qty>0){
-              dispatch(addToCart(id,1))
-          }    
-    }
+    const {value,setValue} = useState(1)
+    // const handleAddToCart = (id) => {
+
+    //         if(cartItems.find((x) => x.product === id.product)){
+    //             dispatch(addToCart(id,1))
+    //         }        
+    // }
     return (
       <>
           {productListHot.productsHot?.map((productItems) => {
@@ -43,7 +45,7 @@ import { addToCart } from "../redux/Actions/CartActions"
                       {/* step : 3  
                        if hami le button ma click garryo bahne 
                       */}
-                      <button onClick={()=>handleAddToCart(productItems.id)}>
+                      <button onClick={()=>dispatch(addToCart(productItems.id,1))} >
                         <i className='fa fa-plus'></i>
                       </button>
                     </div>

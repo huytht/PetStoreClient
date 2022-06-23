@@ -1,63 +1,13 @@
 import { useEffect, useState } from "react";
 import { Table, Row, Col, Tooltip, User, Text } from "@nextui-org/react";
-import { AiFillDelete } from "react-icons/ai";
-import {useDispatch,useSelector} from "react-redux"
-import {addToCart, decreaseQuantity, increaseQuantity} from './../components/redux/Actions/CartActions'
+import { MdDeleteForever } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux"
+import { addToCart, decreaseQuantity, increaseQuantity, removeFromCart } from './../components/redux/Actions/CartActions'
 import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast';
+
 const CartPage = () => {
-  const columns = [
-    { name: "Tên sản phẩm", uid: "name" },
-    { name: "Số lượng", uid: "qty" },
-    { name: "Tạm tính", uid: "price" },
-    { name: "Hành động", uid: "actions" },
-  ];
-  const renderCell = (product, index, columnKey) => {
-    const cellValue = product[columnKey];
-    switch (columnKey) {
-      case "name":
-        return (
-          <User squared  src={`${process.env.REACT_APP_API_ENDPOINT}${product.imagePath} `} name={cellValue} css={{ p: 0 }}/>
-        );
-      case "qty":
-        return (
-          <Col>
-            <div className="box-amount-cart f_flex">
-                <button className='de-cart' onClick={() => handleDecreaseQuantity(cellValue, index)}>-</button>
-                  <input className='input-cart'type="text" value={cellValue} readOnly />
-                <button className='in-cart' onClick={() => handleIncreaseQuantity(cellValue, index)} disabled={active[index] === false ? true : false}>+</button>
-            </div>          
-          </Col>
-        );
-      case "price":
-        return (
-          <Col>
-            <Row>
-              <Text b size={14} css={{ tt: "capitalize" }}>
-                {cellValue}
-              </Text>
-            </Row>
-        </Col>
-        );
-
-      case "actions":
-        return (
-          <Row justify="center" align="center">
-            <Col css={{ d: "flex" }}>
-              <Tooltip
-                content="Delete product"
-                color="error"
-                onClick={() => console.log("Delete user", product.id)}
-              >
-              <AiFillDelete/>
-              </Tooltip>
-            </Col>
-          </Row>
-        );
-      default:
-        return cellValue;
-    }
-  };
-
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = new URL(document.location).searchParams;
@@ -66,11 +16,11 @@ const CartPage = () => {
   const [cartItems, setCartItems] = useState([])
   const [active, setActive] = useState([])
 
-  useEffect(()=>{
-    if(id){
-      dispatch(addToCart(id,qty))
-     }
-  },[dispatch,id,qty])
+  useEffect(() => {
+    if (id) {
+      dispatch(addToCart(id, qty))
+    }
+  }, [dispatch, id, qty])
 
 
   useEffect(() => {
@@ -78,9 +28,9 @@ const CartPage = () => {
       setCartItems(JSON.parse(localStorage.getItem("cartItems")));
       if (id && qty)
         navigate('/cart')
-    }, 50)     
+    }, 50)
   }, [cartItems])
-  
+
   // useEffect(() => {
   //   if (check)
   //     setCartItems(JSON.parse(localStorage.getItem("cartItems")));
@@ -88,19 +38,20 @@ const CartPage = () => {
   // }, [check]);
 
   const handleIncreaseQuantity = (qty, index) => {
-    if(cartItems[index].amount - qty > 0){
-      dispatch(increaseQuantity(index))  
+    if (cartItems[index].amount - qty > 0) {
+      dispatch(increaseQuantity(index))
     }
-     else{
-       let newArr = [...active];
-       newArr[index] = false;
-       setActive(newArr);
-      }
+    else {
+      let newArr = [...active];
+      newArr[index] = false;
+      setActive(newArr);
+      toast.error("Số lượng đã đạt tối đa")
+    }
   }
 
-  const handleDecreaseQuantity = (quantity, index) =>{
+  const handleDecreaseQuantity = (quantity, index) => {
 
-    if(quantity > 0){
+    if (quantity > 0) {
       let newArr = [...active];
       newArr[index] = true;
       setActive(newArr);
@@ -108,49 +59,84 @@ const CartPage = () => {
       // setCheck(true);
       // console.log(cartItems.qty)
     }
-    // else{
-    //   let newArr = [...active];
-    //   newArr[index] = false;
-    //   setActive(newArr);
-    // }
+    if (quantity == 1) {
+      toast.error("Số lượng đã đạt tối thiểu")
+    }
   }
 
-  return (
-    <Table
-      aria-label="Example table with custom cells"
-      css={{
-        height: "auto",
-        maxWidth: "90%",
-        marginTop:"40px",
-        marginBottom:"40px",
-        border:"1px solid red",
-        marginLeft:"70px"
-        
-      }}
-      selectionMode="none"
-    >
-      <Table.Header columns={columns}>
-        {(column) => (
-          <Table.Column
-            key={column.uid}
-          >
-            {column.name}
-          </Table.Column>
-        )}
-      </Table.Header>
+  const removeFromCartHandler = (id) => {
+    dispatch(removeFromCart(id))
+  }
 
-      <Table.Body items={cartItems}>
-        {(item) => (
-          <Table.Row>
-            {(columnKey) => (
-              <Table.Cell>{renderCell(item, cartItems.indexOf(item), columnKey)}</Table.Cell>
-            )}
-          </Table.Row>
-        )}
-      </Table.Body>
-    </Table>
-    
+  let Total=0
+  let TotalQuantity=0
+  return (
+    <div className="table-cart">
+      <h1 className="title-cart mtop">
+        Giỏ Hàng
+      </h1>
+      <table
+        aria-label="Example table with custom cells"
+        style={{
+          height: "auto",
+          maxWidth: "90%",
+          marginTop: "40px",
+          marginBottom: "20px",
+          marginLeft: "70px",
+          width: "100%",
+          textAlign: "center",
+          lineHeight: "3"
+        }}
+        selectionMode="none"
+      >
+        <thead>
+          <th></th>
+          <th>Hình ảnh</th>
+          <th>Tên sản phẩm</th>
+          <th>Số lượng</th>
+          <th>Tạm tính</th>
+         
+        </thead>
+
+        <tbody>
+          {cartItems.map((item, index) => (
+              Total+=Number(item.price * item.qty),
+              TotalQuantity += Number(item.qty),
+            <tr>
+              <td>
+                <MdDeleteForever size="25px" color="#E94560" onClick={() => removeFromCartHandler(item.id)} />
+              </td>
+              <td><User squared src={`${process.env.REACT_APP_API_ENDPOINT}${item.imagePath} `} css={{ p: 0,paddingTop:20 }} /></td>
+              <td>{item.name}</td>
+              <td>
+                <div className="box-amount-cart f_flex">
+                  <button className='de-cart' onClick={() => handleDecreaseQuantity(item.qty, index)}>-</button>
+                  <input className='input-cart' type="text" value={item.qty} readOnly />
+                  <button className='in-cart' onClick={() => handleIncreaseQuantity(item.qty, index)} disabled={active[index] === false ? true : false}>+</button>
+                </div>
+              </td>
+              <td>
+                <Text b size={14} css={{ tt: "capitalize" }}>
+                  {Number(item.price * item.qty)}
+                </Text>
+              </td>
+            </tr>
+          ))}
+
+        </tbody>
+        <tfoot>
+          <tr style={{fontWeight:"bold"}}>
+            <td colSpan={3}>Tổng cộng</td>
+            <td>{TotalQuantity}</td>
+            <td>{Total}</td>
+          </tr>
+        </tfoot>
+      </table>
+      <button type="button" className='btn-add-to-cart' >Mua hàng</button>
+    </div>
+
   );
+
 }
 
 export default CartPage

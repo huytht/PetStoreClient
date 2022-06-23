@@ -31,6 +31,9 @@ body {
 .f_flex {
   display: flex;
 }
+.box-amount-cart {
+  justify-content: center;
+}
 a {
   text-decoration: none;
   color: black;
@@ -267,7 +270,7 @@ button {
 .slick-slider {
   z-index: 1;
 }
-/*----- register form -------*/
+/*----- cart -------*/
 .de-cart{
   outline: none;
   cursor: pointer;
@@ -326,4 +329,29 @@ button {
   width: 50px;
   height: 32px;
   text-align: center;
+}
+.title-cart{
+  color: #e94560;
+  text-align: center;
+}
+
+.table-cart table,.table-cart th,.table-cart td{
+  border: 0.5px solid  rgba(0,0,0,.1);
+  border-collapse: collapse;
+}
+
+.table-cart .btn-add-to-cart{
+  background-color: #e94560;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: 60%;
+  margin-bottom: 20px;
+
 }

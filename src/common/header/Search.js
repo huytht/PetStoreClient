@@ -45,7 +45,7 @@ const Search = () => {
   const { user } = userLogin;
   const { userReg } = userRegister;
   const { products } = productListSuggest;
-
+  const [qty,setQty] = useState(1)
   const validateEmail = (value) => {
     return value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
   };
@@ -113,7 +113,19 @@ const Search = () => {
   };
   const logoutHander = () => {
     dispatch(logout());
-  };
+  }
+  // const {cartItems} = useSelector((state)=>state.cart)
+  const [cartItems, setCartItems] = useState([])
+  const [numberCart, setNumberCart] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCartItems(JSON.parse(localStorage.getItem("cartItems")));
+      let totalQuantity = 0;
+      cartItems.map((item) =>  totalQuantity += Number(item.qty))
+      setNumberCart(totalQuantity) 
+    }, 50)
+  }, [cartItems]);
 
   return (
     <>
@@ -374,7 +386,7 @@ const Search = () => {
             <div className="cart">
               <Link to="/cart">
                 <i className="fa fa-shopping-bag icon-circle"></i>
-                <span>0</span>
+                <span>{numberCart}</span>
               </Link>
             </div>
           </div>

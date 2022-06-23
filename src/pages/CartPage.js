@@ -1,44 +1,34 @@
+import { useEffect, useState } from "react";
 import { Table, Row, Col, Tooltip, User, Text } from "@nextui-org/react";
 import { AiFillDelete } from "react-icons/ai";
+import {useDispatch,useSelector} from "react-redux"
+import {addToCart, decreaseQuantity, increaseQuantity} from './../components/redux/Actions/CartActions'
+import { useNavigate } from 'react-router-dom'
 const CartPage = () => {
   const columns = [
     { name: "Tên sản phẩm", uid: "name" },
-    { name: "Số lượng", uid: "amount" },
-    { name: "Tạm tính", uid: "temp_price" },
+    { name: "Số lượng", uid: "qty" },
+    { name: "Tạm tính", uid: "price" },
     { name: "Hành động", uid: "actions" },
   ];
-  const products = [
-    {
-      id: 1,
-      name: "Tony Reichert",
-      amount: "2",
-      temp_price: "30000000",
-      avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
-    },
-    {
-      id: 2,
-      name: "Tony Reichert",
-      amount: "2",
-      temp_price: "30000000",
-      avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
-    },
-  ];
-  const renderCell = (product, columnKey) => {
+  const renderCell = (product, index, columnKey) => {
     const cellValue = product[columnKey];
     switch (columnKey) {
       case "name":
         return (
-          <User squared src={product.avatar} name={cellValue} css={{ p: 0 }}/>
+          <User squared  src={`${process.env.REACT_APP_API_ENDPOINT}${product.imagePath} `} name={cellValue} css={{ p: 0 }}/>
         );
-      case "amout":
+      case "qty":
         return (
           <Col>
-              <Text b size={14} css={{ tt: "capitalize",alignItems:"center" }}>
-                {cellValue}
-              </Text>
+            <div className="box-amount-cart f_flex">
+                <button className='de-cart' onClick={() => handleDecreaseQuantity(cellValue, index)}>-</button>
+                  <input className='input-cart'type="text" value={cellValue} readOnly />
+                <button className='in-cart' onClick={() => handleIncreaseQuantity(cellValue, index)} disabled={active[index] === false ? true : false}>+</button>
+            </div>          
           </Col>
         );
-      case "temp_price":
+      case "price":
         return (
           <Col>
             <Row>
@@ -67,6 +57,64 @@ const CartPage = () => {
         return cellValue;
     }
   };
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const params = new URL(document.location).searchParams;
+  const qty = params.get('qty')
+  const id = params.get('id')
+  const [cartItems, setCartItems] = useState([])
+  const [active, setActive] = useState([])
+
+  useEffect(()=>{
+    if(id){
+      dispatch(addToCart(id,qty))
+     }
+  },[dispatch,id,qty])
+
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCartItems(JSON.parse(localStorage.getItem("cartItems")));
+      if (id && qty)
+        navigate('/cart')
+    }, 50)     
+  }, [cartItems])
+  
+  // useEffect(() => {
+  //   if (check)
+  //     setCartItems(JSON.parse(localStorage.getItem("cartItems")));
+  //   setCheck(false);
+  // }, [check]);
+
+  const handleIncreaseQuantity = (qty, index) => {
+    if(cartItems[index].amount - qty > 0){
+      dispatch(increaseQuantity(index))  
+    }
+     else{
+       let newArr = [...active];
+       newArr[index] = false;
+       setActive(newArr);
+      }
+  }
+
+  const handleDecreaseQuantity = (quantity, index) =>{
+
+    if(quantity > 0){
+      let newArr = [...active];
+      newArr[index] = true;
+      setActive(newArr);
+      dispatch(decreaseQuantity(index))
+      // setCheck(true);
+      // console.log(cartItems.qty)
+    }
+    // else{
+    //   let newArr = [...active];
+    //   newArr[index] = false;
+    //   setActive(newArr);
+    // }
+  }
+
   return (
     <Table
       aria-label="Example table with custom cells"
@@ -90,11 +138,12 @@ const CartPage = () => {
           </Table.Column>
         )}
       </Table.Header>
-      <Table.Body items={products}>
+
+      <Table.Body items={cartItems}>
         {(item) => (
           <Table.Row>
             {(columnKey) => (
-              <Table.Cell>{renderCell(item, columnKey)}</Table.Cell>
+              <Table.Cell>{renderCell(item, cartItems.indexOf(item), columnKey)}</Table.Cell>
             )}
           </Table.Row>
         )}

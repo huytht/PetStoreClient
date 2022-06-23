@@ -1,19 +1,26 @@
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import "./PetDetails.css"
 import {  listProductDetails } from '../redux/Actions/ProductActions'
 import {useDispatch, useSelector} from "react-redux"
 import { useParams } from 'react-router-dom'
 import Loading from '../LoadingError/Loading'
+import {useNavigate} from 'react-router-dom'
 
 
 const PetDetails = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { id } = useParams();
   const productDetails = useSelector((state) => state.productDetails)
   const { loading, product } = productDetails;
   useEffect(()=>{
     dispatch(listProductDetails(id))
   }, [id, dispatch])
+  const [qtyNum, setQty] = useState(1)
+  const AddToCart = (e) => {
+    e.preventDefault();
+    navigate(`/cart?id=${id}&qty=${qtyNum}`)
+  }
   return (
     <div className='box-details'>
       { (loading === undefined || loading === true) ? (
@@ -45,7 +52,9 @@ const PetDetails = () => {
                       <>
                         <h3>Số lượng: </h3>
                           <div className='amount-box f_flex'>
-                            <button className='de'>-</button><input className='intput'type="text" value="1"/><button className='in'>+</button>
+                            <button className='de' onClick={()=>setQty(qtyNum-1)}>-</button>
+                              <input className='intput'type="text" value={qtyNum} onChange={(e)=>setQty(e.target.value)}/>
+                            <button className='in' onClick={()=>setQty(qtyNum+1)}>+</button>
                           </div>
                           <div className='amount-index'> 
                             Số lượng còn {product?.amount}
@@ -64,7 +73,7 @@ const PetDetails = () => {
                   <br/>
                   {product.amount > 0 ? 
                   (<>
-                    <button type="button" className='btn-add-to-cart' >Mua hàng</button>
+                    <button onClick={AddToCart} type="button" className='btn-add-to-cart' >Mua hàng</button>
                   </>):
                   (<>
                     <button type="button" className='btn-add-to-cart' disabled>Hết sản phẩm</button>

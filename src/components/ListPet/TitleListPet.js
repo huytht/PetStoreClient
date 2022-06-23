@@ -1,9 +1,10 @@
-import React, {useEffect} from "react"
+import React, {useEffect,useState} from "react"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import { Link } from "react-router-dom"
 import { listProduct } from "../redux/Actions/ProductActions"
 import { useDispatch,useSelector } from "react-redux"
+import { addToCart } from "../redux/Actions/CartActions"
 
   const TitleListPet = () => {
     const dispatch = useDispatch()
@@ -11,6 +12,12 @@ import { useDispatch,useSelector } from "react-redux"
     useEffect(()=>{
       dispatch(listProduct("hot",0,2,0,8))
     },[dispatch])
+    const { cartItems } = useSelector((state) => state.cart);
+    const handleAddToCart = (id) => {
+          if(cartItems.amount-cartItems.qty>0){
+              dispatch(addToCart(id,1))
+          }    
+    }
     return (
       <>
           {productListHot.productsHot?.map((productItems) => {
@@ -36,7 +43,7 @@ import { useDispatch,useSelector } from "react-redux"
                       {/* step : 3  
                        if hami le button ma click garryo bahne 
                       */}
-                      <button>
+                      <button onClick={()=>handleAddToCart(productItems.id)}>
                         <i className='fa fa-plus'></i>
                       </button>
                     </div>

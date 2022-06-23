@@ -5,7 +5,7 @@ import { logout, refreshToken } from './UserActions';
 const validRequestForNotAddingToken = [
   '/product',
   '/user/login',
-  '/user/refresh-token'
+  '/user/refresh-token',
 ]
 
 const setup = (store) => {

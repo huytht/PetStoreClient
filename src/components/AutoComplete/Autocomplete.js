@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { listProductSuggest } from "../redux/Actions/ProductActions";
 import "./styles.css";
-
+import { Link } from "react-router-dom";
 const Autocomplete = (props) => {
   const [activeSuggestion, setActiveSuggestion] = useState(0);
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
@@ -68,8 +68,10 @@ const Autocomplete = (props) => {
             return (
               <li className={className} key={suggestion} onClick={onClick}>
                 <div className="suggestion-item">
-                  <img src={ `${process.env.REACT_APP_API_ENDPOINT}${suggestion.imagePath}` } alt="" />
-                  <span>{suggestion.name}</span>
+                  <Link to = {`/product/${suggestion.id}`}>
+                    <img src={ `${process.env.REACT_APP_API_ENDPOINT}${suggestion.imagePath}` } alt="" />
+                    <span>{suggestion.name}</span>
+                  </Link>
                 </div>
                 
               </li>

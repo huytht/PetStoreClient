@@ -17,7 +17,16 @@ import {
     PRODUCT_LIST_RELATED_REQUEST,
     PRODUCT_LIST_SUGGESTION_REQUEST,
     PRODUCT_LIST_SUGGESTION_SUCCESS,
-    PRODUCT_LIST_SUGGESTION_FAIL
+    PRODUCT_LIST_SUGGESTION_FAIL,
+    PRODUCT_CATEGORY_REQUEST,
+    PRODUCT_CATEGORY_SUCCESS,
+    PRODUCT_CATEGORY_FAIL,
+    PRODUCT_BREED_REQUEST,
+    PRODUCT_BREED_SUCCESS,
+    PRODUCT_BREED_FAIL,
+    PRODUCT_LIST_NAME_REQUEST,
+    PRODUCT_LIST_NAME_SUCCESS,
+    PRODUCT_LIST_NAME_FAIL
 } from "../Constants/ProductConstants"
 
 const array = [
@@ -88,6 +97,69 @@ export const listProductSuggest = (text) => async(dispatch) =>{
         dispatch({
             type: PRODUCT_LIST_SUGGESTION_FAIL,
             payload: error.response && error.response.message ? error.response.data.message : error.message
+        })
+    }
+}
+
+// get all category 
+export const listCategory = () => async(dispatch) =>{
+    try {
+        dispatch({ type: PRODUCT_CATEGORY_REQUEST })
+
+        const res = await axiosClient.get(`/common/list/category`)
+
+        dispatch({ type: PRODUCT_CATEGORY_SUCCESS, payload: res.data.data})
+
+    } catch (error) {
+        dispatch({
+            type: PRODUCT_CATEGORY_FAIL,
+            payload: error.response && error.response.message ? error.response.data.message : error.message
+        })
+    }
+}
+
+// get all breed 
+export const listBreed = (categoryId, setContent) => async(dispatch) =>{
+    try {
+        dispatch({ type: PRODUCT_BREED_REQUEST })
+
+        const res = await axiosClient.get(`/common/list/breed?category-id=${categoryId}`);
+
+        setContent(res.data.data);
+
+        dispatch({ type: PRODUCT_BREED_SUCCESS, payload: res.data.data})
+
+    } catch (error) {
+        dispatch({
+            type: PRODUCT_BREED_FAIL,
+            payload: error.response && error.response.message ? error.response.data.message : error.message
+        })
+    }
+}
+
+export const listProductPage = (type, breedId, categoryId, pageNumber, pageSize) => async(dispatch) =>{
+    try {
+        dispatch({type: PRODUCT_LIST_REQUEST})
+
+        const res = await axiosClient.get(`/product/list?type=${type}&breed-id=${breedId}&category-id=${categoryId}&page-number=${pageNumber}&page-size=${pageSize}`)
+        dispatch({type: PRODUCT_LIST_SUCCESS, payload: res.data.data })
+    } catch (error) {
+        dispatch({
+            type: PRODUCT_LIST_FAIL,
+            payload: error.errorMessage
+        })
+    }
+}
+
+export const getCurrentListName = (name) => async(dispatch) => {
+    try {
+        dispatch({type: PRODUCT_LIST_NAME_REQUEST})
+
+        dispatch({type: PRODUCT_LIST_NAME_SUCCESS, payload: name })
+    } catch (error) {
+        dispatch({
+            type: PRODUCT_LIST_NAME_FAIL,
+            payload: error.errorMessage
         })
     }
 }

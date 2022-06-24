@@ -12,7 +12,8 @@ const Autocomplete = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(listProductSuggest(userInput));
+    if (userInput !== "")
+      dispatch(listProductSuggest(userInput));
   }, [userInput, dispatch]);
 
   const onChange = (e) => {

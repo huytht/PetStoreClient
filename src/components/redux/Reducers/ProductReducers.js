@@ -16,7 +16,13 @@ import {
     PRODUCT_LIST_RELATED_SUCCESS,
     PRODUCT_LIST_SUGGESTION_REQUEST,
     PRODUCT_LIST_SUGGESTION_SUCCESS,
-    PRODUCT_LIST_SUGGESTION_FAIL
+    PRODUCT_LIST_SUGGESTION_FAIL,
+    PRODUCT_CATEGORY_REQUEST,
+    PRODUCT_CATEGORY_SUCCESS,
+    PRODUCT_CATEGORY_FAIL,
+    PRODUCT_LIST_NAME_REQUEST,
+    PRODUCT_LIST_NAME_SUCCESS,
+    PRODUCT_LIST_NAME_FAIL
 } from "../Constants/ProductConstants"
 
 //productlist
@@ -87,7 +93,7 @@ export const productDetailsReducer = (state = {product:{}},action) =>{
     }
 }
 
-//details product
+// details product
 export const productListSuggestReducer = (state = {},action) =>{
     switch (action.type) {
         case PRODUCT_LIST_SUGGESTION_REQUEST:
@@ -95,6 +101,34 @@ export const productListSuggestReducer = (state = {},action) =>{
         case PRODUCT_LIST_SUGGESTION_SUCCESS:
             return {loading: false, products: action.payload}
         case PRODUCT_LIST_SUGGESTION_FAIL:
+            return {loading: false, error: action.payload}
+        default:
+            return state;
+    }
+}
+
+// list category
+export const categoryListReducer = (state = {},action) =>{
+    switch (action.type) {
+        case PRODUCT_CATEGORY_REQUEST:
+            return {...state, loading: true}
+        case PRODUCT_CATEGORY_SUCCESS:
+            return {loading: false, categories: action.payload}
+        case PRODUCT_CATEGORY_FAIL:
+            return {loading: false, error: action.payload}
+        default:
+            return state;
+    }
+}
+
+// list category
+export const currentNameListReducer = (state = {},action) =>{
+    switch (action.type) {
+        case PRODUCT_LIST_NAME_REQUEST:
+            return {...state, loading: true}
+        case PRODUCT_LIST_NAME_SUCCESS:
+            return {loading: false, name: action.payload}
+        case PRODUCT_LIST_NAME_FAIL:
             return {loading: false, error: action.payload}
         default:
             return state;

@@ -5,6 +5,7 @@ import "./Header.css"
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { logout } from '../../components/redux/Actions/UserActions';
+import { listCategory } from '../../components/redux/Actions/ProductActions';
 const Header = () => {
   const parseJwt = (token) => {
     try {
@@ -15,6 +16,10 @@ const Header = () => {
   };
   const dispatch = useDispatch(); 
   const location = useLocation();
+
+  useEffect(() => {
+    dispatch(listCategory());
+  }, [])
 
   useEffect(()=> {
       // const user = JSON.parse(localStorage.getItem("user"));

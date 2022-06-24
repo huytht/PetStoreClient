@@ -4,16 +4,16 @@ import { logout, refreshToken } from './UserActions';
 
 const validRequestForNotAddingToken = [
   '/product',
+  '/common',
   '/user/login',
   '/user/refresh-token',
 ]
 
 const setup = (store) => {
-  
+  let check, isPublic = false;
   axiosClient.interceptors.request.use( 
     async (config) => {
       // console.log(config)
-      let check, isPublic = false;
 
       validRequestForNotAddingToken.forEach(item => {
         check = config.url.substring(0).search(item);
@@ -55,7 +55,7 @@ const setup = (store) => {
           } catch (_error) {
             return Promise.reject(_error);
           }
-        } else if (err.response.status === 500){
+        } else if (err.response.status === 500 && !isPublic){
             dispatch(logout());
           }
         }

@@ -1,0 +1,93 @@
+ /*----- Order -------*/
+  .order {
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #f1f1f1;
+    word-break: break-all;
+
+  }
+  
+  .order .order-bloc-tabs {
+    display: flex;
+    max-width: 100%;
+
+  }
+  .order .order-tabs {
+    padding: 15px;
+    text-align: center;
+    width: 50%;
+    cursor: pointer;
+    box-sizing: content-box;
+    position: relative;
+    outline: none;
+
+  }
+  .order .order-active-tabs  {
+    background: #eff2f5;
+    border-bottom: 1px solid red;
+    color: red;
+    font-weight: bold;
+  }
+  
+  .order.order-active-tabs::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% + 2px);
+    height: 5px;
+    
+    
+  }
+  
+  .order button {
+    border: none;
+    
+  }
+ .order .order-content-tabs {
+    flex-grow : 1;
+  }
+ .order .order-content {
+    background: #eff2f5;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    display: none;
+  }
+  .order .order-active-content {
+    display: block;
+  } 
+  /*----- OrderTable -------*/
+  .table-order table, .table-order th, .table-order td{
+    border: 0.5px solid  rgba(0,0,0,.1);
+    border-collapse: collapse;
+  }
+  .box-amount-order {
+    justify-content: center;
+  }
+  .input-order{
+    outline: none;
+    cursor: pointer;
+    border: 0;
+    font-size: .875rem;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color .1s cubic-bezier(.4,0,.6,1);
+    border: 1px solid rgba(0,0,0,.09);
+    border-radius: 2px;
+    background: transparent;
+    color: rgba(0,0,0,.8);
+    width: 50px;
+    height: 32px;
+    text-align: center;
+  }

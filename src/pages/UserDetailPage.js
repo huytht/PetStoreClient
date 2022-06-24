@@ -4,6 +4,9 @@ import UserChangePassword from '../components/User/UserChangePassword'
 import UserDetail from '../components/User/UserDetail'
 import { useDispatch,useSelector } from 'react-redux'
 import { getUserDetails } from '../components/redux/Actions/UserActions'
+import { Order } from '../components/Order/Order'
+import {FaUserEdit,FaClipboardList} from 'react-icons/fa'
+import {RiLockPasswordFill} from 'react-icons/ri'
 
 const UserDetailPage = () => {
   const [toggleState, setToggleState] = useState(1);
@@ -28,13 +31,19 @@ const UserDetailPage = () => {
           className={toggleState === 1 ? "tabs active-tabs" : "tabs"}
           onClick={() => toggleTab(1)}
         >
-          Thông tin tài khoản
+          <FaUserEdit/> &nbsp; Thông tin tài khoản 
         </button>
         <button
           className={toggleState === 2 ? "tabs active-tabs" : "tabs"}
           onClick={() => toggleTab(2)}
         >
-          Đổi mật khẩu
+          <RiLockPasswordFill/> &nbsp; Đổi mật khẩu
+        </button>
+        <button
+          className={toggleState === 3 ? "tabs active-tabs" : "tabs"}
+          onClick={() => toggleTab(3)}
+        >
+          <FaClipboardList/> &nbsp; Đơn hàng
         </button>
       </div>
 
@@ -49,6 +58,11 @@ const UserDetailPage = () => {
           className={toggleState === 2 ? "content  active-content" : "content"}
         >
           <UserChangePassword/>
+        </div>
+        <div
+          className={toggleState === 3 ? "content  active-content" : "content"}
+        >
+          <Order/>
         </div>
       </div>
     </div>

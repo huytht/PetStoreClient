@@ -26,7 +26,10 @@ import {
     PRODUCT_BREED_FAIL,
     PRODUCT_LIST_NAME_REQUEST,
     PRODUCT_LIST_NAME_SUCCESS,
-    PRODUCT_LIST_NAME_FAIL
+    PRODUCT_LIST_NAME_FAIL,
+    PRODUCT_LIST_PAGE_REQUEST,
+    PRODUCT_LIST_PAGE_SUCCESS,
+    PRODUCT_LIST_PAGE_FAIL
 } from "../Constants/ProductConstants"
 
 const array = [
@@ -139,13 +142,13 @@ export const listBreed = (categoryId, setContent) => async(dispatch) =>{
 
 export const listProductPage = (type, breedId, categoryId, pageNumber, pageSize) => async(dispatch) =>{
     try {
-        dispatch({type: PRODUCT_LIST_REQUEST})
+        dispatch({type: PRODUCT_LIST_PAGE_REQUEST})
 
         const res = await axiosClient.get(`/product/list?type=${type}&breed-id=${breedId}&category-id=${categoryId}&page-number=${pageNumber}&page-size=${pageSize}`)
-        dispatch({type: PRODUCT_LIST_SUCCESS, payload: res.data.data })
+        dispatch({type: PRODUCT_LIST_PAGE_SUCCESS, payload: res.data.data })
     } catch (error) {
         dispatch({
-            type: PRODUCT_LIST_FAIL,
+            type: PRODUCT_LIST_PAGE_FAIL,
             payload: error.errorMessage
         })
     }

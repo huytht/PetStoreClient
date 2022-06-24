@@ -22,7 +22,10 @@ import {
     PRODUCT_CATEGORY_FAIL,
     PRODUCT_LIST_NAME_REQUEST,
     PRODUCT_LIST_NAME_SUCCESS,
-    PRODUCT_LIST_NAME_FAIL
+    PRODUCT_LIST_NAME_FAIL,
+    PRODUCT_LIST_PAGE_REQUEST,
+    PRODUCT_LIST_PAGE_SUCCESS,
+    PRODUCT_LIST_PAGE_FAIL
 } from "../Constants/ProductConstants"
 
 //productlist
@@ -59,6 +62,19 @@ export const productListReducer = (state = {products:[]},action) =>{
         case PRODUCT_LIST_SUCCESS:
             return {...state, loading: false, products: action.payload}
         case PRODUCT_LIST_FAIL:
+            return {...state, loading: false, products: action.payload}
+        default:
+            return state;
+    }
+}
+
+export const productListPageReducer = (state = {products:[]},action) =>{
+    switch (action.type) {
+        case PRODUCT_LIST_PAGE_REQUEST:
+            return {...state, loading: true, products: []}
+        case PRODUCT_LIST_PAGE_SUCCESS:
+            return {...state, loading: false, products: action.payload}
+        case PRODUCT_LIST_PAGE_FAIL:
             return {...state, loading: false, products: action.payload}
         default:
             return state;

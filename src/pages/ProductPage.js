@@ -10,7 +10,7 @@ import {
 import { Pagination } from "@nextui-org/react";
 export const ProductPage = () => {
   const { categories } = useSelector((state) => state.categoryList);
-  const productList = useSelector((state) => state.productList);
+  const productList = useSelector((state) => state.productListPage);
   const { name } = useSelector((state) => state.currentNameList);
   const dispatch = useDispatch();
 

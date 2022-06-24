@@ -1,7 +1,7 @@
 
 import { axiosClient } from "../../services/api";
 import { CART_ADD_ITEM, CART_REMOVE_ITEM,DECREASE_QUANTITY,GET_NUMBER_CART, INCREASE_QUANTITY } from "../Constants/CartContants";
-
+import toast from 'react-hot-toast';
 export const addToCart = (id, qty) => async(dispatch, getState) => {
     const res = await axiosClient.get(`/product/detail?id=${id}`)
         dispatch({
@@ -15,6 +15,7 @@ export const addToCart = (id, qty) => async(dispatch, getState) => {
                 qty,
             },
         });   
+        toast.success("Sản phẩm đã thêm vào giỏ hàng")
     localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
 };
 
@@ -36,6 +37,7 @@ export const removeFromCart = (id) => (dispatch,getState) => {
         type: CART_REMOVE_ITEM,
         payload: id,
     });
+    toast.success("Sản phẩm đã được xóa")
     localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
 }
 

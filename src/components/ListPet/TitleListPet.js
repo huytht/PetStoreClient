@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 import { listProduct } from "../redux/Actions/ProductActions"
 import { useDispatch,useSelector } from "react-redux"
 import { addToCart } from "../redux/Actions/CartActions"
-
+import toast from "react-hot-toast"
   const TitleListPet = () => {
     const dispatch = useDispatch()
     const productListHot = useSelector((state)=> state.productListHot)
@@ -41,13 +41,22 @@ import { addToCart } from "../redux/Actions/CartActions"
                       <i className='fa fa-star'></i>
                     </div>
                     <div className='price'>
-                      <h4>${productItems.price}.00 </h4>
+                      <h4>{productItems.price} VNĐ </h4>
                       {/* step : 3  
                        if hami le button ma click garryo bahne 
                       */}
-                      <button onClick={()=>dispatch(addToCart(productItems.id,1))} >
-                        <i className='fa fa-plus'></i>
-                      </button>
+                      {productItems.amount>0 ? 
+                      (<>
+                          <button onClick={()=>dispatch(addToCart(productItems.id,1))}>
+                            <i className='fa fa-plus'></i>
+                          </button>
+                      </>)
+                      :
+                      (<>
+                           <button onClick={()=>toast.error("Sản phẩm đã hết hàng")}>
+                            <i className='fa fa-plus'></i>
+                          </button>
+                      </>)}
                     </div>
                   </div>
                 </div>

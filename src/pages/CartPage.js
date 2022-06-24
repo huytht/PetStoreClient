@@ -3,7 +3,7 @@ import { Table, Row, Col, Tooltip, User, Text } from "@nextui-org/react";
 import { MdDeleteForever } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux"
 import { addToCart, decreaseQuantity, increaseQuantity, removeFromCart } from './../components/redux/Actions/CartActions'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast';
 
 const CartPage = () => {
@@ -75,17 +75,46 @@ const CartPage = () => {
       <h1 className="title-cart mtop">
         Giỏ Hàng
       </h1>
-      <table
-        aria-label="Example table with custom cells"
-        style={{
-          height: "auto",
-          maxWidth: "90%",
-          marginTop: "40px",
-          marginBottom: "20px",
-          marginLeft: "70px",
-          width: "100%",
-          textAlign: "center",
-          lineHeight: "3"
+      {cartItems.length===0 ? 
+      (
+        <div className="box-alert-cart">
+          <div className="alert-cart">
+            <strong>Giỏ hàng hiện tại không có sản phẩm </strong>quý khách vui lòng quay về trang chủ để mua sắm.
+          </div>
+          <div className="link-router-cart">
+            <Link 
+            style={{
+              backgroundColor:"#04AA6D",
+              color:"white",
+              padding:"20px",
+              maxWidth:"20%",
+              marginLeft:"40%",
+              textAlign:"center",
+              marginBottom:"20px",
+              borderRadius:"15px",
+              justifyContent:"center",
+              display:"flex"
+
+            }} 
+            to="/">
+            Tiếp tục mua sắm
+            </Link>    
+          </div>
+        </div>
+      )
+      :(
+        <>
+          <table
+          aria-label="Example table with custom cells"
+          style={{
+            height: "auto",
+            maxWidth: "90%",
+            marginTop: "40px",
+            marginBottom: "20px",
+            marginLeft: "70px",
+            width: "100%",
+            textAlign: "center",
+            lineHeight: "3"
         }}
         selectionMode="none"
       >
@@ -131,8 +160,34 @@ const CartPage = () => {
             <td>{Total}</td>
           </tr>
         </tfoot>
-      </table>
-      <button type="button" className='btn-add-to-cart' >Mua hàng</button>
+          </table>
+          <div className="box-button-cart">
+            <button type="button" className='btn-add-to-cart' >Mua hàng</button>
+            <div className="link-router-cart-value">
+              <Link 
+              style={{
+                backgroundColor:"#04AA6D",
+                color:"white",
+                padding:"20px",
+                maxWidth:"15%",
+                marginLeft:"79%",
+                textAlign:"center",
+                marginBottom:"20px",
+                borderRadius:"15px",
+                justifyContent:"center",
+                display:"flex"
+
+              }} 
+              to="/">
+              Tiếp tục mua sắm
+              </Link>    
+            </div>
+           
+          </div>
+         
+        </>
+      )}
+      
     </div>
 
   );

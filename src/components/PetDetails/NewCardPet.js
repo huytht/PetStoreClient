@@ -6,6 +6,8 @@ import {useDispatch, useSelector} from "react-redux"
 import { listProduct } from "../redux/Actions/ProductActions"
 import { Link, useParams } from "react-router-dom"
 import Loading from "../LoadingError/Loading"
+import { addToCart } from "../redux/Actions/CartActions"
+import toast from "react-hot-toast"
 
 const SampleNextArrow = (props) => {
     const { onClick } = props
@@ -80,9 +82,18 @@ const SampleNextArrow = (props) => {
                           {/* step : 3  
                           if hami le button ma click garryo bahne 
                           */}
-                          <button>
-                            <i className='fa fa-plus'></i>
-                          </button>
+                         {productItems.amount>0 ? 
+                          (<>
+                              <button onClick={()=>dispatch(addToCart(productItems.id,1))}>
+                                <i className='fa fa-plus'></i>
+                              </button>
+                          </>)
+                          :
+                          (<>
+                              <button onClick={()=>toast.error("Sản phẩm đã hết hàng")}>
+                                <i className='fa fa-plus'></i>
+                              </button>
+                          </>)}
                         </div>
                       </div>
                     </div>

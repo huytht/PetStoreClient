@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux"
 import { useParams } from 'react-router-dom'
 import Loading from '../LoadingError/Loading'
 import {useNavigate} from 'react-router-dom'
-
+import toast from 'react-hot-toast';
 
 const PetDetails = () => {
   const dispatch = useDispatch()
@@ -20,6 +20,8 @@ const PetDetails = () => {
   const AddToCart = (e) => {
     e.preventDefault();
     navigate(`/cart?id=${id}&qty=${qtyNum}`)
+    toast.success("Sản phẩm đã thêm vào giỏ hàng")
+
   }
   return (
     <div className='box-details'>

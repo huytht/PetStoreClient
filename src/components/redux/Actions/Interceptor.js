@@ -10,11 +10,12 @@ const validRequestForNotAddingToken = [
 ]
 
 const setup = (store) => {
-  let check, isPublic = false;
+  
+  
   axiosClient.interceptors.request.use( 
     async (config) => {
       // console.log(config)
-
+      let check, isPublic = false;
       validRequestForNotAddingToken.forEach(item => {
         check = config.url.substring(0).search(item);
         if (check === 0)
@@ -39,7 +40,13 @@ const setup = (store) => {
     },
     async (err) => {
       const originalConfig = err.config;
-      if (originalConfig.url !== '/user/login' && err.response) {
+      let check, isPublic = false;
+      validRequestForNotAddingToken.forEach(item => {
+        check = err.config.url.substring(0).search(item);
+        if (check === 0)
+          isPublic = true;
+      });
+      if (!isPublic && err.response) {
         // Access Token was expired
         if (err.response.status === 403 && !originalConfig._retry) {
           originalConfig._retry = true;

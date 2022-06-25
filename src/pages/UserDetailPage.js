@@ -20,7 +20,6 @@ const UserDetailPage = () => {
   useEffect(() => {
     if(user){
       dispatch(getUserDetails(user.userId))
-      console.log(user.userId)
     } 
   },[dispatch, user])
 

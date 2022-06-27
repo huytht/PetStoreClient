@@ -8,6 +8,9 @@ import {
   listProductPage,
 } from "./../components/redux/Actions/ProductActions";
 import { Pagination } from "@nextui-org/react";
+import {FaThLarge} from 'react-icons/fa';
+import {GoThreeBars} from 'react-icons/go';
+
 export const ProductPage = () => {
   const { categories } = useSelector((state) => state.categoryList);
   const productList = useSelector((state) => state.productListPage);
@@ -22,11 +25,12 @@ export const ProductPage = () => {
     else if (categoryId) dispatch(listProductPage("hot", 0, categoryId, pageNumber, 8));
     else dispatch(listProductPage("hot", 0, 0, pageNumber, 8));
   }, [dispatch, categoryId, breedId, pageNumber]);
-
+  const [toggleState, setToggleState] = useState(1);
+  const toggleTab = (index) => {
+      setToggleState(index);
+  };
   return (
     <>
-     <h1>{!name ? "Tất cả" : name}</h1>
-
       <div class="product-page mtop">
       
         <div class="product-category">
@@ -37,11 +41,19 @@ export const ProductPage = () => {
             ))}
           </ul>
         </div>
-
-        <div class="product-list">
-          <ProductList productList={productList} name="Test" />
-        </div>
-
+        <div className="title-page">
+          <h1>{!name ? "Tất cả" : name}</h1>
+          <div className="view-type">
+              <span>Chế độ hiễn thị: </span>
+              <div className="view-control">
+                <a onClick={() =>toggleTab(1)}><FaThLarge/></a>
+                <a onClick={() => toggleTab(2)}><GoThreeBars/></a>
+              </div>
+          </div>
+          <div class={toggleState===2 ? "product-list-list":"product-list"} > 
+            <ProductList productList={productList}/>
+          </div>
+          </div>
       </div>
       <div className="pagination">
         <Pagination shadow animated={false} total={productList.products?.pageInfo?.totalPage} onChange={(e) => setPageNumber(e - 1)} initialPage={1} />

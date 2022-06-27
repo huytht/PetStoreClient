@@ -1,11 +1,13 @@
 import { Link } from "@nextui-org/react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { addToCart } from "../redux/Actions/CartActions";
 import "./style.css"
 
 export const ProductList = ({ productList, name }) => {
   const dispatch = useDispatch();
+  const navigate =useNavigate();
 
   return (
     <>
@@ -21,9 +23,7 @@ export const ProductList = ({ productList, name }) => {
                 />
               </div>
               <div className="product-details">
-                <Link to={`/product/${productItems.id}`}>
-                  <h3>{productItems.name}</h3>
-                </Link>
+                <h3 onClick={()=>navigate(`/product/${productItems.id}`)}>{productItems.name}</h3>
                 <div className="rate">
                   <i className="fa fa-star"></i>
                   <i className="fa fa-star"></i>

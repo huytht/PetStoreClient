@@ -114,6 +114,7 @@ const Search = () => {
   const logoutHander = () => {
     dispatch(logout());
   }
+
   // const {cartItems} = useSelector((state)=>state.cart)
   const [cartItems, setCartItems] = useState([])
   const [numberCart, setNumberCart] = useState(0);

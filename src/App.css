@@ -399,22 +399,48 @@ button {
 .product-page .product-list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 20px;
+  grid-gap: 10px;
 }
+.product-page .product-list-list .product {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 10px;
+  display: flex;
+  
+
+}
+.product-page .view-type .view-control{
+    display: inline-block;
+    height: 36px;
+    line-height: 34px;
+    width: 40px;
+    border: 1px solid #e5e5e5;
+    text-align: center;
+    margin: 0 -2px;
+}
+
+.product-page .test{
+  
+}
+
 .pagination {
   text-align: center;
   margin-bottom: 20px;
 }
 .accordion-item .accordion-content {
   padding-left: 5%;
+  cursor: pointer;
 }
 .accordion-item .accordion-title {
   display: flex;
+  cursor: pointer;
 }
 .accordion-item .accordion-name {
+  cursor: pointer;
   width: 85%;
 }
 .accordion-item .accordion-icon {
   transform: rotate(-90deg);
+  cursor: pointer;
 }
 /*----- product page -------*/

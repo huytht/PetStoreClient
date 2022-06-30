@@ -1,53 +1,153 @@
 import React from 'react'
-import { User, Text } from "@nextui-org/react";
+import { Collapse, Grid, Text, Avatar,Divider } from "@nextui-org/react";
 const OrderDelivered = () => {
     
   return (
-    <div className="table-order">
-        <table
-        aria-label="Example table with custom cells"
-        style={{
-        height: "auto",
-        maxWidth: "90%",
-        marginTop: "40px",
-        marginBottom: "20px",
-        marginLeft: "70px",
-        width: "100%",
-        textAlign: "center",
-        lineHeight: "3"
-  }}
-  selectionMode="none"
->
-  <thead>
-    <th>Hình ảnh</th>
-    <th>Tên sản phẩm</th>
-    <th>Số lượng</th>
-    <th>Tạm tính</th>
-    <th>Trạng thái</th>
-  </thead>
-
-  <tbody>
-      <tr>
-        <td>chưa có</td>
-        <td>Chó 3</td>
-        <td>
-          <div className="box-amount-order f_flex">
-            <input className='input-order' type="text" value={2} style={{border:"none"}} readOnly />
-          </div>
-        </td>
-        <td>
-          <Text b size={14} css={{ tt: "capitalize" }}>
-           20000000
-          </Text>
-        </td>
-        <td>
-            Chưa xác nhận
-        </td>
-      </tr>
-
-  </tbody>
-        </table>
-    </div>
+    <Grid.Container gap={3}>
+    <Grid>
+      <Collapse.Group splitted>
+        <Collapse
+          title={
+             <span className='box-title-order'>
+              <span className='id-order'>4ASFF43FF</span>
+              <span className='status-order'> CHƯA XÁC NHẬN</span>
+             </span>
+              
+          }
+          subtitle="4 sản phẩm"
+          contentLeft={
+            <Avatar
+              size="lg"
+              src="https://thumbs.dreamstime.com/z/order-red-stamp-text-white-44561786.jpg"
+              color="secondary"
+              squared
+            />
+          }
+        >
+          <Divider css={{marginBottom:'2%'}}/>
+          <div className='box-item-order f_flex'>
+           <Avatar
+              size="lg"
+              src="https://thumbs.dreamstime.com/z/order-red-stamp-text-white-44561786.jpg"
+              color="secondary"
+              squared
+            />
+            <div className='item-main-content'>
+            <div className='item-content f_flex'>
+              <div className='item-name'>
+               Chó Husky Chuẩn Phap
+              </div>
+              <div className='item-price'>
+              {Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(20000000)}
+              </div>   
+            </div>         
+            <div className='item-amount'>
+                2
+              </div>   
+            </div>
+            
+           </div>
+           <Divider css={{marginBottom:'2%',marginTop:'2%'}}/>
+           <div className='box-item-order f_flex'>
+           <Avatar
+              size="lg"
+              src="https://thumbs.dreamstime.com/z/order-red-stamp-text-white-44561786.jpg"
+              color="secondary"
+              squared
+            />
+            <div className='item-main-content'>
+            <div className='item-content f_flex'>
+              <div className='item-name'>
+               Chó Husky Chuẩn Phap
+              </div>
+              <div className='item-price'>
+              {Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(20000000)}
+              </div>   
+            </div>         
+            <div className='item-amount'>
+                2
+              </div>   
+            </div>
+            
+           </div>
+           <Divider css={{marginTop:'2%'}} />
+            <div className='total-price' >
+            Tổng tiền:{Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(20000000)}
+            </div>
+        </Collapse>
+        <Collapse
+          title={
+            <span className='box-title-order'>
+              <span className='id-order'>4ASFF43FF</span>
+              <span className='status-order'> CHƯA XÁC NHẬN</span>
+           </span>
+          }
+          subtitle="4 sản phẩm"
+          contentLeft={
+            <Avatar
+              size="lg"
+              src="https://thumbs.dreamstime.com/z/order-red-stamp-text-white-44561786.jpg"
+              color="secondary"
+              squared
+            />
+          }
+        >
+          <Divider css={{marginBottom:'2%'}} />
+         
+           <div className='box-item-order f_flex'>
+           <Avatar
+              size="lg"
+              src="https://thumbs.dreamstime.com/z/order-red-stamp-text-white-44561786.jpg"
+              color="secondary"
+              squared
+            />
+            <div className='item-main-content'>
+            <div className='item-content f_flex'>
+              <div className='item-name'>
+               Chó Husky Chuẩn Phap
+              </div>
+              <div className='item-price'>
+              {Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(20000000)}
+              </div>   
+            </div>         
+            <div className='item-amount'>
+                2
+              </div>   
+            </div>
+            
+           </div>
+           <Divider css={{marginBottom:'2%',marginTop:'2%'}}/>
+           <div className='box-item-order f_flex'>
+           <Avatar
+              size="lg"
+              src="https://thumbs.dreamstime.com/z/order-red-stamp-text-white-44561786.jpg"
+              color="secondary"
+              squared
+            />
+            <div className='item-main-content'>
+            <div className='item-content f_flex'>
+              <div className='item-name'>
+               Chó Husky Chuẩn Phap
+              </div>
+              <div className='item-price'>
+              {Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(20000000)}
+              </div>   
+            </div>         
+            <div className='item-amount'>
+                2
+              </div>   
+            </div>
+            
+           </div>
+           <Divider  css={{marginTop:'2%'}} />
+            <div className='total-price' >
+            Tổng tiền:{Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(20000000)}
+            </div>
+            
+        </Collapse>
+      </Collapse.Group>
+    </Grid>
+  </Grid.Container>
     
   )
 }

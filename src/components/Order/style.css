@@ -91,3 +91,46 @@
     height: 32px;
     text-align: center;
   }
+  
+  .box-title-order{
+    display: flex;
+    font-weight: bold;
+  }
+  .id-order{
+    width: 70%;
+  }
+  .status-order {
+    width: 30% ;
+    font-style: italic;
+    text-transform: uppercase;
+  }
+
+
+ 
+.box-item-order .item-main-content{
+ width: 100%;
+} 
+.box-item-order .item-content {
+  font-weight: bold;
+  font-size: small;
+  padding-left: 2%;
+}
+.box-item-order .item-price{
+  font-style: italic;
+  text-transform: uppercase;
+  width: 30%;
+}
+.box-item-order .item-name{
+  font-style: italic;
+  text-transform: uppercase;
+  width: 70%;
+}
+.box-item-order .item-amount{
+  padding-left: 2%;
+}
+.total-price{
+  margin-top: 2%;
+  font-style: italic;
+  text-transform: uppercase;
+  font-weight: bold;
+}

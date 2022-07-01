@@ -1,6 +1,7 @@
 import React from 'react'
 import { Collapse, Grid, Text, Avatar,Divider } from "@nextui-org/react";
-const OrderConfirm = () => {
+
+const OrderPay = () => {
     
   return (
     <Grid.Container gap={3}>
@@ -76,6 +77,7 @@ const OrderConfirm = () => {
                 Tổng tiền : &nbsp; {Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(20000000)} 
               </div>
               <div className='box-button'>
+                 <button class="btn-pay-order">Thanh toán</button>
                  <button class="btn-cancel-order">Hủy đơn</button>
               </div>
              </div>
@@ -150,6 +152,7 @@ const OrderConfirm = () => {
                 Tổng tiền : &nbsp; {Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(20000000)} 
               </div>
               <div className='box-button'>
+                 <button class="btn-pay-order">Thanh toán</button>
                  <button class="btn-cancel-order">Hủy đơn</button>
               </div>
              </div>
@@ -158,9 +161,9 @@ const OrderConfirm = () => {
         </Collapse>
       </Collapse.Group>
     </Grid>
-  </Grid.Container>
+    </Grid.Container>
     
   )
 }
 
-export default OrderConfirm
+export default OrderPay

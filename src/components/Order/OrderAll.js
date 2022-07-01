@@ -70,10 +70,16 @@ const OrderAll = () => {
               </div>
               
              </div>
-             <Divider css={{marginTop:'2%'}} />
+             <Divider css={{marginTop:'2%', marginBottom:'2%'}} />
+             <div className='footer-order'>
               <div className='total-price' >
-              Tổng tiền:{Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(20000000)}
+                Tổng tiền : &nbsp; {Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(20000000)} 
               </div>
+              <div className='box-button'>
+                 <button class="btn-pay-order">Thanh toán</button>
+                 <button class="btn-cancel-order">Hủy đơn</button>
+              </div>
+             </div>
           </Collapse>
           <Collapse
             title={
@@ -139,10 +145,17 @@ const OrderAll = () => {
               </div>
               
              </div>
-             <Divider  css={{marginTop:'2%'}} />
+             <Divider  css={{marginTop:'2%',marginBottom:'2%'}} />
+             <div className='footer-order'>
               <div className='total-price' >
-              Tổng tiền:{Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(20000000)}
+                Tổng tiền : &nbsp; {Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(20000000)} 
               </div>
+              <div className='box-button'>
+                 <button class="btn-pay-order">Thanh toán</button>
+                 <button class="btn-cancel-order">Hủy đơn</button>
+              </div>
+             </div>
+              
               
           </Collapse>
         </Collapse.Group>

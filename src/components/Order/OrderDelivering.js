@@ -71,7 +71,7 @@ const OrderDelivering= () => {
             
            </div>
            <Divider css={{marginTop:'2%'}} />
-            <div className='total-price' >
+            <div className='footer-order' >
             Tổng tiền:{Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(20000000)}
             </div>
         </Collapse>
@@ -140,7 +140,7 @@ const OrderDelivering= () => {
             
            </div>
            <Divider  css={{marginTop:'2%'}} />
-            <div className='total-price' >
+            <div className='footer-order' >
             Tổng tiền:{Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(20000000)}
             </div>
             

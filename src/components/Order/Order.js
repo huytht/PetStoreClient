@@ -3,6 +3,7 @@ import OrderAll from './OrderAll';
 import OrderConfirm from './OrderConfirm';
 import OrderDelivered from './OrderDelivered';
 import OrderDelivering from './OrderDelivering';
+import OrderPay from './OrderPay';
 import "./style.css"
 export const Order = () => {
 
@@ -23,17 +24,23 @@ export const Order = () => {
         className={toggleState === 2 ? "order-tabs order-active-tabs" : "order-tabs"}
         onClick={() => toggleTab(2)}
       >
-        Chờ xác nhận
+        Chờ thanh toán
       </button>
       <button
         className={toggleState === 3 ? "order-tabs order-active-tabs" : "order-tabs"}
         onClick={() => toggleTab(3)}
       >
-        Đang giao
+        Chờ xác nhận
       </button>
       <button
         className={toggleState === 4 ? "order-tabs order-active-tabs" : "order-tabs"}
         onClick={() => toggleTab(4)}
+      >
+        Đang giao
+      </button>
+      <button
+        className={toggleState === 5 ? "order-tabs order-active-tabs" : "order-tabs"}
+        onClick={() => toggleTab(5)}
       >
         Đã giao
       </button>
@@ -48,15 +55,20 @@ export const Order = () => {
       <div
         className={toggleState === 2 ? "order-content  order-active-content" : "order-content"}
       >
-       <OrderConfirm/>
+       <OrderPay/>
       </div>
       <div
         className={toggleState === 3 ? "order-content  order-active-content" : "order-content"}
       >
-        <OrderDelivering/>
+        <OrderConfirm/>
       </div>
       <div
         className={toggleState === 4 ? "order-content  order-active-content" : "order-content"}
+      >
+       <OrderDelivering/>
+      </div>
+      <div
+        className={toggleState === 5 ? "order-content  order-active-content" : "order-content"}
       >
        <OrderDelivered/>
       </div>

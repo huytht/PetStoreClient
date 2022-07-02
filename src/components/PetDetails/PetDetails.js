@@ -82,7 +82,7 @@ const PetDetails = () => {
                   </>)}
 
                 </div>
-            </section>
+            </section> 
           </>
         )
       

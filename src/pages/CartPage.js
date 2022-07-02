@@ -67,6 +67,9 @@ const CartPage = () => {
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id))
   }
+  const handleCheckout = () =>{
+    navigate('/checkout')
+  }
 
   let Total=0
   let TotalQuantity=0
@@ -162,7 +165,7 @@ const CartPage = () => {
         </tfoot>
           </table>
           <div className="box-button-cart">
-            <button type="button" className='btn-add-to-cart' >Mua hàng</button>
+            <button type="button" className='btn-add-to-cart' onClick={()=>handleCheckout()}>Mua hàng</button>
             <div className="link-router-cart-value">
               <Link 
               style={{

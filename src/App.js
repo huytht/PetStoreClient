@@ -8,6 +8,7 @@ import UserDetailPage from "./pages/UserDetailPage";
 import { Toaster } from "react-hot-toast";
 import CartPage from "./pages/CartPage";
 import { ProductPage } from "./pages/ProductPage";
+import CheckoutForm from "./components/Checkout/CheckoutForm";
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="/pages/:categoryId/:breedId" element={<ProductPage />} />
           <Route path="/pages/:categoryId" element={<ProductPage />} />
           <Route path="/pages" element={<ProductPage />} />
+          <Route path="/checkout" element={<CheckoutForm />} />
         </Routes>
         <Footer />
       </Router>

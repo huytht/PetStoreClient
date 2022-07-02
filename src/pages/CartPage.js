@@ -149,7 +149,7 @@ const CartPage = () => {
               </td>
               <td>
                 <Text b size={14} css={{ tt: "capitalize" }}>
-                  {Number(item.price * item.qty)}
+                  {Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(Number(item.price * item.qty))}
                 </Text>
               </td>
             </tr>
@@ -160,7 +160,7 @@ const CartPage = () => {
           <tr style={{fontWeight:"bold"}}>
             <td colSpan={3}>Tổng cộng</td>
             <td>{TotalQuantity}</td>
-            <td>{Total}</td>
+            <td>{Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(Total)}</td>
           </tr>
         </tfoot>
           </table>

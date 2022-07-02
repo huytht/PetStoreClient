@@ -15,7 +15,7 @@ export const addToCart = (id, qty) => async(dispatch, getState) => {
                 qty,
             },
         });   
-        toast.success("Sản phẩm đã thêm vào giỏ hàng")
+        
     localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
 };
 

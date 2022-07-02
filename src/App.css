@@ -380,7 +380,7 @@ button {
   padding-right: 35px;
   padding-left: 35px;
 }
-.product-page .product-category {
+.product-page .product-category,.box-details .product-category {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   padding: 20px;
@@ -390,7 +390,7 @@ button {
   margin-right: 3%;
 }
 
-.product-page .product-category .title {
+.product-page .product-category .title,.box-details .product-category .title {
   font-weight: 700;
   margin-top: 0;
   border-bottom: 1px solid #e5e5e5;

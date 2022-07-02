@@ -6,6 +6,8 @@ import { useParams } from 'react-router-dom'
 import Loading from '../LoadingError/Loading'
 import {useNavigate} from 'react-router-dom'
 import toast from 'react-hot-toast';
+import Accordion from "../Accordion/Accordion";
+
 
 const PetDetails = () => {
   const dispatch = useDispatch()
@@ -23,12 +25,21 @@ const PetDetails = () => {
     toast.success("Sản phẩm đã thêm vào giỏ hàng")
 
   }
+  const { categories } = useSelector((state) => state.categoryList);
   return (
     <div className='box-details'>
       { (loading === undefined || loading === true) ? (
             <div className="mb-5 "><Loading/></div>
         ) : (
           <>
+          <div class="product-category mtop">
+          <h3 class="title">Danh mục sản phẩm</h3>
+          <ul>
+            {categories?.map((category) => (
+              <Accordion category={category} />
+            ))}
+          </ul>
+        </div>
             <section className='pdetails container mtop heading f_flex'>
               <div className='box-img-detail'>
                 <div className='single-img'  >
@@ -44,11 +55,11 @@ const PetDetails = () => {
               </div>
                 <div className='single-detail'>
                   <h1>{product?.name==null ? '-':product.name}</h1>
-                  <h2>{product?.price}</h2>
-                  {product?.age !== null && <h4>Tuổi: <span>  {product.age}</span> tháng tuổi</h4> }
-                  {product?.gender !== null && <h4>Giới tính: <span> {product?.gender === 0 ? 'Đực' : 'Cái'}</span> </h4> }
-                  {product.origins.length > 0 && <h4>Xuất xứ: <span>{product?.origins.map(origin => origin.name).join(', ')}</span> </h4>}
-                  {product.breed !== null && <h4>Chủng loại: <span>{product.breed.name}</span>  </h4>}
+                  <h2>{Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product?.price)}</h2>
+                  {product?.age !== null && <h3>Tuổi: <span>  {product.age}</span> tháng tuổi</h3> }
+                  {product?.gender !== null && <h3>Giới tính: <span> {product?.gender === 0 ? 'Đực' : 'Cái'}</span> </h3> }
+                  {product.origins.length > 0 && <h3>Xuất xứ: <span>{product?.origins.map(origin => origin.name).join(', ')}</span> </h3>}
+                  {product.breed !== null && <h3>Chủng loại: <span>{product.breed.name}</span>  </h3>}
                   <div className='amount'>
                     {product.amount > 0 ? (
                       <>
@@ -88,6 +99,7 @@ const PetDetails = () => {
       
       }
     </div>
+    
   )
 }
 

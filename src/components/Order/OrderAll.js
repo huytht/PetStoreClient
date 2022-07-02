@@ -60,7 +60,7 @@ const OrderAll = () => {
                 <div className='item-name'>
                  Chó Husky Chuẩn Phap
                 </div>
-                <div className='item-price'>
+                <div className='item-'>
                 {Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(20000000)}
                 </div>   
               </div>         

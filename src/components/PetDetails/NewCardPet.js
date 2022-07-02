@@ -78,7 +78,7 @@ const SampleNextArrow = (props) => {
                           <i className='fa fa-star'></i>
                         </div>
                         <div className='price'>
-                          <h4>{productItems.price} VNĐ </h4>
+                          <h4>{Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(productItems.price)} </h4>
                           {/* step : 3  
                           if hami le button ma click garryo bahne 
                           */}

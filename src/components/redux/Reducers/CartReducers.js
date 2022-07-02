@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { CART_ADD_ITEM, CART_REMOVE_ITEM, INCREASE_QUANTITY,DECREASE_QUANTITY,GET_NUMBER_CART } from "../Constants/CartContants";
 
 export const cartReducer = (state = {cartItems:[]}, action) => {
@@ -5,8 +6,15 @@ export const cartReducer = (state = {cartItems:[]}, action) => {
         case CART_ADD_ITEM:
             const item = action.payload;
             const existItem = state.cartItems.find((x) => x.id === item.id);
+            console.log(existItem)
             if (existItem) {
-                item.qty=Number(item.qty)+Number(existItem.qty)
+                if (existItem.qty < existItem.amount) {
+                    item.qty=Number(item.qty)+Number(existItem.qty)
+                    toast.success("Sản phẩm đã thêm vào giỏ hàng")
+                } else {
+                    toast.error("Số lượng đã đạt tối đa")
+                    item.qty=Number(existItem.qty)
+                }
                 return {
                     ...state,
                     loading: false,

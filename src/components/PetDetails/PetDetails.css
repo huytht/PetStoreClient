@@ -1,6 +1,12 @@
 .box-details{
       background: #f6f9fc;
+      display: flex;
+      margin-right: auto;
+      margin-left: auto;
+      padding-right: 35px;
+      padding-left: 35px;
 }
+.box-details 
 .single-img{
     max-width: 100%;
 }

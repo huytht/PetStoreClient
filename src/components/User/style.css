@@ -248,16 +248,24 @@ button {
   opacity: 1;
 }
 
-.user-info-input-readonly {
+.user-info-input-disabled {
   --nextui--inputBorderColor: none;
   padding: 0 !important;
+}
+
+.user-info-input-disabled .nextui-c-eXOOPO-eNajNl-cv:hover {
+  box-shadow: none;
+}
+
+.nextui-c-eXOOPO-gvlAwB-disabled-true {
   cursor: default;
 }
 
-.user-info-input-readonly .nextui-c-eXOOPO-ccrOPm-underlined-false .nextui-c-jeuecp {
+.user-info-input-disabled .nextui-c-eXOOPO-ccrOPm-underlined-false .nextui-c-jeuecp {
   margin: 0;
+  color: #7E868C;
 }
 
-.user-info-input-readonly .nextui-c-jeuecp-bXqash-bordered-true {
+.user-info-input-disabled .nextui-c-jeuecp-bXqash-bordered-true {
   padding: 0;
 }

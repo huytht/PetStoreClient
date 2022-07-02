@@ -15,9 +15,11 @@ const UserDetail = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [emailToched, setEmailToched] = useState(false);
   const [firstNameToched, setFirstNameToched] = useState(false);
   const [lastNameToched, setLastNameToched] = useState(false);
+  const [phoneToched, setPhoneToched] = useState(false);
   const [imageFile, setImageFile] = useState();
   const [activeEdit, setActiveEdit] = useState(false);
   useEffect(() => {
@@ -25,12 +27,12 @@ const UserDetail = () => {
       setFirstName(userInfo.firstName);
       setLastName(userInfo.lastName);
       setEmail(userInfo.email);
+      setPhone(userInfo.phone);
     }
   }, [dispatch, userInfo]);
 
   const onProfileImageChange = (event) => {
     setImageFile(event.target.files[0]);
-    // console.log(event.target.files[0]);
   };
 
   const onChangeProfileImage = () => {
@@ -50,8 +52,12 @@ const UserDetail = () => {
     return value?.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
   };
 
+  const validatePhone = (value) => {
+    return value?.match(/^[0-9]{10,15}$/i);
+  };
+
   const helperEmail = useMemo(() => {
-    if (!email && !emailToched) {
+    if ((!email && !emailToched) || !activeEdit) {
       return {
         text: "",
       };
@@ -66,10 +72,28 @@ const UserDetail = () => {
         text: !isValid ? "Email không hợp lệ" : "",
       };
     }
-  }, [email, emailToched]);
+  }, [email, emailToched, activeEdit]);
+
+  const helperPhone = useMemo(() => {
+    if ((!phone && !phoneToched) || !activeEdit) {
+      return {
+        text: "",
+      };
+    }
+    if (phone === "" && phoneToched)
+      return {
+        text: "Số điện thoại không được để trống",
+      };
+    else {
+      const isValid = validatePhone(phone);
+      return {
+        text: !isValid ? "Số điện thoại không hợp lệ" : "",
+      };
+    }
+  }, [phone, phoneToched, activeEdit]);
 
   const helperFirstName = useMemo(() => {
-    if (!firstName && !firstNameToched) {
+    if ((!firstName && !firstNameToched) || !activeEdit) {
       return {
         text: "",
       };
@@ -81,10 +105,10 @@ const UserDetail = () => {
     return {
       text: "",
     };
-  }, [firstName, firstNameToched]);
+  }, [firstName, firstNameToched, activeEdit]);
 
   const helperLastName = useMemo(() => {
-    if (!lastName && !lastNameToched) {
+    if ((!lastName && !lastNameToched) || !activeEdit) {
       return {
         text: "",
       };
@@ -96,25 +120,25 @@ const UserDetail = () => {
     return {
       text: "",
     };
-  }, [lastName, lastNameToched]);
+  }, [lastName, lastNameToched, activeEdit]);
 
   const onEditUserInfo = () => {
     setEmailToched(true);
     setFirstNameToched(true);
     setLastNameToched(true);
-    console.log(helperEmail.text + "\n");
-    console.log(helperFirstName.text + "\n");
-    console.log(helperLastName.text + "\n");
+    setPhoneToched(true);
     if (
       helperEmail.text === "" &&
       helperFirstName.text === "" &&
-      helperLastName.text === ""
+      helperLastName.text === "" &&
+      helperPhone.text === ""
     ) {
       dispatch(
         updateProfileUser(userInfo, {
           firstName: firstName,
           lastName: lastName,
           email: email,
+          phone: phone
         })
       );
     }
@@ -179,12 +203,12 @@ const UserDetail = () => {
                 onFocus={() => setLastNameToched(true)}
                 type="text"
                 bordered
-                readOnly={!activeEdit}
-                className={activeEdit ? "user-info-input" : "user-info-input-readonly"}
+                disabled={!activeEdit}
+                className={activeEdit ? "user-info-input" : "user-info-input-disabled"}
                 fullWidth
                 color="primary"
                 size="md"
-                placeholder="Họ"
+                placeholder={ activeEdit ? "Họ" : "Chưa điền họ" }
               />
             </div>
             <div className="data">
@@ -198,12 +222,12 @@ const UserDetail = () => {
                 onFocus={() => setFirstNameToched(true)}
                 type="text"
                 bordered
-                readOnly={!activeEdit}
-                className={activeEdit ? "user-info-input" : "user-info-input-readonly"}
+                disabled={!activeEdit}
+                className={activeEdit ? "user-info-input" : "user-info-input-disabled"}
                 fullWidth
                 color="primary"
                 size="md"
-                placeholder="Tên"
+                placeholder={ activeEdit ? "Tên" : "Chưa điền tên" }
               />
             </div>
           </div>
@@ -220,12 +244,31 @@ const UserDetail = () => {
                 onFocus={() => setEmailToched(true)}
                 type="email"
                 bordered
-                readOnly={!activeEdit}
-                className={activeEdit ? "user-info-input" : "user-info-input-readonly"}
+                disabled={!activeEdit}
+                className={activeEdit ? "user-info-input" : "user-info-input-disabled"}
                 fullWidth
                 color="primary"
                 size="md"
-                placeholder="Email"
+                placeholder={activeEdit ? "Nhập email" : "Chưa điền email"}
+              />
+            </div>
+            <div className="data">
+              <h4>Số điện thoại</h4>
+              <Input
+                // clearable
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                helperColor="error"
+                helperText={phoneToched && helperPhone.text}
+                onFocus={() => setPhoneToched(true)}
+                type="text"
+                bordered
+                disabled={!activeEdit}
+                className={activeEdit ? "user-info-input" : "user-info-input-disabled"}
+                fullWidth
+                color="primary"
+                size="md"
+                placeholder={activeEdit ? "09xxxxxxxx" : "Chưa điền số điện thoại"}
               />
             </div>
           </div>

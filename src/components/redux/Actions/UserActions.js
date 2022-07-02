@@ -110,6 +110,7 @@ export const updateProfileUser = (userInfo, data) => async(dispatch) =>{
             "username": userInfo.username,
             "firstName": data.firstName,
             "lastName": data.lastName,
+            "phone": data.phone,
             "email": data.email,
         })
         dispatch({type: USER_UPDATE_INFORMATION_SUCCESS, payload: res.data.data})

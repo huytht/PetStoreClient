@@ -26,12 +26,13 @@ import toast from "react-hot-toast"
                   </div>
                   <div className='product-details'>
                   <Link to = {`/product/${productItems.id}`}><h3>{productItems.name}</h3></Link>
-                    <div className='rate'>
-                      <i className='fa fa-star'></i>
-                      <i className='fa fa-star'></i>
-                      <i className='fa fa-star'></i>
-                      <i className='fa fa-star'></i>
-                      <i className='fa fa-star'></i>
+                  <div className='rate'>
+                      {productItems.rate=== null ? "Chưa có đánh giá": (<> {[...Array(productItems.rate)].map((star) => {        
+                          return (         
+                            <i className="fa fa-star"></i>        
+                          );
+                        })}
+                      </>)}
                     </div>
                     <div className='price'>
                       <h4>{Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(productItems.price)}</h4>

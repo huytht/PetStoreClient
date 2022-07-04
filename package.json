@@ -10,6 +10,7 @@
     "axios": "0.24.0",
     "moment": "^2.29.3",
     "react": "^18.1.0",
+    "react-animated-heart": "0.0.7-alpha.1",
     "react-dom": "^18.1.0",
     "react-hot-toast": "^2.2.0",
     "react-icons": "^4.4.0",

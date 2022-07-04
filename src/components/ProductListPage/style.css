@@ -8,4 +8,6 @@
 .product-list.product:hover {
   box-shadow: rgb(43 52 69 / 10%) 0px 4px 16px;
 }
-
+.name-product{
+  cursor: pointer;
+}

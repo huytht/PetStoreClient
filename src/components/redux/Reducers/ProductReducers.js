@@ -25,7 +25,12 @@ import {
     PRODUCT_LIST_NAME_FAIL,
     PRODUCT_LIST_PAGE_REQUEST,
     PRODUCT_LIST_PAGE_SUCCESS,
-    PRODUCT_LIST_PAGE_FAIL
+    PRODUCT_LIST_PAGE_FAIL,
+    PRODUCT_WISH_LIST_REQUEST,
+    PRODUCT_WISH_LIST_SUCCESS,
+    PRODUCT_WISH_LIST_FAIL,
+    ADD_PRODUCT_WISH_LIST,
+    ADD_PRODUCT_WISH_LIST_FAIL
 } from "../Constants/ProductConstants"
 
 //productlist
@@ -146,6 +151,30 @@ export const currentNameListReducer = (state = {},action) =>{
             return {loading: false, name: action.payload}
         case PRODUCT_LIST_NAME_FAIL:
             return {loading: false, error: action.payload}
+        default:
+            return state;
+    }
+}
+//wish list
+export const wishListReducer = (state = {products:[]},action) =>{
+    switch (action.type) {
+        case PRODUCT_WISH_LIST_REQUEST:
+            return {...state, loading: true, products: []}
+        case PRODUCT_WISH_LIST_SUCCESS:
+            return {...state, loading: false, products: action.payload}
+        case PRODUCT_WISH_LIST_FAIL:
+            return {...state, loading: false, products: action.payload}
+        default:
+            return state;
+    }
+}
+
+export const addWishListReducer = (state = {products:[]},action) =>{
+    switch (action.type) {
+        case ADD_PRODUCT_WISH_LIST:
+            return  {...state, loading: false, products: action.payload} 
+            case ADD_PRODUCT_WISH_LIST_FAIL:
+                return {...state, loading: false, products: action.payload}    
         default:
             return state;
     }

@@ -32,7 +32,6 @@ export const ProductPage = () => {
   return (
     <>
       <div class="product-page mtop">
-      
         <div class="product-category">
           <h3 class="title">Danh mục sản phẩm</h3>
           <ul>

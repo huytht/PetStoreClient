@@ -1,4 +1,5 @@
 import { axiosClient } from "../../services/api";
+import { CART_ADD_ITEM } from "../Constants/CartContants";
 import { 
     PRODUCT_LIST_NEW_FAIL, 
     PRODUCT_LIST_NEW_REQUEST, 
@@ -29,7 +30,12 @@ import {
     PRODUCT_LIST_NAME_FAIL,
     PRODUCT_LIST_PAGE_REQUEST,
     PRODUCT_LIST_PAGE_SUCCESS,
-    PRODUCT_LIST_PAGE_FAIL
+    PRODUCT_LIST_PAGE_FAIL,
+    PRODUCT_WISH_LIST_REQUEST,
+    PRODUCT_WISH_LIST_SUCCESS,
+    PRODUCT_WISH_LIST_FAIL,
+    ADD_PRODUCT_WISH_LIST,
+    ADD_PRODUCT_WISH_LIST_FAIL
 } from "../Constants/ProductConstants"
 
 const array = [
@@ -166,4 +172,30 @@ export const getCurrentListName = (name) => async(dispatch) => {
         })
     }
 }
+//wishlist
+export const WishListProductPage = (pageNumber,pageSize)=> async(dispatch) =>{
+    try {
+        dispatch({type: PRODUCT_WISH_LIST_REQUEST})
 
+        const res = await axiosClient.get(`/user/wish-list?page-number=${pageNumber}&page-size=${pageSize}`)
+        dispatch({type: PRODUCT_WISH_LIST_SUCCESS, payload: res.data.data })
+    } catch (error) {
+        dispatch({
+            type: PRODUCT_WISH_LIST_FAIL,
+            payload: error.errorMessage
+        })
+    }
+}
+
+export const addWishListProductPage = (productId)=> async(dispatch) =>{
+
+    try {
+        const res = await axiosClient.post(`/user/wish-list?productId=${productId}`)
+        dispatch({type: ADD_PRODUCT_WISH_LIST, payload: res.data.data })
+    } catch (error) {
+        dispatch({
+            type: ADD_PRODUCT_WISH_LIST_FAIL,
+            payload: error.errorMessage
+        })
+}
+}

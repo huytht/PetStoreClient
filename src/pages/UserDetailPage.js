@@ -7,6 +7,8 @@ import { getUserDetails } from '../components/redux/Actions/UserActions'
 import { Order } from '../components/Order/Order'
 import {FaUserEdit,FaClipboardList} from 'react-icons/fa'
 import {RiLockPasswordFill} from 'react-icons/ri'
+import {AiFillHeart} from 'react-icons/ai'
+import Wishlist from '../components/Wishlist/Wishlist'
 
 const UserDetailPage = () => {
   const [toggleState, setToggleState] = useState(1);
@@ -44,6 +46,12 @@ const UserDetailPage = () => {
         >
           <FaClipboardList/> &nbsp; Đơn hàng
         </button>
+        <button
+          className={toggleState === 4 ? "tabs active-tabs" : "tabs"}
+          onClick={() => toggleTab(4)}
+        >
+          <AiFillHeart/> &nbsp; Yêu thích
+        </button>
       </div>
 
       <div className="content-tabs">
@@ -62,6 +70,11 @@ const UserDetailPage = () => {
           className={toggleState === 3 ? "content  active-content" : "content"}
         >
           <Order/>
+        </div>
+        <div
+          className={toggleState === 4 ? "content  active-content" : "content"}
+        >
+          <Wishlist/>
         </div>
       </div>
     </div>

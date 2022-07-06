@@ -63,7 +63,8 @@ const setup = (store) => {
             return Promise.reject(_error);
           }
         } else if (err.response.status === 500 && !isPublic){
-            dispatch(logout());
+          console.log(err.response.data)
+          dispatch(logout());
           }
         }
       return Promise.reject(err);

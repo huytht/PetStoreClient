@@ -151,6 +151,10 @@ button {
   color: #ffcd4e;
   margin: 5px 5px 5px 0;
 }
+.rated{
+  color: grey;
+  font-size: 10px;
+}
 .product .price {
   display: flex;
   justify-content: space-between;

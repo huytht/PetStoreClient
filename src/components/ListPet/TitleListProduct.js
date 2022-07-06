@@ -27,7 +27,7 @@ import toast from "react-hot-toast"
                   <div className='product-details'>
                   <Link to = {`/product/${productItems.id}`}><h3>{productItems.name}</h3></Link>
                   <div className='rate'>
-                      {productItems.rate=== null ? "Chưa có đánh giá": (<> {[...Array(productItems.rate)].map((star) => {        
+                      {productItems.rate=== null ?<span className="rated">Chưa có đánh giá </span>: (<> {[...Array(productItems.rate)].map((star) => {        
                           return (         
                             <i className="fa fa-star"></i>        
                           );

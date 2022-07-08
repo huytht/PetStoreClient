@@ -6,7 +6,6 @@ export const cartReducer = (state = {cartItems:[]}, action) => {
         case CART_ADD_ITEM:
             const item = action.payload;
             const existItem = state.cartItems.find((x) => x.id === item.id);
-            console.log(existItem)
             if (existItem) {
                 if (existItem.qty < existItem.amount) {
                     item.qty=Number(item.qty)+Number(existItem.qty)

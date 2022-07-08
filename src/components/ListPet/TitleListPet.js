@@ -25,7 +25,7 @@ import Heart from "react-animated-heart";
                     <span className='discount'>New</span>
                     <img className="img-product"src= { `${process.env.REACT_APP_API_ENDPOINT}${productItems.imagePath} `} alt='' /> 
                     <div className='product-like'>
-                      <Heart isClick={isClick} onClick={() => setClick(!isClick)} />
+                      {/* <Heart isClick={isClick} onClick={() => setClick(!isClick)} /> */}
                     </div>
                   </div>
                   <div className='product-details'>

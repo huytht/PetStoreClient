@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { axiosClient } from "../../services/api";
 import { CART_ADD_ITEM } from "../Constants/CartContants";
 import { 
@@ -35,7 +36,9 @@ import {
     PRODUCT_WISH_LIST_SUCCESS,
     PRODUCT_WISH_LIST_FAIL,
     ADD_PRODUCT_WISH_LIST,
-    ADD_PRODUCT_WISH_LIST_FAIL
+    ADD_PRODUCT_WISH_LIST_FAIL,
+    ADD_PRODUCT_WISH_LIST_SUCCESS,
+    ADD_PRODUCT_WISH_LIST_REQUEST
 } from "../Constants/ProductConstants"
 
 const array = [
@@ -173,29 +176,36 @@ export const getCurrentListName = (name) => async(dispatch) => {
     }
 }
 //wishlist
-export const WishListProductPage = (pageNumber,pageSize)=> async(dispatch) =>{
+export const WishListProductPage = (pageNumber,pageSize)=> async(dispatch,getState) =>{
     try {
         dispatch({type: PRODUCT_WISH_LIST_REQUEST})
 
         const res = await axiosClient.get(`/user/wish-list?page-number=${pageNumber}&page-size=${pageSize}`)
         dispatch({type: PRODUCT_WISH_LIST_SUCCESS, payload: res.data.data })
+        
     } catch (error) {
         dispatch({
             type: PRODUCT_WISH_LIST_FAIL,
             payload: error.errorMessage
         })
     }
+    localStorage.setItem("products", JSON.stringify(getState().wishList.products));
+    
 }
 
-export const addWishListProductPage = (productId)=> async(dispatch) =>{
+export const addWishListProductPage = (productId)=> async(dispatch,getState) =>{
 
     try {
-        const res = await axiosClient.post(`/user/wish-list?productId=${productId}`)
-        dispatch({type: ADD_PRODUCT_WISH_LIST, payload: res.data.data })
+        dispatch({type:ADD_PRODUCT_WISH_LIST_REQUEST})
+        const res = await axiosClient.post(`/user/wish-list?product-id=${productId}`)
+        dispatch({type: ADD_PRODUCT_WISH_LIST_SUCCESS, payload: res.data.data })
+        toast.success("")
+        localStorage.setItem("products", JSON.stringify(getState().wishList.products));
     } catch (error) {
         dispatch({
             type: ADD_PRODUCT_WISH_LIST_FAIL,
             payload: error.errorMessage
         })
-}
+    }
+   
 }

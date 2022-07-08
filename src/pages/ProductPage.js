@@ -43,7 +43,7 @@ export const ProductPage = () => {
         <div className="title-page">
           <h1>{!name ? "Tất cả" : name}</h1>
           <div className="view-type">
-              <span>Chế độ hiễn thị: </span>
+              <span>Chế độ hiển thị: </span>
               <div className="view-control">
                 <a onClick={() =>toggleTab(1)}><FaThLarge/></a>
                 <a onClick={() => toggleTab(2)}><GoThreeBars/></a>

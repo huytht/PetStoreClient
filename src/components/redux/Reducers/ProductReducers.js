@@ -32,7 +32,10 @@ import {
     ADD_PRODUCT_WISH_LIST,
     ADD_PRODUCT_WISH_LIST_FAIL,
     ADD_PRODUCT_WISH_LIST_SUCCESS,
-    ADD_PRODUCT_WISH_LIST_REQUEST
+    ADD_PRODUCT_WISH_LIST_REQUEST,
+    SEARCH_PRODUCT_LIST_REQUEST,
+    SEARCH_PRODUCT_LIST_SUCCESS,
+    SEARCH_PRODUCT_LIST_FAIL
 } from "../Constants/ProductConstants"
 
 //productlist
@@ -163,7 +166,6 @@ export const wishListReducer = (state = {products:[]},action) =>{
         case PRODUCT_WISH_LIST_REQUEST:
             return {...state, loading: true, products: []}
         case PRODUCT_WISH_LIST_SUCCESS:
-
             return {...state, loading: false, products: action.payload}
         case PRODUCT_WISH_LIST_FAIL:
             return {...state, loading: false, products: action.payload}
@@ -185,3 +187,4 @@ export const addWishListReducer = (state = {products:[]},action) =>{
             return state;
     }
 }
+

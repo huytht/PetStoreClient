@@ -10,8 +10,6 @@ const validRequestForNotAddingToken = [
 ]
 
 const setup = (store) => {
-  
-  
   axiosClient.interceptors.request.use( 
     async (config) => {
       // console.log(config)

@@ -2,18 +2,22 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { listProductSuggest } from "../redux/Actions/ProductActions";
 import "./styles.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 const Autocomplete = (props) => {
   const [activeSuggestion, setActiveSuggestion] = useState(0);
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [userInput, setUserInput] = useState("");
   const { suggestions } = props;
+  const navigate = useNavigate()
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (userInput !== "")
+    if (userInput !== "") {
       dispatch(listProductSuggest(userInput));
+    }
+
   }, [userInput, dispatch]);
 
   const onChange = (e) => {
@@ -23,6 +27,7 @@ const Autocomplete = (props) => {
     setFilteredSuggestions(suggestions);
     setShowSuggestions(true);
     setUserInput(e.currentTarget.value);
+
   };
 
   const onClick = (e) => {
@@ -30,6 +35,7 @@ const Autocomplete = (props) => {
     setFilteredSuggestions([]);
     setShowSuggestions(false);
     setUserInput(e.currentTarget.innerText);
+
   };
 
   const onKeyDown = (e) => {
@@ -37,6 +43,13 @@ const Autocomplete = (props) => {
       setActiveSuggestion(0);
       setShowSuggestions(false);
       setUserInput(filteredSuggestions[activeSuggestion]);
+      if (userInput!==""){
+        navigate(`/pages/${userInput}/0/0`)
+      }else {
+        toast.error("Bạn chưa nhập từ khóa tìm kiếm")
+        
+      }
+        
     } else if (e.keyCode === 38) {
       if (activeSuggestion === 0) {
         return;
@@ -53,9 +66,7 @@ const Autocomplete = (props) => {
   };
 
   let suggestionsListComponent;
-
   if (showSuggestions && userInput) {
-    console.log(filteredSuggestions.length);
     if (filteredSuggestions.length) {
       suggestionsListComponent = (
         <ul className="suggestions">
@@ -69,12 +80,12 @@ const Autocomplete = (props) => {
             return (
               <li className={className} key={suggestion} onClick={onClick}>
                 <div className="suggestion-item">
-                  <Link to = {`/product/${suggestion.id}`}>
-                    <img src={ `${process.env.REACT_APP_API_ENDPOINT}${suggestion.imagePath}` } alt="" />
+                  <Link to={`/product/${suggestion.id}`}>
+                    <img src={`${process.env.REACT_APP_API_ENDPOINT}${suggestion.imagePath}`} alt="" />
                     <span>{suggestion.name}</span>
                   </Link>
                 </div>
-                
+
               </li>
             );
           })}
@@ -82,9 +93,11 @@ const Autocomplete = (props) => {
       );
     } else {
       suggestionsListComponent = (
-        <div class="no-suggestions">
-          <em>No suggestions available.</em>
-        </div>
+        <ul class="suggestions">
+          <div className="suggestion-item">
+            <span>No suggestions available.</span>
+          </div>
+        </ul>
       );
     }
   }

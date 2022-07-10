@@ -33,27 +33,27 @@ export const ProductList = ({ productList, name }) => {
 		dispatch(addWishListProductPage(id))
 	}
 
-	useEffect(() => {
-		let newArr = new Array(productList.products.content?.length).fill(false);
-		setClick(newArr)
-		productList.products.content?.map((item, index) => {
-			const existItem = wishList.find((x) => x.id === item.id)
-			if (existItem) {
-				const newArr = [...isClick]
-				newArr[index] = false
-				setClick(newArr)
-			}
-			else {
-				const newArr = [...isClick]
-				newArr[index] = true
-				setClick(newArr)
-			}
-		})
-	}, [productList])
+	// useEffect(() => {
+	// 	let newArr = new Array(productList.products.content?.length).fill(false);
+	// 	setClick(newArr)
+	// 	productList.products.content?.map((item, index) => {
+	// 		const existItem = wishList.find((x) => x.id === item.id)
+	// 		if (existItem) {
+	// 			const newArr = [...isClick]
+	// 			newArr[index] = false
+	// 			setClick(newArr)
+	// 		}
+	// 		else {
+	// 			const newArr = [...isClick]
+	// 			newArr[index] = true
+	// 			setClick(newArr)
+	// 		}
+	// 	})
+	// }, [productList])
 
 	return (
 		<>
-			{productList.products?.content?.map((productItems, index) => {
+			{Array.isArray(productList)?productList.map((productItems, index) => {
 				return (
 					<div className="box">
 						<div className="product mtop">
@@ -104,7 +104,7 @@ export const ProductList = ({ productList, name }) => {
 						</div>
 					</div>
 				);
-			})}
+			}):null}
 		</>
 	);
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import logo from "./assets/logo.svg";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Modal, Input, Row, Checkbox, Button, Text } from "@nextui-org/react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,6 +10,7 @@ import {
 } from "../../components/redux/Actions/UserActions";
 import { Dropdown, Avatar, Grid } from "@nextui-org/react";
 import Autocomplete from "../../components/AutoComplete/Autocomplete";
+import { useNavigate } from "react-router-dom";
 
 const Search = () => {
   // fixed Header
@@ -17,7 +18,7 @@ const Search = () => {
     const search = document.querySelector(".search");
     search.classList.toggle("active", window.scrollY > 100);
   });
-
+  const navigate = useNavigate()
   const [visible, setVisible] = React.useState(false);
   const handler = () => setVisible(true);
   const closeHandler = () => {
@@ -115,6 +116,7 @@ const Search = () => {
     dispatch(logout());
   }
 
+
   // const {cartItems} = useSelector((state)=>state.cart)
   const [cartItems, setCartItems] = useState([])
   const [numberCart, setNumberCart] = useState(0);
@@ -127,6 +129,7 @@ const Search = () => {
       setNumberCart(totalQuantity) 
     }, 50)
   }, [cartItems]);
+ 
 
   return (
     <>
@@ -138,7 +141,7 @@ const Search = () => {
 
           <div className="search-box f_flex">
             <Autocomplete suggestions={products?.length > 0 ? products : []} />
-            <i className="fa fa-search"></i>
+            <i  className="fa fa-search"></i>
           </div>
 
           <div className="icon f_flex width">

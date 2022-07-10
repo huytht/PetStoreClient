@@ -38,7 +38,8 @@ import {
     ADD_PRODUCT_WISH_LIST,
     ADD_PRODUCT_WISH_LIST_FAIL,
     ADD_PRODUCT_WISH_LIST_SUCCESS,
-    ADD_PRODUCT_WISH_LIST_REQUEST
+    ADD_PRODUCT_WISH_LIST_REQUEST,
+
 } from "../Constants/ProductConstants"
 
 const array = [
@@ -97,13 +98,13 @@ export const listProductDetails = (id) => async(dispatch) =>{
 }
 
 // search product
-export const listProductSuggest = (text) => async(dispatch) =>{
+export const listProductSuggest = (text, pageNumber, pageSize) => async(dispatch) =>{
     try {
         dispatch({ type: PRODUCT_LIST_SUGGESTION_REQUEST })
 
-        const res = await axiosClient.get(`/product/search-text?text=${text}`)
+        const res = await axiosClient.get(`/product/search-text?text=${text}&page-number=${pageNumber}&page-size=${pageSize}`)
 
-        dispatch({ type: PRODUCT_LIST_SUGGESTION_SUCCESS, payload: res.data.data.content})
+        dispatch({ type: PRODUCT_LIST_SUGGESTION_SUCCESS, payload: res.data.data})
 
     } catch (error) {
         dispatch({

@@ -11,12 +11,8 @@ const Wishlist = () => {
   const [ pageNumber, setPageNumber ] = useState(0);
   const loading = addWishList;
   useEffect(()=>{
-    dispatch(WishListProductPage(pageNumber,4))
+      dispatch(WishListProductPage(pageNumber,4))
   },[dispatch,pageNumber,loading])
-  // useEffect(()=>{
-      
-  //     dispatch(WishListProductPage(pageNumber,4))
-  // },[dispatch,wishList])
   return (
     <div className='wrapper'>
        <div class='product-page mtop'>
@@ -24,7 +20,7 @@ const Wishlist = () => {
             <div className='alert-wishlist '>Chưa có <strong>sản phẩm yêu thích</strong> </div>        
         ) :     
         <div className='product-list'>   
-          <ProductList productList={wishList} />   
+          <ProductList productList={wishList.products?.content} />   
         </div>
         }        
         </div>

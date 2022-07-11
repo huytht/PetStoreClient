@@ -21,13 +21,11 @@ export const ProductPage = () => {
   const [ pageNumber, setPageNumber ] = useState(0);
   
   useEffect(() => {
-    if (keyword) dispatch(listProductSuggest(keyword, pageNumber, 4));
-    else if (breedId) dispatch(listProductPage("hot", breedId, categoryId, pageNumber, 8));
-    else if (categoryId) dispatch(listProductPage("hot", 0, categoryId, pageNumber, 8));
+    if (keyword) dispatch(listProductSuggest(keyword, pageNumber, 4))
+    else if (breedId) dispatch(listProductPage("hot", breedId, categoryId, pageNumber, 8))
+    else if (categoryId) dispatch(listProductPage("hot", 0, categoryId, pageNumber, 8))
     else  dispatch(listProductPage("hot", 0, 0, pageNumber, 8))
-
-
-  }, [dispatch, categoryId, breedId, pageNumber]);
+  }, [dispatch, categoryId, breedId, pageNumber, keyword]);
   const [toggleState, setToggleState] = useState(1);
   const toggleTab = (index) => {
       setToggleState(index);

@@ -15,14 +15,12 @@ const Autocomplete = (props) => {
 
   useEffect(() => {
     if (userInput !== "") {
-      dispatch(listProductSuggest(userInput));
+      dispatch(listProductSuggest(userInput, 0, 10));
     }
 
   }, [userInput, dispatch]);
 
   const onChange = (e) => {
-    const userInput = e.currentTarget.value;
-
     setActiveSuggestion(0);
     setFilteredSuggestions(suggestions);
     setShowSuggestions(true);

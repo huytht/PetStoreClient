@@ -8,6 +8,7 @@
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "0.24.0",
+    "http-proxy-middleware": "^2.0.6",
     "moment": "^2.29.3",
     "react": "^18.1.0",
     "react-animated-heart": "0.0.7-alpha.1",
@@ -47,6 +48,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "http://38.242.132.213:8081"
+  }
 }

@@ -15,7 +15,7 @@ const Autocomplete = (props) => {
 
   useEffect(() => {
     if (userInput !== "") {
-      dispatch(listProductSuggest(userInput, 0, 10));
+      dispatch(listProductSuggest(userInput, 0, 4));
     }
 
   }, [userInput, dispatch]);

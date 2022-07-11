@@ -140,7 +140,7 @@ const Search = () => {
           </div>
 
           <div className="search-box f_flex">
-            <Autocomplete suggestions={products.content?.length > 0 ? products.content : []} />
+            <Autocomplete suggestions={products?.content.length > 0 ? products?.content : []} />
             <i  className="fa fa-search"></i>
           </div>
 

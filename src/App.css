@@ -469,3 +469,7 @@ button {
   cursor: pointer;
 }
 /*----- product page -------*/
+.search-result{
+  color: grey;
+  font-size:30px;
+}

@@ -125,6 +125,7 @@ export const productListSuggestReducer = (state = {},action) =>{
         case PRODUCT_LIST_SUGGESTION_REQUEST:
             return {...state, loading: true}
         case PRODUCT_LIST_SUGGESTION_SUCCESS:
+            const item = action.payload.content?.length
             return {loading: false, products: action.payload}
         case PRODUCT_LIST_SUGGESTION_FAIL:
             return {loading: false, error: action.payload}

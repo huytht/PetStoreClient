@@ -155,7 +155,9 @@ export const listProductPage = (type, breedId, categoryId, pageNumber, pageSize)
         dispatch({type: PRODUCT_LIST_PAGE_REQUEST})
 
         const res = await axiosClient.get(`/product/list?type=${type}&breed-id=${breedId}&category-id=${categoryId}&page-number=${pageNumber}&page-size=${pageSize}`)
-        dispatch({type: PRODUCT_LIST_PAGE_SUCCESS, payload: res.data.data })
+        
+        dispatch({type: PRODUCT_LIST_PAGE_SUCCESS,  payload: res.data.data })
+
     } catch (error) {
         dispatch({
             type: PRODUCT_LIST_PAGE_FAIL,

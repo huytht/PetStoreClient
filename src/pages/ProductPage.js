@@ -51,12 +51,15 @@ export const ProductPage = () => {
               </div>
           </div>
           <div class={toggleState===2 ? "product-list-list":"product-list"} > 
-            <ProductList productList={keyword? searchList.products?.content : productList?.products?.content }/>
+          {keyword &&searchList.products?.content.length===0 ?  <span className="search-result">Không có kết quả</span>:  <ProductList productList={keyword? searchList.products?.content : productList?.products?.content }/>}
+           
+           
           </div>
           </div>
       </div>
       <div className="pagination">
-        <Pagination shadow animated={false} total={keyword?searchList.products?.pageInfo?.totalPage:productList.products?.pageInfo?.totalPage} onChange={(e) => setPageNumber(e - 1)} initialPage={1} />
+        {keyword&&searchList.products?.content.length===0?<></>:keyword?<Pagination shadow animated={false} total={searchList.products?.pageInfo?.totalPage} onChange={(e) => setPageNumber(e - 1)} initialPage={1} />:
+        <Pagination shadow animated={false} total={productList.products?.pageInfo?.totalPage} onChange={(e) => setPageNumber(e - 1)} initialPage={1} />}
       </div>
     </>
   );

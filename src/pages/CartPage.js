@@ -31,12 +31,6 @@ const CartPage = () => {
     }, 50)
   }, [cartItems])
 
-  // useEffect(() => {
-  //   if (check)
-  //     setCartItems(JSON.parse(localStorage.getItem("cartItems")));
-  //   setCheck(false);
-  // }, [check]);
-
   const handleIncreaseQuantity = (qty, index) => {
     if (cartItems[index].amount - qty > 0) {
       dispatch(increaseQuantity(index))

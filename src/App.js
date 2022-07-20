@@ -25,6 +25,7 @@ const App = () => {
         <Header />
         <Routes>
           <Route path="/" exact element={<HomePage />} />
+          <Route path="**" element={<HomePage />} />
           <Route path="/product/:id" element={<PetDetailPage />} />
           <Route path="/profile" element={<UserDetailPage />} />
           <Route path="/cart" element={<CartPage />} />

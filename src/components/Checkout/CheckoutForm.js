@@ -1,9 +1,20 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import "./style.css";
 import { FaShoppingCart, FaPaypal, FaMoneyBillWave } from "react-icons/fa";
 import { Input, Row, Col, Container, Radio, Checkbox } from "@nextui-org/react";
+import { useDispatch } from 'react-redux';
+import { createPayment } from './../redux/Actions/PaymentAction';
 const CheckoutForm = () => {
-  const [checked, setChecked] = React.useState(false);
+  const [checked, setChecked] = useState(false);
+  const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem("cartItems")));
+  const [paymentMethod, setPaymentMethod] = useState("");
+
+  let total = 0;
+  const dispatch = useDispatch();
+
+  const placeOrder = () => {
+    dispatch(createPayment(total, paymentMethod));
+  }
 
   return (
     <>
@@ -295,7 +306,7 @@ const CheckoutForm = () => {
                 <Container>
                   <Row gap={1} className="checkout-element-row">
                     <Col className="box-checkout-element">
-                      <Radio.Group css={{ lineHeight: 3 }} defaultValue="COD">
+                      <Radio.Group css={{ lineHeight: 3 }} onChange={(value) => setPaymentMethod(value)} defaultValue="COD">
                         <Radio className="checkbox-item" value="COD"><img class="method-icon" src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/checkout/icon-payment-method-cod.svg" width="32" height="32" alt="icon" />
                           &nbsp; Thanh toán bằng tiền mặt
                         </Radio>
@@ -311,8 +322,9 @@ const CheckoutForm = () => {
               </div>
               <input
                 className="btn-checkout-form"
-                type="submit"
+                type="button"
                 value="Continue to checkout"
+                onClick={placeOrder}
               />
             </form>
           </div>
@@ -322,14 +334,17 @@ const CheckoutForm = () => {
             <h4>
               Cart{" "}
               <span class="header-price">
-                <FaShoppingCart /> <b>4</b>
+                <FaShoppingCart /> <b>{ cartItems.length }</b>
               </span>
             </h4>
             <br />
-            <p>
-              <a href="#">Product 1</a> <span class="price">$1</span>
-            </p>
-            <p>
+            {cartItems.map((item) => (
+              total += Number(item.price * item.qty),
+              <p>
+                <a href="#">{item.name} x{item.qty}</a> <span class="price">{Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(Number(item.price * item.qty))}</span>
+              </p>
+            ))}
+{/*         <p>
               <a href="#">Product 2</a> <span class="price">$5</span>
             </p>
             <p>
@@ -337,13 +352,13 @@ const CheckoutForm = () => {
             </p>
             <p>
               <a href="#">Product 4</a> <span class="price">$2</span>
-            </p>
+            </p> */}
             <br />
             <hr />
             <p>
               Total{" "}
               <span className="price">
-                <b>$30</b>
+                <b>{Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(Number(total))}</b>
               </span>
             </p>
           </div>

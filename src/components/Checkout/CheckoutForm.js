@@ -1,20 +1,35 @@
-import { useEffect, useState } from "react";
+import { useEffect , useState } from "react";
 import "./style.css";
 import { FaShoppingCart, FaPaypal, FaMoneyBillWave } from "react-icons/fa";
 import { Input, Row, Col, Container, Radio, Checkbox } from "@nextui-org/react";
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { createPayment } from './../redux/Actions/PaymentAction';
+import { listProvince, getProvince, getDistrict } from "../redux/Actions/AddressAction";
+import AutoComplete from "react-autocomplete";
+
 const CheckoutForm = () => {
   const [checked, setChecked] = useState(false);
   const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem("cartItems")));
   const [paymentMethod, setPaymentMethod] = useState("");
-
+  const [provinceShippingName,setProvinceShippingName] = useState("")
+  const [districtShippingName,setDistrictShippingName] = useState("")
+  const [wardShippingName,setWardShippingName] = useState("")
+  const [provinceBillingName,setProvinceBillingName] = useState("")
+  const [districtBillingName,setDistrictBillingName] = useState("")
+  const [wardBillingName,setWardBillingName] = useState("")
+  const provinces = useSelector((state)=>state.provinces)
+  const province = useSelector((state)=>state.province)
+  const district = useSelector((state)=>state.district)
   let total = 0;
   const dispatch = useDispatch();
 
   const placeOrder = () => {
     dispatch(createPayment(total, paymentMethod));
   }
+
+  useEffect(()=>{
+    dispatch(listProvince())
+  },[dispatch])
 
   return (
     <>
@@ -115,36 +130,54 @@ const CheckoutForm = () => {
                       <label for="lastName">
                         <i class="fa-solid fa-city"></i> Tỉnh/Thành phố
                       </label>
-                      <Input
-                        // clearable
-                        // value={lastName}
-                        // onChange={(e) => setLastName(e.target.value)}
-                        helperColor="error"
-                        // helperText={lastNameToched && helperLastName.text}
-                        // onFocus={() => setLastNameToched(true)}
-                        type="text"
-                        bordered
-                        fullWidth
-                        color="primary"
-                        size="md"
+                      <AutoComplete
+                        getItemValue={(item) => item.name}
+                        items={provinces.data.filter((province) => province.name.includes(provinceShippingName))}
+                        renderItem={(item, isHighlighted) => ( 
+                          <div
+                            style={{
+                              verticalAlign: "middle",
+                              background: isHighlighted ? "lightgray" : "white",
+                              color:"red"
+                              
+                            }}
+                          >
+                            
+                            <div style={{ display: "inline-block", minWidth: 200 }}>
+                              {item.name}
+                            </div>
+                          </div>
+                        )}
+                        value={provinceShippingName || ""}
+                        onChange={(e) => setProvinceShippingName(e.target.value)}
+                        onSelect={(provinceShippingName, item) =>  { setProvinceShippingName(provinceShippingName); dispatch(getProvince(item.code))}}
                       />
                     </Col>
                     <Col className="box-checkout-element">
                       <label for="firstName">
                         <i class="fa-solid fa-city"></i> Quận/Huyện
                       </label>
-                      <Input
-                        // clearable
-                        // value={lastName}
-                        // onChange={(e) => setLastName(e.target.value)}
-                        helperColor="error"
-                        // helperText={lastNameToched && helperLastName.text}
-                        // onFocus={() => setLastNameToched(true)}
-                        type="text"
-                        bordered
-                        fullWidth
-                        color="primary"
-                        size="md"
+                      <AutoComplete
+                        getItemValue={(item) => item.name}
+                        items={province.data.districts?.length > 0 && province.data.districts.filter((district) => district.name.includes(districtShippingName))}
+                        renderItem={(item, isHighlighted) => ( 
+                          <div
+                            style={{
+                              verticalAlign: "middle",
+                              background: isHighlighted ? "lightgray" : "white",
+                              color:"red"
+                              
+                            }}
+                          >
+                            
+                            <div style={{ display: "inline-block", minWidth: 200 }}>
+                              {item.name}
+                            </div>
+                          </div>
+                        )}
+                        value={districtShippingName || ""}
+                        onChange={(e) => setDistrictShippingName(e.target.value)}
+                        onSelect={(districtShippingName, item) => { setDistrictShippingName(districtShippingName); dispatch(getDistrict(item.code)) }}
                       />
                     </Col>
                   </Row>
@@ -153,18 +186,27 @@ const CheckoutForm = () => {
                       <label for="email">
                         <i class="fa-solid fa-city"></i> Phường/Xã
                       </label>
-                      <Input
-                        // clearable
-                        // value={lastName}
-                        // onChange={(e) => setLastName(e.target.value)}
-                        helperColor="error"
-                        // helperText={lastNameToched && helperLastName.text}
-                        // onFocus={() => setLastNameToched(true)}
-                        type="text"
-                        bordered
-                        fullWidth
-                        color="primary"
-                        size="md"
+                      <AutoComplete
+                        getItemValue={(item) => item.name}
+                        items={district.data.wards?.length > 0 && district.data.wards.filter((ward) => ward.name.includes(wardShippingName))}
+                        renderItem={(item, isHighlighted) => ( 
+                          <div
+                            style={{
+                              verticalAlign: "middle",
+                              background: isHighlighted ? "lightgray" : "white",
+                              color:"red"
+                              
+                            }}
+                          >
+                            
+                            <div style={{ display: "inline-block", minWidth: 200 }}>
+                              {item.name}
+                            </div>
+                          </div>
+                        )}
+                        value={wardShippingName || ""}
+                        onChange={(e) => setWardShippingName(e.target.value)}
+                        onSelect={(wardShippingName) => setWardShippingName(wardShippingName)}
                       />
                     </Col>
                     <Col className="box-checkout-element">

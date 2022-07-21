@@ -1,4 +1,4 @@
-import {PROVINCES_SUCCESS,PROVINCES_REQUEST,PROVINCES_FAIL,DISTRICT_FAIL,DISTRICT_REQUEST,DISTRICT_SUCCESS, PROVINCE_REQUEST, PROVINCE_SUCCESS, PROVINCE_FAIL } from "../Constants/AddressContants";
+import {PROVINCES_SUCCESS,PROVINCES_REQUEST,PROVINCES_FAIL,DISTRICT_SHIPPING_FAIL,DISTRICT_SHIPPING_REQUEST,DISTRICT_SHIPPING_SUCCESS, PROVINCE_SHIPPING_REQUEST, PROVINCE_SHIPPING_SUCCESS, PROVINCE_SHIPPING_FAIL, PROVINCE_BILLING_REQUEST, PROVINCE_BILLING_SUCCESS, PROVINCE_BILLING_FAIL, DISTRICT_BILLING_REQUEST, DISTRICT_BILLING_SUCCESS, DISTRICT_BILLING_FAIL } from "../Constants/AddressContants";
 
 export const ProvincesReducer = (state = {data:[]},action) =>{
     switch (action.type) {
@@ -12,25 +12,50 @@ export const ProvincesReducer = (state = {data:[]},action) =>{
             return state;
     }
 }
-export const ProvinceReducer = (state = {data:{}},action) =>{
+export const ProvinceShippingReducer = (state = {data:{}},action) =>{
     switch (action.type) {
-        case PROVINCE_REQUEST:
+        case PROVINCE_SHIPPING_REQUEST:
             return {...state, loading: true, data: {}}
-        case PROVINCE_SUCCESS:
+        case PROVINCE_SHIPPING_SUCCESS:
             return {...state, loading: false, data: action.payload}
-        case PROVINCE_FAIL:
+        case PROVINCE_SHIPPING_FAIL:
             return {...state, loading: false, data: action.payload}
         default:
             return state;
     }
 }
-export const DistrictReducer = (state = {data:{}},action) =>{
+export const DistrictShippingReducer = (state = {data:{}},action) =>{
     switch (action.type) {
-        case DISTRICT_REQUEST:
+        case DISTRICT_SHIPPING_REQUEST:
             return {...state, loading: true, data: {}}
-        case DISTRICT_SUCCESS:
+        case DISTRICT_SHIPPING_SUCCESS:
             return {...state, loading: false, data: action.payload}
-        case DISTRICT_FAIL:
+        case DISTRICT_SHIPPING_FAIL:
+            return {...state, loading: false, data: action.payload}
+        default:
+            return state;
+    }
+}
+
+export const ProvinceBillingReducer = (state = {data:{}},action) =>{
+    switch (action.type) {
+        case PROVINCE_BILLING_REQUEST:
+            return {...state, loading: true, data: {}}
+        case PROVINCE_BILLING_SUCCESS:
+            return {...state, loading: false, data: action.payload}
+        case PROVINCE_BILLING_FAIL:
+            return {...state, loading: false, data: action.payload}
+        default:
+            return state;
+    }
+}
+export const DistrictBillingReducer = (state = {data:{}},action) =>{
+    switch (action.type) {
+        case DISTRICT_BILLING_REQUEST:
+            return {...state, loading: true, data: {}}
+        case DISTRICT_BILLING_SUCCESS:
+            return {...state, loading: false, data: action.payload}
+        case DISTRICT_BILLING_FAIL:
             return {...state, loading: false, data: action.payload}
         default:
             return state;

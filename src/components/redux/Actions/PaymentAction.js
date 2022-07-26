@@ -8,13 +8,18 @@ export const createPayment = (amount, paymentMethod, orderTrackingNumber, isPlac
   
   try {
     const response = await axiosClient.post(paymentMethod === "Momo" ? `/pay/momo?amount=${amount}&orderTrackingNumber=${orderTrackingNumber}` : `/pay/paypal?amount=${amount * 0.00004263}&orderTrackingNumber=${orderTrackingNumber}`).then(res => {
-      toast.success("Đặt hàng thành công");
-      setTimeout(() => {
+      if (isPlaceOrder) {
+        setTimeout(() => {
+          window.open(res.data.data, '_blank').focus();
+          dispatch({ type: PAYMENT_SUCCESS, payload: res });
+          localStorage.removeItem("cartItems");
+          window.location.href = "/";
+        }, 5000)
+      } else {
         window.open(res.data.data, '_blank').focus();
         dispatch({ type: PAYMENT_SUCCESS, payload: res });
-        localStorage.removeItem("cartItems");
-        window.location.href = "/";
-      }, 5000)
+      }
+      
     });
   } catch (error) {
     console.log(error)
@@ -32,6 +37,7 @@ export const checkout = (shippingAddress, billingAddress, order, orderItems) => 
       "orderItems": orderItems
      });
      dispatch({ type: CHECKOUT_SUCCESS, payload: response.data.data });
+     toast.success("Đặt hàng thành công");
   } catch (error) {
     dispatch({ type: CHECKOUT_FAIL, payload: error.response });
   }

@@ -65,7 +65,7 @@ const CheckoutForm = () => {
 
   useEffect(() => {
     if (!loading && ordered?.orderTrackingNumber)
-      dispatch(createPayment(total, paymentMethod, ordered?.orderTrackingNumber));
+      dispatch(createPayment(total, paymentMethod, ordered?.orderTrackingNumber, true));
   },[loading, ordered]);
 
   let sum = 0;

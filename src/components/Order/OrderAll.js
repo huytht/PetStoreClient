@@ -1,168 +1,114 @@
-import React from 'react'
-import { Collapse, Grid, Text, Avatar,Divider } from "@nextui-org/react";
+import React, { useEffect, useState } from "react";
+import { Collapse, Grid, Avatar, Divider } from "@nextui-org/react";
+import { useSelector, useDispatch } from "react-redux";
+import { getOrderListAll } from "../redux/Actions/PaymentAction";
+import { MdExpandLess } from "react-icons/md";
+import { FaCcPaypal, FaPaypal } from "react-icons/fa";
 const OrderAll = () => {
-    
+  const { loading, orderedList } = useSelector((state) => state.orderListAll);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getOrderListAll());
+  }, []);
+
+  const createPayment = () => {
+    dispatch();
+  }
+
   return (
     <Grid.Container gap={3}>
       <Grid>
         <Collapse.Group splitted>
-          <Collapse
-            title={
-               <span className='box-title-order'>
-                <span className='id-order'>4ASFF43FF</span>
-                <span className='status-order'> CHƯA XÁC NHẬN</span>
-               </span>
-                
-            }
-            subtitle="4 sản phẩm"
-            contentLeft={
-              <Avatar
-                size="lg"
-                src="https://thumbs.dreamstime.com/z/order-red-stamp-text-white-44561786.jpg"
-                color="secondary"
-                squared
-              />
-            }
-          >
-            <Divider css={{marginBottom:'2%'}}/>
-            <div className='box-item-order f_flex'>
-             <Avatar
-                size="lg"
-                src="https://thumbs.dreamstime.com/z/order-red-stamp-text-white-44561786.jpg"
-                color="secondary"
-                squared
-              />
-              <div className='item-main-content'>
-              <div className='item-content f_flex'>
-                <div className='item-name'>
-                 Chó Husky Chuẩn Phap
+          {!loading &&
+            orderedList?.data?.content.map((item, index) => 
+              <Collapse
+                title={
+                  <span className="box-title-order">
+                    <span className="id-order">#{item.orderTrackingNumber}</span>
+                    <span className="status-order">{item.orderStatus.name.toUpperCase()}</span>
+                  </span>
+                }
+                arrowIcon={<div className="icon-collapse"><MdExpandLess /></div>}
+                subtitle={`${item.totalQuantity} sản phẩm`}
+                contentLeft={
+                  <Avatar
+                    size="lg"
+                    src="https://thumbs.dreamstime.com/z/order-red-stamp-text-white-44561786.jpg"
+                    color="secondary"
+                    squared
+                  />
+                }
+              >
+                {item.orderItems.map(orderItem => 
+                  <>
+                    <Divider css={{ marginBottom: "2%" }} />
+                    <div className="box-item-order f_flex">
+                      <Avatar
+                        size="lg"
+                        src={`${process.env.REACT_APP_API_ENDPOINT}${orderItem.imageUrl}`}
+                        color="secondary"
+                        squared
+                      />
+                      <div className="item-main-content">
+                        <div className="item-content f_flex">
+                          <div className="item-name">{orderItem.name}</div>
+                          <div className="item-price">
+                            {Intl.NumberFormat("vi-VN", {
+                              style: "currency",
+                              currency: "VND",
+                            }).format(orderItem.price)}
+                          </div>
+                        </div>
+                        <div className="item-amount">x{orderItem.quantity}</div>
+                      </div>
+                    </div>
+                  </>
+                )}
+                <Divider css={{ marginTop: "2%", marginBottom: "2%" }} />
+                <div className="footer-order">
+                  <table>
+                    <tr>
+                      <td><b>Hình thức thanh toán: &nbsp;</b></td>
+                      <td style={{ textAlign: "left" }}>
+                        {
+                          item.paymentId === 1 ? 
+                          (<><FaCcPaypal style={{ color: "#00457C", fontSize: 30 }} /></>)
+                          : 
+                          (<>
+                            <img
+                              class="method-icon"
+                              src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/checkout/icon-payment-method-momo.svg"
+                              width="32"
+                              height="32"
+                              alt="icon"
+                            />
+                          </>)
+                        }
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><b>Tổng số tiền: &nbsp;</b></td>
+                      <td> 
+                        {Intl.NumberFormat("vi-VN", {
+                          style: "currency",
+                          currency: "VND",
+                        }).format(item.totalPrice)}
+                      </td>
+                    </tr>
+                  </table>
+                  <div className="box-button">
+                    {item.orderStatus.id === 1 && <button class="btn-pay-order">Thanh toán</button>}
+                    {item.orderStatus.id < 3 && <button class="btn-cancel-order">Hủy đơn</button>}
+                  </div>
                 </div>
-                <div className='item-price'>
-                {Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(20000000)}
-                </div>   
-              </div>         
-              <div className='item-amount'>
-                  2
-                </div>   
-              </div>
-              
-             </div>
-             <Divider css={{marginBottom:'2%',marginTop:'2%'}}/>
-             <div className='box-item-order f_flex'>
-             <Avatar
-                size="lg"
-                src="https://thumbs.dreamstime.com/z/order-red-stamp-text-white-44561786.jpg"
-                color="secondary"
-                squared
-              />
-              <div className='item-main-content'>
-              <div className='item-content f_flex'>
-                <div className='item-name'>
-                 Chó Husky Chuẩn Phap
-                </div>
-                <div className='item-'>
-                {Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(20000000)}
-                </div>   
-              </div>         
-              <div className='item-amount'>
-                  2
-                </div>   
-              </div>
-              
-             </div>
-             <Divider css={{marginTop:'2%', marginBottom:'2%'}} />
-             <div className='footer-order'>
-              <div className='total-price' >
-                Tổng tiền : &nbsp; {Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(20000000)} 
-              </div>
-              <div className='box-button'>
-                 <button class="btn-pay-order">Thanh toán</button>
-                 <button class="btn-cancel-order">Hủy đơn</button>
-              </div>
-             </div>
-          </Collapse>
-          <Collapse
-            title={
-              <span className='box-title-order'>
-                <span className='id-order'>4ASFF43FF</span>
-                <span className='status-order'> CHƯA XÁC NHẬN</span>
-             </span>
-            }
-            subtitle="4 sản phẩm"
-            contentLeft={
-              <Avatar
-                size="lg"
-                src="https://thumbs.dreamstime.com/z/order-red-stamp-text-white-44561786.jpg"
-                color="secondary"
-                squared
-              />
-            }
-          >
-            <Divider css={{marginBottom:'2%'}} />
-           
-             <div className='box-item-order f_flex'>
-             <Avatar
-                size="lg"
-                src="https://thumbs.dreamstime.com/z/order-red-stamp-text-white-44561786.jpg"
-                color="secondary"
-                squared
-              />
-              <div className='item-main-content'>
-              <div className='item-content f_flex'>
-                <div className='item-name'>
-                 Chó Husky Chuẩn Phap
-                </div>
-                <div className='item-price'>
-                {Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(20000000)}
-                </div>   
-              </div>         
-              <div className='item-amount'>
-                  2
-                </div>   
-              </div>
-              
-             </div>
-             <Divider css={{marginBottom:'2%',marginTop:'2%'}}/>
-             <div className='box-item-order f_flex'>
-             <Avatar
-                size="lg"
-                src="https://thumbs.dreamstime.com/z/order-red-stamp-text-white-44561786.jpg"
-                color="secondary"
-                squared
-              />
-              <div className='item-main-content'>
-              <div className='item-content f_flex'>
-                <div className='item-name'>
-                 Chó Husky Chuẩn Phap
-                </div>
-                <div className='item-price'>
-                {Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(20000000)}
-                </div>   
-              </div>         
-              <div className='item-amount'>
-                  2
-                </div>   
-              </div>
-              
-             </div>
-             <Divider  css={{marginTop:'2%',marginBottom:'2%'}} />
-             <div className='footer-order'>
-              <div className='total-price' >
-                Tổng tiền : &nbsp; {Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(20000000)} 
-              </div>
-              <div className='box-button'>
-                 <button class="btn-pay-order">Thanh toán</button>
-                 <button class="btn-cancel-order">Hủy đơn</button>
-              </div>
-             </div>
-              
-              
-          </Collapse>
+              </Collapse>
+            )
+          }
         </Collapse.Group>
       </Grid>
     </Grid.Container>
-    
-  )
-}
+  );
+};
 
-export default OrderAll
+export default OrderAll;

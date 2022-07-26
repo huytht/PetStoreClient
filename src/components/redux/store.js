@@ -5,6 +5,7 @@ import { addWishListReducer, categoryListReducer, currentNameListReducer, produc
 import { userLoginReducer, userRegisterReducer,userDetailsReducer, changePasswordReducer, } from "./Reducers/UserReducers";
 import { cartReducer } from "./Reducers/CartReducers";
 import {  DistrictBillingReducer, DistrictShippingReducer, ProvinceBillingReducer, ProvinceShippingReducer, ProvincesReducer } from "./Reducers/AddressReducer";
+import { checkoutReducer, listOrderAllReducer, listOrderProcessingReducer, listOrderUnpaidReducer } from "./Reducers/CheckoutReducer";
 
 const reducer = combineReducers({
    productListNew: productListNewReducer,
@@ -27,7 +28,11 @@ const reducer = combineReducers({
   provinceShipping: ProvinceShippingReducer,
   districtShipping: DistrictShippingReducer,
   provinceBilling: ProvinceBillingReducer,
-  districtBilling: DistrictBillingReducer
+  districtBilling: DistrictBillingReducer,
+  checkout: checkoutReducer,
+  orderListAll: listOrderAllReducer,
+  orderListUnpaid: listOrderUnpaidReducer,
+  orderListProcessing: listOrderProcessingReducer,
 })
 
 //login

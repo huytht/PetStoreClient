@@ -65,7 +65,7 @@ const PetDetails = () => {
                       <>
                         <h3>Số lượng: </h3>
                           <div className='amount-box f_flex'>
-                            <button className='de' onClick={()=>setQty(qtyNum-1)} disabled={product.amount-qtyNum>0?false:true}>-</button>
+                            <button className='de' onClick={()=>setQty(qtyNum-1)} disabled={product.amount-qtyNum<0?false:true}>-</button>
                               <input className='intput'type="text" value={qtyNum} onChange={(e)=>setQty(e.target.value)}/>
                             <button className='in' onClick={()=>setQty(qtyNum+1)}  disabled={product.amount-qtyNum>0?false:true}>+</button>
                           </div>

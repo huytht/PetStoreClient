@@ -10,6 +10,10 @@
     word-break: break-all;
 
   }
+
+  .box-item-order {
+    padding-left: 50px;
+  }
   
   .order .order-bloc-tabs {
     display: flex;
@@ -42,8 +46,6 @@
     transform: translateX(-50%);
     width: calc(100% + 2px);
     height: 5px;
-    
-    
   }
   
   .order button {
@@ -95,42 +97,46 @@
   .box-title-order{
     display: flex;
     font-weight: bold;
+    justify-content: space-between;
   }
   .id-order{
     width: 70%;
   }
   .status-order {
-    width: 30% ;
-    font-style: italic;
+    width: 30%;
     text-transform: uppercase;
+    color: #e94560;
+    font-size: 15px;
+    text-align: right;
   }
-
-
  
+  .icon-collapse {
+    margin-top: 30px;
+    margin-left: -10px;
+    transform: rotate(-90deg);
+  }
 .box-item-order .item-main-content{
  width: 100%;
 } 
 .box-item-order .item-content {
-  font-weight: bold;
+  /* font-weight: bold; */
   font-size: small;
   padding-left: 2%;
 }
 .box-item-order .item-price{
-  font-style: italic;
-  text-transform: uppercase;
+  color: #e94560;
+  font-size: 16px;
   width: 30%;
+  text-align: right;
 }
 .box-item-order .item-name{
-  font-style: italic;
-  text-transform: uppercase;
+  font-size: 20px;
   width: 70%;
 }
 .box-item-order .item-amount{
   padding-left: 2%;
 }
 .total-price{
-  font-style: italic;
-  text-transform: uppercase;
   font-weight: bold;
   width: 100%;
 }
@@ -169,9 +175,13 @@
   height: 100%;
   margin-bottom: 2%;
   margin-top: 2%;
-  padding-left: 65%;
   font-weight: bold;
-  font-style: italic;
-  text-transform: uppercase;
+  color: #e94560;
+  text-align: right;
+}
+
+.footer-order table {
+  margin-right: 0px;
+  margin-left: auto;
 }
 

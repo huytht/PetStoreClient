@@ -107,6 +107,25 @@
   margin-bottom: 10px;
   float: right;
 }
+.address-autocomplete{
+  max-width: 400px;
+  margin-top: 10px;
+}
+.address-autocomplete input:focus, .address-autocomplete input:hover{
+  outline: 1px solid #0072f5;
+
+}
+
+.address-autocomplete input {
+  height:  40px;
+  border-radius: 15px;
+  width: 100%
+
+  
+}
+.address-autocomplete div{
+display: block !important;
+}
 
 @media (max-width: 800px) {
   .box-checkout-form {

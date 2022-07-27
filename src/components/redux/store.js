@@ -4,6 +4,8 @@ import {composeWithDevTools} from "redux-devtools-extension";
 import { addWishListReducer, categoryListReducer, currentNameListReducer, productDetailsReducer, productListHotReducer, productListNewReducer, productListPageReducer, productListReducer, productListRelatedReducer, productListSuggestReducer, searchProductListReducer, wishListReducer } from "./Reducers/ProductReducers";
 import { userLoginReducer, userRegisterReducer,userDetailsReducer, changePasswordReducer, } from "./Reducers/UserReducers";
 import { cartReducer } from "./Reducers/CartReducers";
+import {  DistrictBillingReducer, DistrictShippingReducer, ProvinceBillingReducer, ProvinceShippingReducer, ProvincesReducer } from "./Reducers/AddressReducer";
+import { checkoutReducer, listOrderAllReducer, listOrderProcessingReducer, listOrderUnpaidReducer } from "./Reducers/CheckoutReducer";
 
 const reducer = combineReducers({
    productListNew: productListNewReducer,
@@ -22,6 +24,15 @@ const reducer = combineReducers({
    productListPage: productListPageReducer,
    wishList: wishListReducer,
    addWishList: addWishListReducer,
+  provinces: ProvincesReducer,
+  provinceShipping: ProvinceShippingReducer,
+  districtShipping: DistrictShippingReducer,
+  provinceBilling: ProvinceBillingReducer,
+  districtBilling: DistrictBillingReducer,
+  checkout: checkoutReducer,
+  orderListAll: listOrderAllReducer,
+  orderListUnpaid: listOrderUnpaidReducer,
+  orderListProcessing: listOrderProcessingReducer,
 })
 
 //login

@@ -149,7 +149,7 @@ const UserDetail = () => {
       <div className="left">
         <div onClick={onChangeProfileImage} class="content_img">
           <Avatar
-            src={userInfo.avatarImg}
+            src={userInfo?.avatarImg}
             css= {{size:"$40",zIndex:"$1"}}
             className="avatar"
             zoomed

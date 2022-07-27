@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { logout } from '../../components/redux/Actions/UserActions';
 import { listCategory } from '../../components/redux/Actions/ProductActions';
+import { listProvince } from '../../components/redux/Actions/AddressAction';
 const Header = () => {
   const parseJwt = (token) => {
     try {
@@ -19,6 +20,7 @@ const Header = () => {
 
   useEffect(() => {
     dispatch(listCategory());
+    dispatch(listProvince())
   }, [])
 
   useEffect(()=> {

@@ -99,10 +99,10 @@ export const getOrderListDelivering = (pageNumber, pageSize) => async (dispatch)
   }
 }
 
-export const getOrderListCancel = () => async (dispatch) => {
+export const getOrderListCancel = (pageNumber, pageSize) => async (dispatch) => {
   dispatch({ type: ORDER_LIST_CANCEL_REQUEST });
   try {
-    const response = await axiosClient.get('/user/order?order-status=5');
+    const response = await axiosClient.get(`/user/order?order-status=5&page-number=${pageNumber}&page-size=${pageSize}`);
     
     dispatch({ type: ORDER_LIST_CANCEL_SUCCESS, payload: response.data });
   } catch (error) {

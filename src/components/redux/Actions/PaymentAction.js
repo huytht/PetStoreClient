@@ -1,4 +1,4 @@
-import { CANCEL_ORDER_FAIL, CANCEL_ORDER_SUCCESS, CHECKOUT_FAIL, CHECKOUT_REQUEST, CHECKOUT_SUCCESS, ORDER_LIST_ALL_FAIL, ORDER_LIST_ALL_REQUEST, ORDER_LIST_ALL_SUCCESS, ORDER_LIST_DELIVERING_FAIL, ORDER_LIST_DELIVERING_REQUEST, ORDER_LIST_DELIVERING_SUCCESS, ORDER_LIST_PROCESSING_FAIL, ORDER_LIST_PROCESSING_REQUEST, ORDER_LIST_PROCESSING_SUCCESS, ORDER_LIST_UNPAID_FAIL, ORDER_LIST_UNPAID_REQUEST, ORDER_LIST_UNPAID_SUCCESS, PAYMENT_FAIL, PAYMENT_REQUEST, PAYMENT_SUCCESS } from "../Constants/PaymentConstant";
+import { CANCEL_ORDER_FAIL, CANCEL_ORDER_SUCCESS, CHECKOUT_FAIL, CHECKOUT_REQUEST, CHECKOUT_SUCCESS, ORDER_LIST_ALL_FAIL, ORDER_LIST_ALL_REQUEST, ORDER_LIST_ALL_SUCCESS, ORDER_LIST_CANCEL_FAIL, ORDER_LIST_CANCEL_REQUEST, ORDER_LIST_CANCEL_SUCCESS, ORDER_LIST_DELIVERING_FAIL, ORDER_LIST_DELIVERING_REQUEST, ORDER_LIST_DELIVERING_SUCCESS, ORDER_LIST_PROCESSING_FAIL, ORDER_LIST_PROCESSING_REQUEST, ORDER_LIST_PROCESSING_SUCCESS, ORDER_LIST_UNPAID_FAIL, ORDER_LIST_UNPAID_REQUEST, ORDER_LIST_UNPAID_SUCCESS, PAYMENT_FAIL, PAYMENT_REQUEST, PAYMENT_SUCCESS } from "../Constants/PaymentConstant";
 import { axiosClient } from './../../services/api';
 import * as cryptojs from 'crypto-js';
 import { toast } from 'react-hot-toast';
@@ -47,7 +47,7 @@ export const checkout = (shippingAddress, billingAddress, order, orderItems) => 
 export const cancelOrder = (orderTrackingNumber) => async (dispatch) => {
   dispatch({ type: CANCEL_ORDER_REQUEST });
   try {
-    const response = await axiosClient.post(`/order/cancel?order-tracking-number=${orderTrackingNumber}`);
+    const response = await axiosClient.put(`/order/cancel?order-tracking-number=${orderTrackingNumber}`);
     dispatch({ type: CANCEL_ORDER_SUCCESS, payload: response.data.data });
     toast.success("Hủy đặt hàng thành công");
   } catch (error) {
@@ -99,3 +99,13 @@ export const getOrderListDelivering = (pageNumber, pageSize) => async (dispatch)
   }
 }
 
+export const getOrderListCancel = () => async (dispatch) => {
+  dispatch({ type: ORDER_LIST_CANCEL_REQUEST });
+  try {
+    const response = await axiosClient.get('/user/order?order-status=5');
+    
+    dispatch({ type: ORDER_LIST_CANCEL_SUCCESS, payload: response.data });
+  } catch (error) {
+    dispatch({ type: ORDER_LIST_CANCEL_FAIL, payload: error.response });
+  }
+}

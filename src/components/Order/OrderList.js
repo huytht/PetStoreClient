@@ -130,7 +130,6 @@ export const OrderList = ({loading, orderedList, pageNumber, setPageNumber}) => 
                   <Modal.Body>
                     <Text id="modal-description">
                       Bạn có chắc chắn muốn hủy đơn hàng này không?
-                      {orderTrackingNumber}
                     </Text>
                   </Modal.Body>
                   <Modal.Footer>

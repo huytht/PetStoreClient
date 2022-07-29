@@ -55,10 +55,10 @@ export const cancelOrder = (orderTrackingNumber) => async (dispatch) => {
   }
 }
 
-export const getOrderListAll = () => async (dispatch) => {
+export const getOrderListAll = (pageNumber, pageSize) => async (dispatch) => {
   dispatch({ type: ORDER_LIST_ALL_REQUEST });
   try {
-    const response = await axiosClient.get('/user/order?order-status=0');
+    const response = await axiosClient.get(`/user/order?order-status=0&page-number=${pageNumber}&page-size=${pageSize}`);
 
     dispatch({ type: ORDER_LIST_ALL_SUCCESS, payload: response.data });
   } catch (error) {
@@ -66,10 +66,10 @@ export const getOrderListAll = () => async (dispatch) => {
   }
 }
 
-export const getOrderListUnpaid = () => async (dispatch) => {
+export const getOrderListUnpaid = (pageNumber, pageSize) => async (dispatch) => {
   dispatch({ type: ORDER_LIST_UNPAID_REQUEST });
   try {
-    const response = await axiosClient.get('/user/order?order-status=1');
+    const response = await axiosClient.get(`/user/order?order-status=1&page-number=${pageNumber}&page-size=${pageSize}`);
 
     dispatch({ type: ORDER_LIST_UNPAID_SUCCESS, payload: response.data });
   } catch (error) {
@@ -77,10 +77,10 @@ export const getOrderListUnpaid = () => async (dispatch) => {
   }
 }
 
-export const getOrderListProcessing = () => async (dispatch) => {
+export const getOrderListProcessing = (pageNumber, pageSize) => async (dispatch) => {
   dispatch({ type: ORDER_LIST_PROCESSING_REQUEST });
   try {
-    const response = await axiosClient.get('/user/order?order-status=2');
+    const response = await axiosClient.get(`/user/order?order-status=2&page-number=${pageNumber}&page-size=${pageSize}`);
     
     dispatch({ type: ORDER_LIST_PROCESSING_SUCCESS, payload: response.data });
   } catch (error) {
@@ -88,10 +88,10 @@ export const getOrderListProcessing = () => async (dispatch) => {
   }
 }
 
-export const getOrderListDelivering = () => async (dispatch) => {
+export const getOrderListDelivering = (pageNumber, pageSize) => async (dispatch) => {
   dispatch({ type: ORDER_LIST_DELIVERING_REQUEST });
   try {
-    const response = await axiosClient.get('/user/order?order-status=3');
+    const response = await axiosClient.get(`/user/order?order-status=3&page-number=${pageNumber}&page-size=${pageSize}`);
     
     dispatch({ type: ORDER_LIST_DELIVERING_SUCCESS, payload: response.data });
   } catch (error) {

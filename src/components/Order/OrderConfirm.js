@@ -1,22 +1,20 @@
-import React, { useEffect } from 'react'
-import { Collapse, Grid, Text, Avatar,Divider } from "@nextui-org/react";
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { getOrderListProcessing } from '../redux/Actions/PaymentAction';
-import { MdExpandLess } from 'react-icons/md';
-import { FaCcPaypal } from 'react-icons/fa';
 import { OrderList } from './OrderList';
 const OrderConfirm = () => {
     
   const { loading, orderedList } = useSelector((state) => state.orderListProcessing);
+  const [pageNumber, setPageNumber] = useState(0);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getOrderListProcessing());
-  }, []);
+    dispatch(getOrderListProcessing(pageNumber, 4));
+  }, [pageNumber, dispatch]);
 
   return (
     <>
-      <OrderList loading={loading} orderedList={orderedList} />
+      <OrderList loading={loading} orderedList={orderedList} setPageNumber={setPageNumber} pageNumber={pageNumber} />
     </>
   )
 }

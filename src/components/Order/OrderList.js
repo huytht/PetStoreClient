@@ -1,11 +1,11 @@
-import { Avatar, Button, Collapse, Divider, Grid, Modal, Text, useModal } from "@nextui-org/react"
+import { Avatar, Button, Collapse, Divider, Grid, Modal, Pagination, Text, useModal } from "@nextui-org/react"
 import { FaCcPaypal } from 'react-icons/fa';
 import { MdExpandLess } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { cancelOrder, createPayment } from "../redux/Actions/PaymentAction";
 
 
-export const OrderList = ({loading, orderedList}) => {
+export const OrderList = ({loading, orderedList, pageNumber, setPageNumber}) => {
 
     const { setVisible, bindings } = useModal();
 
@@ -136,6 +136,11 @@ export const OrderList = ({loading, orderedList}) => {
                 }
               </Collapse.Group>
             </Grid>
+            <div className='pagination'>
+              {orderedList?.data?.content===null? (
+                <></>
+              ) : <Pagination shadow animated={false} total={orderedList?.data?.pageInfo?.totalPage} onChange={(e) => setPageNumber(e - 1)} initialPage={pageNumber + 1}/>}
+            </div>
           </Grid.Container>
         ) : (
         <div className="box-alert-cart">

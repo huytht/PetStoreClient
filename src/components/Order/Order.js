@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import OrderAll from "./OrderAll";
+import OrderCancel from "./OrderCancel";
 import OrderConfirm from "./OrderConfirm";
 import OrderDelivered from "./OrderDelivered";
 import OrderDelivering from "./OrderDelivering";
@@ -54,6 +55,14 @@ export const Order = () => {
           >
             Đã giao
           </button>
+          <button
+            className={
+              toggleState === 6 ? "order-tabs order-active-tabs" : "order-tabs"
+            }
+            onClick={() => toggleTab(6)}
+          >
+            Đã hủy
+          </button>
         </div>
         <div className="order-content-tabs">
           <div
@@ -100,6 +109,15 @@ export const Order = () => {
             }
           >
             <OrderDelivered />
+          </div>
+          <div
+            className={
+              toggleState === 6
+                ? "order-content  order-active-content"
+                : "order-content"
+            }
+          >
+            <OrderCancel />
           </div>
         </div>
       </div>

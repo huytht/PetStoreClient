@@ -5,7 +5,7 @@ import { addWishListReducer, categoryListReducer, currentNameListReducer, produc
 import { userLoginReducer, userRegisterReducer,userDetailsReducer, changePasswordReducer, } from "./Reducers/UserReducers";
 import { cartReducer } from "./Reducers/CartReducers";
 import {  DistrictBillingReducer, DistrictShippingReducer, ProvinceBillingReducer, ProvinceShippingReducer, ProvincesReducer } from "./Reducers/AddressReducer";
-import { checkoutReducer, listOrderAllReducer, listOrderDeliveringReducer, listOrderProcessingReducer, listOrderUnpaidReducer } from "./Reducers/CheckoutReducer";
+import { checkoutReducer, listOrderAllReducer, listOrderCancelReducer, listOrderDeliveringReducer, listOrderProcessingReducer, listOrderUnpaidReducer } from "./Reducers/CheckoutReducer";
 
 const reducer = combineReducers({
    productListNew: productListNewReducer,
@@ -34,6 +34,7 @@ const reducer = combineReducers({
   orderListUnpaid: listOrderUnpaidReducer,
   orderListProcessing: listOrderProcessingReducer,
   orderListDelivering: listOrderDeliveringReducer,
+  orderListCancel:listOrderCancelReducer,
 })
 
 //login

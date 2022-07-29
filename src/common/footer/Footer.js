@@ -1,6 +1,6 @@
 import React from "react"
 import "./style.css"
-
+import MailChimpSimpleForm from "../../components/MailChimp/MailChimpForm"
 const Footer = () => {
   return (
     <>
@@ -8,7 +8,15 @@ const Footer = () => {
         <div className='container grid2'>
           <div className='box'>
             <h1>OkaKoro Store</h1>
-            <p>Nơi đây có bán pet. Pet các loại: pet nhập khẩu, pet nhà nuôi. Cảm ơn quý khách đã xem và ủng hộ shop.</p>
+            <p>Trong quá trình hoạt động Shop luôn làm đúng những gì đã cam kết , tư vấn đầy đủ cũng như luôn đảm bảo quyền lợi của khách hàng.
+            </p>
+            <div className='icon d_flex'>
+                <div className='img d_flex'>
+                    <i class='fa-brands fa-paypal'></i>
+                    <span>Paypal</span>
+                </div>
+              </div>
+            
           </div>
 
           <div className='box'>
@@ -37,13 +45,8 @@ const Footer = () => {
               <li>280 An Dương Vương, Phường 4, Quận 5, TP. Hồ Chí Minh </li>
               <li>Email: contactkawaii@gmail.com</li>
               <li>Phone: +1 233456789</li>
-              <div className='icon d_flex'>
-                <div className='img d_flex'>
-                    <i class='fa-brands fa-paypal'></i>
-                    <span>Paypal</span>
-                </div>
-              </div>
-              
+              <li>Đăng kí để nhận thông tin mới nhất từ shop</li>
+              <MailChimpSimpleForm/>
             </ul>
           </div>
         </div>

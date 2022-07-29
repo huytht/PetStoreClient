@@ -1,15 +1,21 @@
-import { Avatar, Collapse, Divider, Grid } from "@nextui-org/react"
+import { Avatar, Button, Collapse, Divider, Grid, Modal, Text, useModal } from "@nextui-org/react"
 import { FaCcPaypal } from 'react-icons/fa';
 import { MdExpandLess } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { createPayment } from "../redux/Actions/PaymentAction";
+import { cancelOrder, createPayment } from "../redux/Actions/PaymentAction";
 
 
 export const OrderList = ({loading, orderedList}) => {
 
+    const { setVisible, bindings } = useModal();
+
     const dispatch = useDispatch();
     const payOrder = (totalPrice, paymentMethod, orderTrackingNumber) => {
         dispatch(createPayment(totalPrice, paymentMethod, orderTrackingNumber, false));
+    }
+    const confirmCancel = (orderTrackingNumber) => {
+      dispatch(cancelOrder(orderTrackingNumber));
+      setVisible(false);
     }
 
     return (
@@ -97,8 +103,33 @@ export const OrderList = ({loading, orderedList}) => {
                         </table>
                         <div className="box-button">
                           {item.orderStatus.id === 1 && <button onClick={() => payOrder(item.totalPrice, item.paymentId === 1 ? "Paypal" : "Momo", item.orderTrackingNumber)} class="btn-pay-order">Thanh toán</button>}
-                          {item.orderStatus.id < 3 && <button class="btn-cancel-order">Hủy đơn</button>}
+                          {item.orderStatus.id < 3 && <button class="btn-cancel-order" onClick={() => setVisible(true)}>Hủy đơn</button>}
                         </div>
+                        <Modal
+                          width="300px"
+                          aria-labelledby="modal-title"
+                          aria-describedby="modal-description"
+                          { ...bindings }
+                        >
+                          <Modal.Header>
+                            <Text id="modal-title" size={18}>
+                              Xác nhận hủy
+                            </Text>
+                          </Modal.Header>
+                          <Modal.Body>
+                            <Text id="modal-description">
+                              Bạn có chắc chắn muốn hủy đơn hàng này không?
+                            </Text>
+                          </Modal.Body>
+                          <Modal.Footer>
+                            <Button auto onClick={() => confirmCancel(item.orderTrackingNumber)}>
+                              Đồng ý
+                            </Button>
+                            <Button auto flat color="error" onClick={() => setVisible(false)}>
+                              Đóng
+                            </Button>
+                          </Modal.Footer>
+                        </Modal>
                       </div>
                     </Collapse>
                   )

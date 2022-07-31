@@ -10,6 +10,7 @@ import { Toaster } from "react-hot-toast";
 import CartPage from "./pages/CartPage";
 import { ProductPage } from "./pages/ProductPage";
 import CheckoutForm from "./components/Checkout/CheckoutForm";
+import { Helmet } from "react-helmet";
 
 
 const App = () => {
@@ -24,6 +25,14 @@ const App = () => {
       />
       <Router>
         <Header />
+        <Helmet>
+          <title>OkaKoro Store</title>
+          <meta 
+            name="description"
+            content="Bạn sẽ tìm được thú cưng yêu thích của mình tại đây"
+          />
+          <meta name="keywords" content="OkaKoro Store, Home, Pages, Categories"/>
+        </Helmet>
         <Routes>
           <Route path="/" exact element={<HomePage />} />
           <Route path="**" element={<HomePage />} />

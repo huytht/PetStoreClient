@@ -9,6 +9,7 @@ import {
 import { Pagination } from "@nextui-org/react";
 import {FaThLarge} from 'react-icons/fa';
 import {GoThreeBars} from 'react-icons/go';
+import { Helmet } from "react-helmet";
 
 export const ProductPage = () => {
   const { categories } = useSelector((state) => state.categoryList);
@@ -32,6 +33,10 @@ export const ProductPage = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>Danh mục thú cưng</title>
+        <meta name="description" content="Khám phá danh mục thú cưng để tìm ra thú cưng yêu thích của bạn" />
+      </Helmet>
       <div class="product-page mtop">
         <div class="product-category">
           <h3 class="title">Danh mục sản phẩm</h3>

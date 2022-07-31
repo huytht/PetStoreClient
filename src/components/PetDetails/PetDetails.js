@@ -7,6 +7,7 @@ import Loading from '../LoadingError/Loading'
 import {useNavigate} from 'react-router-dom'
 import toast from 'react-hot-toast';
 import Accordion from "../Accordion/Accordion";
+import { Helmet } from 'react-helmet'
 
 
 const PetDetails = () => {
@@ -26,8 +27,44 @@ const PetDetails = () => {
 
   }
   const { categories } = useSelector((state) => state.categoryList);
+  const convertURL= (str)=>{
+		// Chuyển hết sang chữ thường
+		str = str?.toLowerCase();     
+	 
+		// xóa dấu
+		str = str?.replace(/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/g, 'a');
+		str = str?.replace(/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/g, 'e');
+		str = str?.replace(/(ì|í|ị|ỉ|ĩ)/g, 'i');
+		str = str?.replace(/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/g, 'o');
+		str = str?.replace(/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/g, 'u');
+		str = str?.replace(/(ỳ|ý|ỵ|ỷ|ỹ)/g, 'y');
+		str = str?.replace(/(đ)/g, 'd');
+	 
+		// Xóa ký tự đặc biệt
+		str = str?.replace(/([^0-9a-z-\s])/g, '');
+	 
+		// Xóa khoảng trắng thay bằng ký tự -
+		str = str?.replace(/(\s+)/g, '-');
+	 
+		// xóa phần dự - ở đầu
+		str = str?.replace(/^-+/g, '');
+	 
+		// xóa phần dư - ở cuối
+		str = str?.replace(/-+$/g, '');
+	 
+		// return
+		return str;
+	  }
   return (
+    
     <div className='box-details'>
+      <Helmet>
+        <title>{product.name}</title>
+        <meta property='og:title' content={product.name}/>
+        <meta property='og:url' content={ `http://localhost:3000/product/${convertURL(product?.name)}-${product.id}`}/>
+        <meta property='og:image' content={`${process.env.REACT_APP_API_ENDPOINT}${product?.imagePath?.find((value,index)=>index===0)} `}/>
+        <meta property='og:description' content={product.description}/>
+      </Helmet>
       { (loading === undefined || loading === true) ? (
             <div className="mb-5 "><Loading/></div>
         ) : (

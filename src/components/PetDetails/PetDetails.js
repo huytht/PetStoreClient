@@ -55,6 +55,12 @@ const PetDetails = () => {
 		// return
 		return str;
 	  }
+    useEffect(()=>{
+      setTimeout(()=>{
+        document.querySelector('meta[property="og:image"]').setAttribute("content", process.env.REACT_APP_API_ENDPOINT+product?.imagePath?.find((value,index)=>index===0) );
+      },1000)
+     
+    },[])
   return (
     
     <div className='box-details'>
@@ -62,7 +68,7 @@ const PetDetails = () => {
         <title>{product.name}</title>
         <meta property='og:title' content={product.name}/>
         <meta property='og:url' content={ `http://38.242.132.213:3000/product/${convertURL(product?.name)}-${product.id}`}/>
-        <meta property='og:image' content={`${process.env.REACT_APP_API_ENDPOINT}${product?.imagePath?.find((value,index)=>index===0)} `}/>
+        {/* <meta property='og:image' content={`${process.env.REACT_APP_API_ENDPOINT}${product?.imagePath?.find((value,index)=>index===0)} `}/> */}
         <meta property='og:description' content={product.description}/>
       </Helmet>
       { (loading === undefined || loading === true) ? (

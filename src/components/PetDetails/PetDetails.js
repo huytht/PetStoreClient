@@ -54,22 +54,24 @@ const PetDetails = () => {
 	 
 		// return
 		return str;
-	  }
+	}
     useEffect(()=>{
-      setTimeout(()=>{
+      if(product!==undefined){
         document.querySelector('meta[property="og:image"]').setAttribute("content", process.env.REACT_APP_API_ENDPOINT+product?.imagePath?.find((value,index)=>index===0) );
-      },1000)
-     
-    },[])
+        document.querySelector('meta[property="og:url"]').setAttribute("content", `${process.env.REACT_APP_CLIENT_ENDPOINT}/product/${convertURL(product?.name)}-${product.id}`);
+        document.querySelector('meta[property="og:title"]').setAttribute("content", product.name );
+        document.querySelector('meta[property="og:description"]').setAttribute("content", product.description);
+      }
+    },[product])
   return (
     
     <div className='box-details'>
       <Helmet>
         <title>{product.name}</title>
-        <meta property='og:title' content={product.name}/>
-        <meta property='og:url' content={ `http://38.242.132.213:3000/product/${convertURL(product?.name)}-${product.id}`}/>
-        {/* <meta property='og:image' content={`${process.env.REACT_APP_API_ENDPOINT}${product?.imagePath?.find((value,index)=>index===0)} `}/> */}
-        <meta property='og:description' content={product.description}/>
+        {/* <meta property='og:title' content={product.name}/>
+        <meta property='og:url' content={ `${process.env.REACT_APP_CLIENT_ENDPOINT}/product/${convertURL(product?.name)}-${product.id}`}/>
+        <meta property='og:image' content={`${process.env.REACT_APP_API_ENDPOINT}${product?.imagePath?.find((value,index)=>index===0)} `}/>
+        <meta property='og:description' content={product.description}/> */}
       </Helmet>
       { (loading === undefined || loading === true) ? (
             <div className="mb-5 "><Loading/></div>

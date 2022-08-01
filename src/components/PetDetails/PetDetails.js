@@ -62,7 +62,7 @@ const PetDetails = () => {
         <title>{product.name}</title>
         <meta property='og:title' content={product.name}/>
         <meta property='og:url' content={ `http://38.242.132.213:3000/product/${convertURL(product?.name)}-${product.id}`}/>
-        <meta property='og:image' content={`${process.env.REACT_APP_API_ENDPOINT}${product?.imagePath?.find((value,index)=>index===0)} `}/>
+        <meta property='og:image' content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" />
         <meta property='og:description' content={product.description}/>
       </Helmet>
       { (loading === undefined || loading === true) ? (

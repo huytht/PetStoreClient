@@ -61,7 +61,7 @@ const PetDetails = () => {
       <Helmet>
         <title>{product.name}</title>
         <meta property='og:title' content={product.name}/>
-        <meta property='og:url' content={ `http://localhost:3000/product/${convertURL(product?.name)}-${product.id}`}/>
+        <meta property='og:url' content={ `http://http://38.242.132.213/:3000/product/${convertURL(product?.name)}-${product.id}`}/>
         <meta property='og:image' content={`${process.env.REACT_APP_API_ENDPOINT}${product?.imagePath?.find((value,index)=>index===0)} `}/>
         <meta property='og:description' content={product.description}/>
       </Helmet>

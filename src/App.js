@@ -11,9 +11,11 @@ import CartPage from "./pages/CartPage";
 import { ProductPage } from "./pages/ProductPage";
 import CheckoutForm from "./components/Checkout/CheckoutForm";
 import { Helmet } from "react-helmet";
+import MessengerCustomerChat from "react-messenger-customer-chat/lib/MessengerCustomerChat";
 
 
 const App = () => {
+  
   return (
     <>
       <Toaster
@@ -23,6 +25,10 @@ const App = () => {
           zIndex: "10000",
         }}
       />
+      <MessengerCustomerChat
+        pageId="105898941761897"
+        appId="783041989536896"
+      />,
       <Router>
         <Header />
         <Helmet>

@@ -7,7 +7,7 @@ import Loading from '../LoadingError/Loading'
 import {useNavigate} from 'react-router-dom'
 import toast from 'react-hot-toast';
 import Accordion from "../Accordion/Accordion";
-import Helmet, { HelmetProvider } from 'react-helmet-async'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 
 
 const PetDetails = () => {

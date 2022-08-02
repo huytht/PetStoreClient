@@ -31,14 +31,14 @@ const App = () => {
       />,
       <Router>
         <Header />
-        <Helmet>
+        {/* <Helmet>
           <title>OkaKoro Store</title>
           <meta 
             name="description"
             content="Bạn sẽ tìm được thú cưng yêu thích của mình tại đây"
           />
           <meta name="keywords" content="OkaKoro Store, Home, Pages, Categories"/>
-        </Helmet>
+        </Helmet> */}
         <Routes>
           <Route path="/" exact element={<HomePage />} />
           <Route path="**" element={<HomePage />} />

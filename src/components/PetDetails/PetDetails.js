@@ -7,7 +7,7 @@ import Loading from '../LoadingError/Loading'
 import {useNavigate} from 'react-router-dom'
 import toast from 'react-hot-toast';
 import Accordion from "../Accordion/Accordion";
-import { Helmet } from 'react-helmet'
+import Helmet, { HelmetProvider } from 'react-helmet-async'
 
 
 const PetDetails = () => {
@@ -66,13 +66,15 @@ const PetDetails = () => {
   return (
     
     <div className='box-details'>
-      <Helmet>
-        <title>{product.name}</title>
-        <meta property='og:image' content={`${process.env.REACT_APP_API_ENDPOINT}${product?.imagePath?.find((value,index)=>index===0)} `}/>
-        <meta property='og:url' content={ `${process.env.REACT_APP_CLIENT_ENDPOINT}/product/${convertURL(product?.name)}-${product.id}`}/>
-        <meta property='og:title' content={product.name}/>
-        <meta property='og:description' content={product.description}/>
-      </Helmet>
+      <HelmetProvider>
+        <Helmet>
+          <title>{product.name}</title>
+          <meta property='og:title' content={product.name}/>
+          <meta property='og:url' content={ `${process.env.REACT_APP_CLIENT_ENDPOINT}/product/${convertURL(product?.name)}-${product.id}`}/>
+          <meta property='og:image' content={`${process.env.REACT_APP_API_ENDPOINT}${product?.imagePath?.find((value,index)=>index===0)} `}/>
+          <meta property='og:description' content={product.description}/>
+        </Helmet>
+      </HelmetProvider>
       { (loading === undefined || loading === true) ? (
             <div className="mb-5 "><Loading/></div>
         ) : (

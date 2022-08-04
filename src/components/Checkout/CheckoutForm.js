@@ -72,7 +72,7 @@ const CheckoutForm = () => {
 
   useEffect(() => { 
     cartItems.map(item => {
-      sum += item.qty;
+      sum += Number(item.qty);
       orderItemArrays.push({
         "productId": item.id,
         "quantity": item.qty,
@@ -90,88 +90,7 @@ const CheckoutForm = () => {
           <div class="container-checkout">
             <form>
               <div className="box-checkout-form">
-                {/* <h2 className="title">
-                  <i class="fa-solid fa-address-card"></i> Thông tin liên hệ
-                </h2>
-                <Container>
-                  <Row gap={1} className="checkout-element-row">
-                    <Col className="box-checkout-element">
-                      <label for="lastName">
-                        <i class="fa fa-user"></i> Họ và tên đệm
-                      </label>
-                      <Input
-                        // clearable
-                        // value={lastName}
-                        // onChange={(e) => setLastName(e.target.value)}
-                        helperColor="error"
-                        // helperText={lastNameToched && helperLastName.text}
-                        // onFocus={() => setLastNameToched(true)}
-                        type="text"
-                        bordered
-                        fullWidth
-                        color="primary"
-                        size="md"
-                      />
-                    </Col>
-                    <Col className="box-checkout-element">
-                      <label for="firstName">
-                        <i class="fa fa-user"></i> Tên
-                      </label>
-                      <Input
-                        // clearable
-                        // value={lastName}
-                        // onChange={(e) => setLastName(e.target.value)}
-                        helperColor="error"
-                        // helperText={lastNameToched && helperLastName.text}
-                        // onFocus={() => setLastNameToched(true)}
-                        type="text"
-                        bordered
-                        fullWidth
-                        color="primary"
-                        size="md"
-                      />
-                    </Col>
-                  </Row>
-                  <Row gap={1}>
-                    <Col className="box-checkout-element">
-                      <label for="email">
-                        <i class="fa fa-envelope"></i> Email
-                      </label>
-                      <Input
-                        // clearable
-                        // value={lastName}
-                        // onChange={(e) => setLastName(e.target.value)}
-                        helperColor="error"
-                        // helperText={lastNameToched && helperLastName.text}
-                        // onFocus={() => setLastNameToched(true)}
-                        type="text"
-                        bordered
-                        fullWidth
-                        color="primary"
-                        size="md"
-                      />
-                    </Col>
-                    <Col className="box-checkout-element">
-                      <label for="email">
-                        <i class="fa fa-phone"></i> Số điện thoại
-                      </label>
-                      <Input
-                        // clearable
-                        // value={lastName}
-                        // onChange={(e) => setLastName(e.target.value)}
-                        helperColor="error"
-                        // helperText={lastNameToched && helperLastName.text}
-                        // onFocus={() => setLastNameToched(true)}
-                        type="text"
-                        bordered
-                        fullWidth
-                        color="primary"
-                        size="md"
-                      />
-                    </Col>
-                  </Row>
-                </Container> */}
-
+                
                 <h2 className="title">
                   <i class="fa-solid fa-truck"></i> Thông tin giao hàng
                 </h2>

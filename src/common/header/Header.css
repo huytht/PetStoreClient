@@ -1,11 +1,11 @@
 /*------search-----------*/
 .search {
-    padding: 20px 0;
+
     max-width: 100%;
   }
   .search .logo img {
-    width: auto;
-    height: auto;
+    width: 350px;
+    height: 80px;
   }
   .search .width {
     width: 45%;
@@ -108,7 +108,7 @@
     top: 0;
     z-index: 1000;
     width: 100%;
-    background-color: #fff;
+    background-color: #f3f3f3;
     box-shadow: -1px 11px 24px -11px rgba(0, 0, 0, 0.2);
     transition: 0.5s;
   }
@@ -179,4 +179,12 @@
 }
 .login-logout .btnregisted{
  margin-left: 50px;
+}
+.box-img-logo-footer  img {
+  width: 100%;
+  height: 100%;
+}
+
+.box-img-logo-footer{
+  max-width: 170px;
 }

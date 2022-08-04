@@ -8,6 +8,7 @@ import {useNavigate} from 'react-router-dom'
 import toast from 'react-hot-toast';
 import Accordion from "../Accordion/Accordion";
 import { Helmet } from 'react-helmet'
+import { FacebookIcon, FacebookShareButton,FacebookMessengerShareButton,FacebookMessengerIcon } from 'react-share'
 
 
 const PetDetails = () => {
@@ -55,6 +56,7 @@ const PetDetails = () => {
 		// return
 		return str;
 	}
+  const shareUrl = `${process.env.REACT_APP_CLIENT_ENDPOINT}/product/${convertURL(product?.name)}-${product.id}`
     // useEffect(()=>{
     //   if(product!==undefined){
     //     document.querySelector('meta[property="og:image"]').setAttribute("content", process.env.REACT_APP_API_ENDPOINT+product?.imagePath?.find((value,index)=>index===0) );
@@ -70,7 +72,7 @@ const PetDetails = () => {
           <title>{product.name}</title>
           <meta property='og:image' content={`${process.env.REACT_APP_API_ENDPOINT}${product?.imagePath?.find((value,index)=>index===0)} `}/>
           <meta property='og:title' content={product.name}/>
-          <meta property='og:url' content={ `${process.env.REACT_APP_CLIENT_ENDPOINT}/product/${convertURL(product?.name)}-${product.id}`}/>
+          <meta property='og:url' content={shareUrl}/>
           <meta property='og:description' content={product.description}/>
         </Helmet>
        
@@ -115,16 +117,34 @@ const PetDetails = () => {
                               <input className='intput'type="text" value={qtyNum} onChange={(e)=>setQty(e.target.value)}/>
                             <button className='in' onClick={()=>setQty(qtyNum+1)}  disabled={product.amount-qtyNum>0?false:true}>+</button>
                           </div>
-                          <div className='amount-index'> 
-                            Số lượng còn {product?.amount}
+                          <div className='amount-index f_flex'> 
+                            <div className='box-amount-index'>
+                              Số lượng còn {product?.amount}
+                            </div>
+                            <div className='box-share'>
+                              <FacebookShareButton url={shareUrl}>
+                                <FacebookIcon size={40} round={true}/>
+                              </FacebookShareButton>
+                            </div>
+                            
                           </div>
                       </>
                       ):(
                         <>   
                           <h3>Số lượng: </h3>
-                          <div className='amount-index'> 
-                            Số lượng còn {product?.amount}
+                          <div className='amount-index f_flex'>
+                            <div className='box-amount-index'> 
+                              Số lượng còn {product?.amount}
+                            </div>
+                            <div className='box-share'>
+                              <div className='fb-share'>
+                                <FacebookShareButton url={shareUrl}>
+                                  <FacebookIcon size={40} round={true}/>
+                                </FacebookShareButton>
+                              </div>
+                            </div>
                           </div>
+                         
                         </>
                     )}
                     

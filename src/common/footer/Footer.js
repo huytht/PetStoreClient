@@ -7,7 +7,10 @@ const Footer = () => {
       <footer>
         <div className='container grid2'>
           <div className='box'>
-            <h1>OkaKoro Store</h1>
+            <div className="box-img-logo-footer">
+              <img src="/images/logo.png" alt="" />
+            </div>
+            
             <p>Trong quá trình hoạt động Shop luôn làm đúng những gì đã cam kết , tư vấn đầy đủ cũng như luôn đảm bảo quyền lợi của khách hàng.
             </p>
             <div className='icon d_flex'>

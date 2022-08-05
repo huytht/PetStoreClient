@@ -9,6 +9,8 @@ import toast from 'react-hot-toast';
 import Accordion from "../Accordion/Accordion";
 import { Helmet } from 'react-helmet'
 import { FacebookIcon, FacebookShareButton,FacebookMessengerShareButton,FacebookMessengerIcon } from 'react-share'
+import React from 'react';
+import { ReactSEOMetaTags } from 'react-seo-meta-tags'
 
 
 const PetDetails = () => {
@@ -17,6 +19,7 @@ const PetDetails = () => {
   const { id } = useParams();
   const productDetails = useSelector((state) => state.productDetails)
   const { loading, product } = productDetails;
+  const [siteMetadata, setSiteMetadata] = useState({})
   useEffect(()=>{
     dispatch(listProductDetails(id))
   }, [id, dispatch])
@@ -57,24 +60,34 @@ const PetDetails = () => {
 		return str;
 	}
   const shareUrl = `${process.env.REACT_APP_CLIENT_ENDPOINT}/product/${convertURL(product?.name)}-${product.id}`
-    // useEffect(()=>{
-    //   if(product!==undefined){
-    //     document.querySelector('meta[property="og:image"]').setAttribute("content", process.env.REACT_APP_API_ENDPOINT+product?.imagePath?.find((value,index)=>index===0) );
-    //     document.querySelector('meta[property="og:url"]').setAttribute("content", `${process.env.REACT_APP_CLIENT_ENDPOINT}/product/${convertURL(product?.name)}-${product.id}`);
-    //     document.querySelector('meta[property="og:title"]').setAttribute("content", product.name );
-    //     document.querySelector('meta[property="og:description"]').setAttribute("content", product.description);
-    //   }
-    // },[product])
+    useEffect(()=>{
+      if(product!==undefined){
+        setSiteMetadata({
+          title: product.name,
+          description: product.description,
+          image: process.env.REACT_APP_API_ENDPOINT+product?.imagePath?.find((value,index)=>index===0),
+          url: shareUrl
+        })
+        // document.querySelector('meta[property="og:image"]').setAttribute("content", process.env.REACT_APP_API_ENDPOINT+product?.imagePath?.find((value,index)=>index===0) );
+        // document.querySelector('meta[property="og:url"]').setAttribute("content", `${process.env.REACT_APP_CLIENT_ENDPOINT}/product/${convertURL(product?.name)}-${product.id}`);
+        // document.querySelector('meta[property="og:title"]').setAttribute("content", product.name );
+        // document.querySelector('meta[property="og:description"]').setAttribute("content", product.description);
+      }
+    },[product, shareUrl])
   return (
     
     <div className='box-details'>
-        <Helmet>
+        <ReactSEOMetaTags
+          render={(el: React.ReactNode) => <Helmet>{el}</Helmet>}
+          website={{ ...siteMetadata }}
+        />
+        {/* <Helmet>
           <title>{product.name}</title>
           <meta property='og:image' content={`${process.env.REACT_APP_API_ENDPOINT}${product?.imagePath?.find((value,index)=>index===0)} `}/>
           <meta property='og:title' content={product.name}/>
           <meta property='og:url' content={shareUrl}/>
           <meta property='og:description' content={product.description}/>
-        </Helmet>
+        </Helmet> */}
        
       { (loading === undefined || loading === true) ? (
             <div className="mb-5 "><Loading/></div>

@@ -10,8 +10,10 @@
     "axios": "0.24.0",
     "crpyto-js": "^0.0.1-security",
     "crypto-js": "^4.1.1",
+    "exppress": "^0.0.1-security",
     "http-proxy-middleware": "^2.0.6",
     "moment": "^2.29.3",
+    "nodemon": "^2.0.19",
     "react": "^18.1.0",
     "react-animated-heart": "0.0.7-alpha.1",
     "react-autocomplete": "^1.8.1",
@@ -55,5 +57,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {}
 }

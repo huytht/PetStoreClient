@@ -10,7 +10,7 @@ import Accordion from "../Accordion/Accordion";
 import { Helmet } from 'react-helmet'
 import { FacebookIcon, FacebookShareButton,FacebookMessengerShareButton,FacebookMessengerIcon } from 'react-share'
 import React from 'react';
-import { ReactSEOMetaTags } from 'react-seo-meta-tags'
+
 
 
 const PetDetails = () => {

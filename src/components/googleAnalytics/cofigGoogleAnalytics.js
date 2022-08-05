@@ -8,7 +8,7 @@ const useGaTracker = () => {
 
     useEffect(() => {
         if (!window.location.href.includes("http://vmi921295.contaboserver.net/")) {
-        ReactGA.initialize("G-HENX392434");
+        ReactGA.initialize("UA-236746041-1");
         }
         setInitialized(true);
     }, []);

@@ -29,7 +29,7 @@ const App = () => {
         pageId="105898941761897"
         appId="783041989536896"
       />,
-      <Router>
+      {/* <Router> */}
         <Header />
         {/* <Helmet>
           <title>OkaKoro Store</title>
@@ -52,7 +52,7 @@ const App = () => {
          <Route path="/checkout" element={<CheckoutForm />} />
         </Routes>
         <Footer />
-      </Router>
+      {/* </Router> */}
     </>
   );
 };

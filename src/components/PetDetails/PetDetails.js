@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 import "./PetDetails.css"
-import {  listProductDetails } from '../redux/Actions/ProductActions'
+import {  convertURL, listProductDetails } from '../redux/Actions/ProductActions'
 import {useDispatch, useSelector} from "react-redux"
 import { useParams } from 'react-router-dom'
 import Loading from '../LoadingError/Loading'
@@ -31,56 +31,16 @@ const PetDetails = () => {
 
   }
   const { categories } = useSelector((state) => state.categoryList);
-  const convertURL= (str)=>{
-		// Chuyển hết sang chữ thường
-		str = str?.toLowerCase();     
-	 
-		// xóa dấu
-		str = str?.replace(/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/g, 'a');
-		str = str?.replace(/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/g, 'e');
-		str = str?.replace(/(ì|í|ị|ỉ|ĩ)/g, 'i');
-		str = str?.replace(/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/g, 'o');
-		str = str?.replace(/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/g, 'u');
-		str = str?.replace(/(ỳ|ý|ỵ|ỷ|ỹ)/g, 'y');
-		str = str?.replace(/(đ)/g, 'd');
-	 
-		// Xóa ký tự đặc biệt
-		str = str?.replace(/([^0-9a-z-\s])/g, '');
-	 
-		// Xóa khoảng trắng thay bằng ký tự -
-		str = str?.replace(/(\s+)/g, '-');
-	 
-		// xóa phần dự - ở đầu
-		str = str?.replace(/^-+/g, '');
-	 
-		// xóa phần dư - ở cuối
-		str = str?.replace(/-+$/g, '');
-	 
-		// return
-		return str;
-	}
+  
   const shareUrl = `${process.env.REACT_APP_CLIENT_ENDPOINT}/product/${convertURL(product?.name)}-${product.id}`
-    useEffect(()=>{
-      if(product!==undefined){
-        setSiteMetadata({
-          title: product.name,
-          description: product.description,
-          image: process.env.REACT_APP_API_ENDPOINT+product?.imagePath?.find((value,index)=>index===0),
-          url: shareUrl
-        })
-        // document.querySelector('meta[property="og:image"]').setAttribute("content", process.env.REACT_APP_API_ENDPOINT+product?.imagePath?.find((value,index)=>index===0) );
-        // document.querySelector('meta[property="og:url"]').setAttribute("content", `${process.env.REACT_APP_CLIENT_ENDPOINT}/product/${convertURL(product?.name)}-${product.id}`);
-        // document.querySelector('meta[property="og:title"]').setAttribute("content", product.name );
-        // document.querySelector('meta[property="og:description"]').setAttribute("content", product.description);
-      }
-    },[product, shareUrl])
+  //   useEffect(()=>{
+  //     if(product!==undefined){
+       
+  //     }
+  //   },[product, shareUrl])
   return (
     
     <div className='box-details'>
-        <ReactSEOMetaTags
-          render={(el: React.ReactNode) => <Helmet>{el}</Helmet>}
-          website={{ ...siteMetadata }}
-        />
         {/* <Helmet>
           <title>{product.name}</title>
           <meta property='og:image' content={`${process.env.REACT_APP_API_ENDPOINT}${product?.imagePath?.find((value,index)=>index===0)} `}/>
@@ -104,9 +64,9 @@ const PetDetails = () => {
             <section className='pdetails container mtop heading f_flex'>
               <div className='box-img-detail'>
                 <div className='single-img'  >
-                  <img className='big-img' src={`${process.env.REACT_APP_API_ENDPOINT}${product.imagePath[0]} `} alt=''/>
+                  <img className='big-img' src={`${process.env.REACT_APP_API_ENDPOINT}${product.imagePath?.find((value,index)=>index===0)} `} alt=''/>
                     <div className='small-img-group f_flex '>
-                      {product.imagePath.map((image) => (
+                      {product.imagePath?.map((image) => (
                         <div className='small-img-col '>
                           <img className='small-img' src={`${process.env.REACT_APP_API_ENDPOINT}${image} `}   alt=''/>
                         </div>

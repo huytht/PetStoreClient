@@ -12,10 +12,10 @@ import { ProductPage } from "./pages/ProductPage";
 import CheckoutForm from "./components/Checkout/CheckoutForm";
 import { Helmet } from "react-helmet";
 import MessengerCustomerChat from "react-messenger-customer-chat/lib/MessengerCustomerChat";
-
+import useGaTracker from "./components/googleAnalytics/cofigGoogleAnalytics";
 
 const App = () => {
-  
+  useGaTracker();
   return (
     <>
       <Toaster

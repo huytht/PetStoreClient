@@ -13,7 +13,7 @@ import CheckoutForm from "./components/Checkout/CheckoutForm";
 import { Helmet } from "react-helmet";
 import MessengerCustomerChat from "react-messenger-customer-chat/lib/MessengerCustomerChat";
 import useGaTracker from "./components/googleAnalytics/cofigGoogleAnalytics";
-
+import  Routess  from "./Routes";
 const App = () => {
   useGaTracker();
   return (
@@ -39,18 +39,7 @@ const App = () => {
           />
           <meta name="keywords" content="OkaKoro Store, Home, Pages, Categories"/>
         </Helmet> */}
-        <Routes>
-          <Route path="/" exact element={<HomePage />} />
-          <Route path="**" element={<HomePage />} />
-          <Route path="/product/:slug-:id" element={<PetDetailPage />} />
-          <Route path="/profile" element={<UserDetailPage />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/pages/:keyword/:categoryId/:breedId" element={<ProductPage />} />
-          <Route path="/pages/:categoryId/:breedId" element={<ProductPage />} />
-          <Route path="/pages/:categoryId" element={<ProductPage />} />
-          <Route path="/pages" element={<ProductPage />} />         
-         <Route path="/checkout" element={<CheckoutForm />} />
-        </Routes>
+        <Routess/>
         <Footer />
       {/* </Router> */}
     </>

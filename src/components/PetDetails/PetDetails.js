@@ -78,9 +78,10 @@ const PetDetails = () => {
                   <h1>{product?.name==null ? '-':product.name}</h1>
                   <h2>{Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product?.price)}</h2>
                   {product?.age !== null && <h3>Tuổi: <span>  {product.age}</span> tháng tuổi</h3> }
-                  {product?.gender !== null && <h3>Giới tính: <span> {product?.gender === 0 ? 'Đực' : 'Cái'}</span> </h3> }
+                  {product?.gender !== null && <h3>Giới tính: <span> {product?.gender ===  false? 'Đực' : 'Cái'}</span> </h3> }
                   {product.origins.length > 0 && <h3>Xuất xứ: <span>{product?.origins.map(origin => origin.name).join(', ')}</span> </h3>}
                   {product.breed !== null && <h3>Chủng loại: <span>{product.breed.name}</span>  </h3>}
+                  {product.description !== null && <h3 className='description-product'>Mô tả: <span>{product.description}</span>  </h3>}
                   <div className='amount'>
                     {product.amount > 0 ? (
                       <>

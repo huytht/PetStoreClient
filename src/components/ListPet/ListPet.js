@@ -2,8 +2,12 @@ import React from "react"
 import TitleListPet from "./TitleListPet"
 import TitleListProduct from "./TitleListProduct"
 import "./style.css"
+import { useNavigate } from "react-router-dom"
+
+
 
 const ListPet = () => {
+  const navigate=useNavigate();
   return (
     <>
       <section className='shop background'>
@@ -12,11 +16,10 @@ const ListPet = () => {
           <div className='contentWidth'>
             <div className='heading d_flex'>
               <div className='heading-left row  f_flex'>
-                <h2>Thú cưng nổi bật</h2>
+                <h2>Cún cưng nổi bật</h2>
               </div>
               <div className='heading-right row '>
-                <span >View all</span>
-                <i className='fa-solid fa-caret-right'></i>
+                <button style={{cursor:"pointer"}} className='btn-primary' onClick={() => navigate(`/pages/2`)}>Xem thêm</button>
               </div>
             </div>
             <div className='product-content  grid1'>
@@ -26,11 +29,10 @@ const ListPet = () => {
           <div className='contentWidth'>
             <div className='heading d_flex'>
               <div className='heading-left row  f_flex'>
-                <h2>Thú cưng quá trời</h2>
+                <h2>Phụ kiện thú cưng</h2>
               </div>
               <div className='heading-right row '>
-                <span >View all</span>
-                <i className='fa-solid fa-caret-right'></i>
+                <button style={{cursor:"pointer"}} className='btn-primary' onClick={() => navigate(`/pages/3`)}>Xem thêm</button>
               </div>
             </div>
             <div className='product-content  grid1'>

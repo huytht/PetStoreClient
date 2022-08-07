@@ -50,7 +50,7 @@ export const ProductList = ({ productList, name }) => {
 	// 		}
 	// 	})
 	// }, [productList])
-	const covertURL= (str)=>{
+	const convertURL= (str)=>{
 		// Chuyển hết sang chữ thường
 		str = str.toLowerCase();     
 	 
@@ -95,7 +95,7 @@ export const ProductList = ({ productList, name }) => {
 								<Heart isClick={isClick[index]} onClick={() => handleAddWishList(productItems.id, index)} />
 							</div>
 							<div className="product-details">
-								<h3 className="name-product" onClick={() => navigate(`/product/${covertURL(productItems.name)}-${productItems.id}`)}>{productItems.name}</h3>
+								<h3 className="name-product" onClick={() => navigate(`/product/${convertURL(productItems.name)}-${productItems.id}`)}>{productItems.name}</h3>
 								<div className='rate'>
 									{productItems.rate === null ? <span className="rated">Chưa có đánh giá </span> : (<> {[...Array(productItems.rate)].map((star) => {
 										return (

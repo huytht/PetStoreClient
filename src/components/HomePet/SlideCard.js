@@ -3,7 +3,9 @@ import Sdata from "./Sdata"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
-
+import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import { convertURL } from "../redux/Actions/ProductActions"
 const SlideCard = () => {
   const settings = {
     dots: true,
@@ -15,6 +17,7 @@ const SlideCard = () => {
       return <ul style={{ margin: "0px" }}>{dots}</ul>
     },
   }
+  const navigate=useNavigate()
   return (
     <>
       <Slider {...settings}>
@@ -25,7 +28,9 @@ const SlideCard = () => {
                 <div className='left'>
                   <h1>{value.title}</h1>
                   <p>{value.desc}</p>
-                  <button className='btn-primary'>Visit Collections</button>
+                  {value.id===1 ?  <button style={{cursor:"pointer"}} className='btn-primary' onClick={() => navigate(`/pages`)}>Visit Collections</button> :
+                    <button style={{cursor:"pointer"}} className='btn-primary' onClick={() => navigate(`/product/${convertURL(value.title)}-${value.id}`)}>Visit Collections</button>}
+                
                 </div>
                 <div className='right'>
                   <img src={value.cover} alt='' />

@@ -4,6 +4,7 @@ import { listProductSuggest } from "../redux/Actions/ProductActions";
 import "./styles.css";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { convertURL } from "../redux/Actions/ProductActions";
 const Autocomplete = (props) => {
   const [activeSuggestion, setActiveSuggestion] = useState(0);
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
@@ -78,7 +79,7 @@ const Autocomplete = (props) => {
             return (
               <li className={className} key={suggestion} onClick={onClick}>
                 <div className="suggestion-item">
-                  <Link to={`/product/${suggestion.id}`}>
+                  <Link to={`/product/${convertURL(suggestion.name)}-${suggestion.id}`}>
                     <img src={`${process.env.REACT_APP_API_ENDPOINT}${suggestion.imagePath}`} alt="" />
                     <span>{suggestion.name}</span>
                   </Link>

@@ -133,7 +133,9 @@ const Search = () => {
       <section className="search">
         <div className="container c_flex">
           <div className="logo  ">
-            <img src="/images/logo.png" alt="" />
+            <Link to="/">
+              <img src="/images/logo.png" alt="" />
+            </Link>
           </div>
 
           <div className="search-box f_flex">

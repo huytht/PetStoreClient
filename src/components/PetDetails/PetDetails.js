@@ -7,10 +7,9 @@ import Loading from '../LoadingError/Loading'
 import {useNavigate} from 'react-router-dom'
 import toast from 'react-hot-toast';
 import Accordion from "../Accordion/Accordion";
-// import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet';
 import { FacebookIcon, FacebookShareButton } from 'react-share'
 import React from 'react';
-import MetaTags from 'react-meta-tags';
 
 
 
@@ -42,13 +41,13 @@ const PetDetails = () => {
   return (
     
     <div className='box-details'>
-        {/* <Helmet>
+        <Helmet>
           <title>{product.name}</title>
-          <meta property='og:image' content={`${process.env.REACT_APP_API_ENDPOINT}${product?.imagePath?.find((value,index)=>index===0)} `}/>
+          <meta property='og:image' content={`${process.env.REACT_APP_API_ENDPOINT}${product.imagePath?.find((value,index)=>index===0)} `}/>
           <meta property='og:title' content={product.name}/>
           <meta property='og:url' content={shareUrl}/>
           <meta property='og:description' content={product.description}/>
-        </Helmet> */}
+        </Helmet>
        
       { (loading === undefined || loading === true) ? (
             <div className="mb-5 "><Loading/></div>
@@ -76,14 +75,6 @@ const PetDetails = () => {
                 </div>
               </div>
                 <div className='single-detail'>
-                  {/* test share */}
-                  <MetaTags>
-                    <title>{product?.name==null ? '-':product.name}</title>
-                    <meta name="description" content="Your description here.." />
-                    <meta property="og:title" content={product?.name==null ? '-Abcacsacs':product.name} />
-                    <meta property="og:image" content={process.env.REACT_APP_API_ENDPOINT + product.imagePath[0]} />
-                  </MetaTags>
-                  {/*  */}
                   <h1>{product?.name==null ? '-':product.name}</h1>
                   <h2>{Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product?.price)}</h2>
                   {product?.age !== null && <h3>Tuổi: <span>  {product.age}</span> tháng tuổi</h3> }

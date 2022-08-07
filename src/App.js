@@ -18,19 +18,15 @@ const App = () => {
   useGaTracker();
   return (
     <>
-      <Helmet>
+      {/* <Helmet>
           <title>OkaKoro Store</title>
           <meta 
             name="description"
             content="Bạn sẽ tìm được thú cưng yêu thích của mình tại đây"
           />
           <meta name="keywords" content="OkaKoro Store, Home, Pages, Categories"/>
-          <meta property="og:type" content="website"/>
-          <meta property="og:url" content="http://38.242.132.213/"/>
-          <meta property="og:title" content="OkoKaro Store"/>
-          <meta property="og:description" content="OkaKoro - Thiên đường thú cưng"/>
-          <meta property="og:image" content="http://38.242.132.213:3000/images/logo.png"/>
-        </Helmet>
+          
+        </Helmet> */}
       <Toaster
         position="bottom-center"
         reverseOrder={false}

@@ -1,4 +1,4 @@
-import React,{useEffect} from "react"
+import React,{useEffect, useState} from "react"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
@@ -30,7 +30,7 @@ const SampleNextArrow = (props) => {
     )
   }
   const NewCardPet = () => {
-    const settings = {
+    const [settings, setSettings] = useState({
       dots: false,
       infinite: true,
       speed: 500,
@@ -38,7 +38,7 @@ const SampleNextArrow = (props) => {
       slidesToScroll: 1,
       nextArrow: <SampleNextArrow />,
       prevArrow: <SamplePrevArrow />,
-    }
+    })
   
     const dispatch = useDispatch();
     const { id } = useParams();
@@ -53,6 +53,20 @@ const SampleNextArrow = (props) => {
           dispatch(listProduct("related", product.breed.id,0,0,8))
           
     },[id, dispatch, loading, product])
+
+    useEffect(() => {
+      if (productsRelated.productsRelated !== undefined) {
+        setSettings({
+          dots: false,
+          infinite: true,
+          speed: 500,
+          slidesToShow: productsRelated.productsRelated.length < 4 ? productsRelated.productsRelated.length : 4,
+          slidesToScroll: 1,
+          nextArrow: <SampleNextArrow />,
+          prevArrow: <SamplePrevArrow />,
+        })
+      }
+    }, [productsRelated])
     const covertURL= (str)=>{
       // Chuyển hết sang chữ thường
       str = str.toLowerCase();     

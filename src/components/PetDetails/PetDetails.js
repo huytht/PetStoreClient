@@ -39,15 +39,14 @@ const PetDetails = () => {
   //     }
   //   },[product, shareUrl])
   return (
-    
     <div className='box-details'>
         <Helmet>
           <title>{product.name}</title>
-          <meta property="og:type" content="website"></meta>
-          <meta property='og:image' content={`${process.env.REACT_APP_API_ENDPOINT}${product.imagePath?.find((value,index)=>index===0)} `}/>
-          <meta property='og:title' content={product.name}/>
-          <meta property='og:url' content={shareUrl}/>
-          <meta property='og:description' content={product.description}/>
+          <meta property="og:type" content="website"/>
+          <meta property="og:image" content={`${process.env.REACT_APP_API_ENDPOINT}${product.imagePath?.find((value,index)=>index===0)} `}/>
+          <meta property="og:title" content={product.name}/>
+          <meta property="og:url" content={shareUrl}/>
+          <meta property="og:description" content={product.description}/>
         </Helmet>
        
       { (loading === undefined || loading === true) ? (

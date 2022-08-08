@@ -14,19 +14,22 @@ import { Helmet } from "react-helmet";
 import MessengerCustomerChat from "react-messenger-customer-chat/lib/MessengerCustomerChat";
 import useGaTracker from "./components/googleAnalytics/cofigGoogleAnalytics";
 import  Routess  from "./Routes";
-const App = () => {
+import React from "react";
+const App = ({ initialText }) => {
   useGaTracker();
+  
   return (
     <>
-      {/* <Helmet>
-          <title>OkaKoro Store</title>
-          <meta 
-            name="description"
-            content="Bạn sẽ tìm được thú cưng yêu thích của mình tại đây"
-          />
-          <meta name="keywords" content="OkaKoro Store, Home, Pages, Categories"/>
-          
-        </Helmet> */}
+      <Helmet>
+        <title>OkaKoro Store</title>
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="http://38.242.132.213/"/>
+        <meta property="og:title" content="OkoKaro Store"/>
+        <meta property="og:description" content="OkaKoro - Thiên đường thú cưng"/>
+        <meta property="og:image" content="http://38.242.132.213/images/logo.png"/>
+        <meta property="og:image:width" content="500"/>
+        <meta property="og:image:height" content="200"/>
+      </Helmet>
       <Toaster
         position="bottom-center"
         reverseOrder={false}
@@ -45,6 +48,7 @@ const App = () => {
       {/* </Router> */}
     </>
   );
+
 };
 
 export default App;

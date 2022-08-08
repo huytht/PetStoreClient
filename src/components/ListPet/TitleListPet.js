@@ -6,7 +6,6 @@ import { listProduct } from "../redux/Actions/ProductActions"
 import { useDispatch,useSelector } from "react-redux"
 import { addToCart } from "../redux/Actions/CartActions"
 import toast from "react-hot-toast"
-import Heart from "react-animated-heart";
 
   const TitleListPet = () => {
     const dispatch = useDispatch()

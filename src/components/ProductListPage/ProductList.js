@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addToCart } from "../redux/Actions/CartActions";
 import { addWishListProductPage, WishListProductPage } from "../redux/Actions/ProductActions";
-import Heart from 'react-animated-heart'
+// import Heart from 'react-animated-heart'
 
 import "./style.css"
 
@@ -92,7 +92,7 @@ export const ProductList = ({ productList, name }) => {
 								/>
 							</div>
 							<div className='product-like'>
-								<Heart isClick={isClick[index]} onClick={() => handleAddWishList(productItems.id, index)} />
+								{/* <Heart isClick={isClick[index]} onClick={() => handleAddWishList(productItems.id, index)} /> */}
 							</div>
 							<div className="product-details">
 								<h3 className="name-product" onClick={() => navigate(`/product/${convertURL(productItems.name)}-${productItems.id}`)}>{productItems.name}</h3>

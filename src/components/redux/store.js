@@ -35,7 +35,7 @@ const reducer = combineReducers({
   orderListProcessing: listOrderProcessingReducer,
   orderListDelivering: listOrderDeliveringReducer,
   orderListCancel:listOrderCancelReducer,
-  remarkList :remarkListReducer,
+  // remarkList :remarkListReducer,
 })
 
 //login

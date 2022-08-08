@@ -44,6 +44,6 @@ app.use("^/$", (req, res, next) => {
 
 app.use(express.static(path.resolve(__dirname, "..", "build")));
 
-app.listen(81, () => {
-  console.log("App running on port 81");
+app.listen(80, () => {
+  console.log("App running on port 80");
 });

@@ -9,7 +9,7 @@ const NewPet = () => {
         <div className='container'>
           <div className='heading f_flex'>
             <i className='fa fa-bolt'></i>
-            <h1>Sản phảm tương tự</h1>
+            <h1>Sản phẩm tương tự</h1>
           </div>
           <NewCardPet />
         </div>

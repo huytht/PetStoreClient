@@ -77,7 +77,7 @@ const Autocomplete = (props) => {
               className = "suggestion-active";
             }
             return (
-              <li className={className} key={suggestion} onClick={onClick}>
+              <li className={className} key={suggestion.id} onClick={onClick}>
                 <div className="suggestion-item">
                   <Link to={`/product/${convertURL(suggestion.name)}-${suggestion.id}`}>
                     <img src={`${process.env.REACT_APP_API_ENDPOINT}${suggestion.imagePath}`} alt="" />

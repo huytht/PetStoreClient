@@ -15,11 +15,10 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 //     document.getElementById("root")
 // );
-const initialState = window.APP_STATE;
 ReactDOM.hydrate(
   <Provider store={store}>
     <Router>
-      <App {...initialState} />
+      <App />
     </Router>
   </Provider>,
   document.getElementById("root")

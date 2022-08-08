@@ -1,7 +1,7 @@
 import {createStore, combineReducers, applyMiddleware} from "redux";
 import thunk from "redux-thunk";
 import {composeWithDevTools} from "redux-devtools-extension";
-import { addWishListReducer, categoryListReducer, currentNameListReducer, productDetailsReducer, productListHotReducer, productListNewReducer, productListPageReducer, productListReducer, productListRelatedReducer, productListSuggestReducer, searchProductListReducer, wishListReducer } from "./Reducers/ProductReducers";
+import { addWishListReducer, categoryListReducer, currentNameListReducer, productDetailsReducer, productListHotReducer, productListNewReducer, productListPageReducer, productListReducer, productListRelatedReducer, productListSuggestReducer, remarkListReducer, searchProductListReducer, wishListReducer } from "./Reducers/ProductReducers";
 import { userLoginReducer, userRegisterReducer,userDetailsReducer, changePasswordReducer, } from "./Reducers/UserReducers";
 import { cartReducer } from "./Reducers/CartReducers";
 import {  DistrictBillingReducer, DistrictShippingReducer, ProvinceBillingReducer, ProvinceShippingReducer, ProvincesReducer } from "./Reducers/AddressReducer";
@@ -35,18 +35,19 @@ const reducer = combineReducers({
   orderListProcessing: listOrderProcessingReducer,
   orderListDelivering: listOrderDeliveringReducer,
   orderListCancel:listOrderCancelReducer,
+  remarkList :remarkListReducer,
 })
 
 //login
-const userFromLocalStorage = localStorage.getItem("user")
+const userFromLocalStorage = typeof window !== 'undefined' && localStorage.getItem("user")
 ? JSON.parse(localStorage.getItem("user"))
 : null;
 //cart 
-const cartItemsFromLocalStorage = localStorage.getItem("cartItems")
+const cartItemsFromLocalStorage = typeof window !== 'undefined'&& localStorage.getItem("cartItems")
 ? JSON.parse(localStorage.getItem("cartItems"))
 : [];
 //wishlist
-const wishListFromLocalStorage = localStorage.getItem("products")
+const wishListFromLocalStorage = typeof window !== 'undefined' && localStorage.getItem("products")
 ? JSON.parse(localStorage.getItem("products"))
 : [];
 const initialState = {

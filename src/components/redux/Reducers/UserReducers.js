@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { 
     USER_REGISTER_REQUEST,
     USER_REGISTER_FAIL,
@@ -62,11 +63,13 @@ export const userRegisterReducer = (state = {},action) =>{
 }
 
 //refresh token
-const user = JSON.parse(localStorage.getItem("user"));
+let user = {};
+if (typeof window !== 'undefined') { 
+    user = JSON.parse(localStorage.getItem("user"));
+}
 const initialState = user
-  ? { isLoggedIn: true, user }
-  : { isLoggedIn: false, user: null };
-  
+      ? { isLoggedIn: true, user }
+      : { isLoggedIn: false, user: null };
 export const refreshTokenReducer = (state= initialState,action) => {
     const { type, payload } = action;
     switch (type) {

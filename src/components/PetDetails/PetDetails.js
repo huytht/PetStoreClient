@@ -45,8 +45,8 @@ const PetDetails = () => {
           <title>{product.name}</title>
           <meta property="og:type" content="website"/>
           <meta property="og:image" content={`${process.env.REACT_APP_API_ENDPOINT}${product.imagePath?.find((value,index)=>index===0)} `}/>
-          <meta property="og:image:width" content="500" />
-          <meta property="og:image:height" content="200" />
+          <meta property="og:image:width" content="520" />
+          <meta property="og:image:height" content="220" />
           <meta property="og:title" content={product.name}/>
           <meta property="og:url" content={shareUrl}/>
           <meta property="og:description" content={product.description}/>

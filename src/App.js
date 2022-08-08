@@ -15,9 +15,8 @@ import MessengerCustomerChat from "react-messenger-customer-chat/lib/MessengerCu
 import useGaTracker from "./components/googleAnalytics/cofigGoogleAnalytics";
 import  Routess  from "./Routes";
 import React from "react";
-const App = ({ initialText }) => {
+const App = () => {
   useGaTracker();
-  
   return (
     <>
       {/* <Helmet>

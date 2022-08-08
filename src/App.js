@@ -20,7 +20,7 @@ const App = ({ initialText }) => {
   
   return (
     <>
-      <Helmet>
+      {/* <Helmet>
         <title>OkaKoro Store</title>
         <meta property="og:type" content="website"/>
         <meta property="og:url" content="http://38.242.132.213/"/>
@@ -29,7 +29,7 @@ const App = ({ initialText }) => {
         <meta property="og:image" content="http://38.242.132.213/images/logo.png"/>
         <meta property="og:image:width" content="500"/>
         <meta property="og:image:height" content="200"/>
-      </Helmet>
+      </Helmet> */}
       <Toaster
         position="bottom-center"
         reverseOrder={false}

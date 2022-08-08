@@ -31,14 +31,17 @@ const PetDetails = () => {
   const { categories } = useSelector((state) => state.categoryList);
   
   const shareUrl = `${process.env.REACT_APP_CLIENT_ENDPOINT}/product/${convertURL(product?.name)}-${product.id}`;
-  //   useEffect(()=>{
-  //     if(product!==undefined){
-       
-  //     }
-  //   },[product, shareUrl])
+    useEffect(()=>{
+      if(product!==undefined){
+        document.querySelector('meta[property="og:url"]').content = shareUrl;
+        document.querySelector('meta[property="og:title"]').content = product.name;
+        document.querySelector('meta[property="og:description"]').content = product.description;
+        document.querySelector('meta[property="og:image"]').content = process.env.REACT_APP_API_ENDPOINT + product.imagePath?.find((value,index)=>index===0); 
+      }
+    },[product])
   return (
     <div className='box-details'>
-        <Helmet>
+        {/* <Helmet>
           <title>{product.name}</title>
           <meta property="og:type" content="website"/>
           <meta property="og:image" content={`${process.env.REACT_APP_API_ENDPOINT}${product.imagePath?.find((value,index)=>index===0)} `}/>
@@ -46,7 +49,7 @@ const PetDetails = () => {
           <meta property="og:url" content={shareUrl}/>
           <meta property="og:description" content={product.description}/>
         </Helmet>
-       
+        */}
       { (loading === undefined || loading === true) ? (
             <div className="mb-5 "><Loading/></div>
         ) : (

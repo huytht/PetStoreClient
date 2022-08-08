@@ -31,14 +31,14 @@ const PetDetails = () => {
   const { categories } = useSelector((state) => state.categoryList);
   
   const shareUrl = `${process.env.REACT_APP_CLIENT_ENDPOINT}/product/${convertURL(product?.name)}-${product.id}`;
-    useEffect(()=>{
-      if(product!==undefined){
-        document.querySelector('meta[property="og:url"]').content = shareUrl;
-        document.querySelector('meta[property="og:title"]').content = product.name;
-        document.querySelector('meta[property="og:description"]').content = product.description;
-        document.querySelector('meta[property="og:image"]').content = process.env.REACT_APP_API_ENDPOINT + product.imagePath?.find((value,index)=>index===0); 
-      }
-    },[product])
+    // useEffect(()=>{
+    //   if(product!==undefined){
+    //     document.querySelector('meta[property="og:url"]').content = shareUrl;
+    //     document.querySelector('meta[property="og:title"]').content = product.name;
+    //     document.querySelector('meta[property="og:description"]').content = product.description;
+    //     document.querySelector('meta[property="og:image"]').content = process.env.REACT_APP_API_ENDPOINT + product.imagePath?.find((value,index)=>index===0); 
+    //   }
+    // },[product])
   return (
     <div className='box-details'>
         {/* <Helmet>

@@ -31,9 +31,9 @@ app.use("^/$", (req, res, next) => {
           </Provider>
         )}</div>`
       )
-      //   .replace("</head>", `${helmet.meta.toString()}</head>`)
-      //   .replace("</head>", `${helmet.title.toString()}</head>`)
-      //   .replace("</head>", `${helmet.script.toString()}</head>`)
+        .replace("</head>", `${helmet.meta.toString()}</head>`)
+        .replace("</head>", `${helmet.title.toString()}</head>`)
+        .replace("</head>", `${helmet.script.toString()}</head>`)
     );
   });
 });

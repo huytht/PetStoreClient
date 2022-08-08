@@ -122,11 +122,7 @@ export const listProductDetails = (id) => async(dispatch) =>{
         dispatch({type: PRODUCT_DETAILS_REQUEST})
 
         const res = await axiosClient.get(`/product/detail?id=${id}`)
-        document.querySelector('meta[property="og:url"]').content = `${process.env.REACT_APP_CLIENT_ENDPOINT}/product/${convertURL(res.data.data?.name)}-${res.data.data.id}`;
-        document.querySelector('meta[property="og:title"]').content = res.data.data.name;
-        document.querySelector('meta[property="og:description"]').content = res.data.data.description;
-        document.querySelector('meta[property="og:image"]').content = process.env.REACT_APP_API_ENDPOINT + res.data.data.imagePath?.find((value,index)=>index===0); 
-
+      
         dispatch({type: PRODUCT_DETAILS_SUCCESS, payload: res.data.data})
     } catch (error) {
         dispatch({

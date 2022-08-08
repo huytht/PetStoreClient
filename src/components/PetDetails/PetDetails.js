@@ -41,7 +41,7 @@ const PetDetails = () => {
     // },[product])
   return (
     <div className='box-details'>
-        {/* <Helmet>
+        <Helmet>
           <title>{product.name}</title>
           <meta property="og:type" content="website"/>
           <meta property="og:image" content={`${process.env.REACT_APP_API_ENDPOINT}${product.imagePath?.find((value,index)=>index===0)} `}/>
@@ -49,7 +49,7 @@ const PetDetails = () => {
           <meta property="og:url" content={shareUrl}/>
           <meta property="og:description" content={product.description}/>
         </Helmet>
-        */}
+       
       { (loading === undefined || loading === true) ? (
             <div className="mb-5 "><Loading/></div>
         ) : (

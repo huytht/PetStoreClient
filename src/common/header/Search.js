@@ -155,9 +155,7 @@ const Search = () => {
                         as="button"
                         color="secondary"
                         src={
-                          user?.avatarImg?.substring(0).search('https://robohash.org/') === 0
-                            ? user.avatarImg
-                            : `${process.env.REACT_APP_API_ENDPOINT}${user.avatarImg}`
+                          user?.avatarImg
                         }
                       />
                     </Dropdown.Trigger>

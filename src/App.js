@@ -22,10 +22,10 @@ const App = () => {
       <Helmet>
         <title>OkaKoro Store</title>
         <meta property="og:type" content="website"/>
-        <meta property="og:url" content="http://38.242.132.213/"/>
+        <meta property="og:url" content="https://petheaven.vercel.app/"/>
         <meta property="og:title" content="OkoKaro Store"/>
         <meta property="og:description" content="OkaKoro - Thiên đường thú cưng"/>
-        <meta property="og:image" content="http://38.242.132.213/images/logo.png"/>
+        <meta property="og:image" content="https://petheaven.vercel.app/images/logo.png"/>
         <meta property="og:image:width" content="500"/>
         <meta property="og:image:height" content="200"/>
       </Helmet>
